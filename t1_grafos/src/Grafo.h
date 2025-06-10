@@ -1,20 +1,22 @@
-//
-// Created by Rafael on 28/05/2025.
-//
-
 #ifndef GRAFO_H
 #define GRAFO_H
 
 #include "No.h"
-#include <iostream>
-#include <vector>
+#include "includes.h"
 
-
-using namespace std;
 class Grafo {
 public:
     Grafo();
+    Grafo(const string& filePath);
     ~Grafo();
+
+    void adicionarNo(char id_no, int peso = 0);
+    void removerNo(char id_no);
+    void adicionarAresta(char id_origem, char id_destino, int peso = 0);
+    void removerAresta(char id_origem, char id_destino, int peso = 0);
+    void imprimirNoTerminal() const;
+    void imprimirEmArquivo(const string& nomeArquivo) const;
+    void imprimirEmArquivoDot(const string& nomeArquivo) const;
 
     vector<char> fecho_transitivo_direto(int id_no); // a
     vector<char> fecho_transitivo_indireto(int id_no); // b
@@ -35,6 +37,9 @@ public:
     bool in_ponderado_aresta;
     bool in_ponderado_vertice;
     vector<No*> lista_adj;
+
+    private:
+    void gerarSaida(ostream& out) const;
 };
 
 

@@ -1,13 +1,17 @@
-#include <iostream>
+#include "includes.h"
 #include "Gerenciador.h"
 
-using namespace std;
 int main(int argc, char *argv[])
 {
+    if (argc != 2) {
+        cout << "Uso: ./main <arquivo_entrada>" << endl;
+        return 1; // Return an error code
+    }
 
-    Grafo* grafo = new Grafo();
+    Grafo* grafo = new Grafo(argv[1]);
 
-    Gerenciador::comandos(grafo);
+    Gerenciador::menu_principal(grafo);
 
+    delete grafo;
     return 0;
 }

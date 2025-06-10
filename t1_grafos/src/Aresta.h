@@ -1,7 +1,6 @@
 #ifndef ARESTA_H
 #define ARESTA_H
-
-using namespace std;
+#include "includes.h"
 class Aresta {
 public:
     Aresta();

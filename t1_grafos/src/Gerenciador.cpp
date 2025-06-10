@@ -1,8 +1,121 @@
 #include "Gerenciador.h"
-#include <fstream>
+#include "includes.h"
 
+void Gerenciador::menu_principal(Grafo* grafo) {
+    char resp;
+    do {
+        cout << "--- Menu Principal ---" << endl;
+        cout << "(1) Funcoes Basicas" << endl;
+        cout << "(2) Algoritmos em Grafos" << endl;
+        cout << "(0) Sair" << endl;
+        cin >> resp;
 
-void Gerenciador::comandos(Grafo* grafo) {
+        switch (resp) {
+            case '1':
+                menu_basico(grafo);
+                break;
+            case '2':
+                menu_algoritmos(grafo);
+                break;
+            case '0':
+                cout << "Saindo..." << endl;
+                exit(0);
+            default:
+                cout << "Opcao invalida!" << endl;
+                break;
+        }
+    } while (resp != '0');
+}
+
+void Gerenciador::menu_basico(Grafo* grafo) {
+    char resp;
+    do {
+        cout << "--- Funcoes Basicas ---" << endl;
+        cout << "(1) Adicionar No" << endl;
+        cout << "(2) Remover No" << endl;
+        cout << "(3) Adicionar Aresta" << endl;
+        cout << "(4) Remover Aresta" << endl;
+        cout << "(5) Imprimir Grafo" << endl;
+        cout << "(6) Imprimir Grafo em Arquivo." << endl;
+        cout << "(7) Imprimir Grafo em Arquivo DOT." << endl;
+        cout << "(0) Voltar ao Menu Principal" << endl;
+        cin >> resp;
+
+        switch (resp) {
+            case '1': {
+                char id;
+                int peso = 0;
+                cout << "Digite o id do no: ";
+                cin >> id;
+                if (grafo->in_ponderado_vertice) {
+                    cout << "Digite o peso do no: ";
+                    cin >> peso;
+                }
+                grafo->adicionarNo(id, peso);
+                break;
+            }
+            case '2': {
+                char id = get_id_entrada();
+                grafo->removerNo(id);
+                break;
+            }
+            case '3': {
+                char id_origem, id_destino;
+                int peso = 0;
+                cout << "Digite o id do no de origem: ";
+                cin >> id_origem;
+                cout << "Digite o id do no de destino: ";
+                cin >> id_destino;
+                if (grafo->in_ponderado_aresta) {
+                    cout << "Digite o peso da aresta: ";
+                    cin >> peso;
+                }
+                grafo->adicionarAresta(id_origem, id_destino, peso);
+                break;
+            }
+            case '4': {
+                char id_origem, id_destino;
+                int peso = 0;
+                cout << "Digite o id do no de origem: ";
+                cin >> id_origem;
+                cout << "Digite o id do no de destino: ";
+                cin >> id_destino;
+                if (grafo->in_ponderado_aresta) {
+                    cout << "Digite o peso da aresta: ";
+                    cin >> peso;
+                }
+                grafo->removerAresta(id_origem, id_destino, peso);
+                break;
+            }
+            case '5':
+                grafo->imprimirNoTerminal();
+                break;
+            case '6':{
+                string file;
+                cout << "Digite o nome do arquivo: ";
+                cin >> file;
+                grafo->imprimirEmArquivo(file);
+                break;
+            }
+            case '7':{
+                string file;
+                cout << "Digite o nome do arquivo: ";
+                cin >> file;
+                grafo->imprimirEmArquivoDot(file);
+                break;
+            }
+            case '0':
+                return;
+            default:
+                cout << "Opcao invalida!" << endl;
+                break;
+        }
+    } while (resp != '0');
+}
+
+void Gerenciador::menu_algoritmos(Grafo* grafo) {
+    char resp;
+    do {
     cout<<"Digite uma das opcoes abaixo e pressione enter:"<<endl<<endl;
     cout<<"(a) Fecho transitivo direto de um no;"<<endl;
     cout<<"(b) Fecho transitivo indireto de um no;"<<endl;
@@ -13,9 +126,8 @@ void Gerenciador::comandos(Grafo* grafo) {
     cout<<"(g) Arvore de caminhamento em profundidade;"<<endl;
     cout<<"(h) Raio, diametro, centro e periferia do grafo;"<<endl;
     cout<<"(0) Sair;"<<endl<<endl;
-
-    char resp;
     cin >> resp;
+    
     switch (resp) {
         case 'a': {
 
@@ -161,15 +273,13 @@ void Gerenciador::comandos(Grafo* grafo) {
         }
 
         case '0': {
-            exit(0);
+            menu_principal(grafo);
         }
         default: {
             cout<<"Opção inválida"<<endl;
         }
-    }
-
-    comandos(grafo);
-
+        }
+    } while (resp != '0');
 }
 
 char Gerenciador::get_id_entrada() {

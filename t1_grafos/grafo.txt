@@ -1,0 +1,12 @@
+graph G {
+    a [label="a (1)"];
+    b [label="b (2)"];
+    c [label="c (3)"];
+    d [label="d (4)"];
+    e [label="e (5)"];
+    a -- b [label="5"];
+    a -- e [label="1"];
+    b -- e [label="4"];
+    c -- e [label="3"];
+    d -- e [label="2"];
+}
