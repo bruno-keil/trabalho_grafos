@@ -1,5 +1,6 @@
 #include "Grafo.h"
 #include "includes.h"
+#include <cmath>
 
 
 Grafo::Grafo() {
@@ -302,6 +303,22 @@ vector<char> Grafo::fecho_transitivo_indireto(int id_no) {
 }
 
 vector<char> Grafo::caminho_minimo_dijkstra(int id_no_a, int id_no_b) {
+
+    //Vetores para verificar a distancia e se o nó foi visitado
+    int dist[ordem];
+    int visited[ordem];
+
+    //Inicializa os vetores do nó de origem
+    dist[id_no_a] = 0;
+    visited[id_no_a] = 1;
+
+    //Inicializa os outros nós como não visitados e com distância infinita
+    for (int i = 0; i < ordem; i++) {
+        visited[i] = 0;
+        dist[i] = INFINITY;
+    }
+
+
     cout<<"Metodo nao implementado"<<endl;
     return {};
 }
