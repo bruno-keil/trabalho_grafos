@@ -3,6 +3,7 @@
 
 #include "No.h"
 #include "includes.h"
+#include <unordered_map>
 
 class Grafo {
 public:
@@ -37,9 +38,11 @@ public:
     bool in_ponderado_aresta;
     bool in_ponderado_vertice;
     vector<No*> lista_adj;
+    unordered_map<int, std::vector<int>> adjacencias;
 
     private:
     void gerarSaida(ostream& out) const;
+    vector<int> getArestasDoNo(int no); 
 };
 
 

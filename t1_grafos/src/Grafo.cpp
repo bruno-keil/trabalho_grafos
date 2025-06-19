@@ -1,12 +1,14 @@
 #include "Grafo.h"
 #include "includes.h"
 #include <cmath>
+#include <queue>
+#include <limits> 
 
 
 Grafo::Grafo() {
     this->ordem = 0;
     this->in_direcionado = false;
-    this->in_ponderado_aresta = false;
+    this->in_ponderado_aresta = true;
     this->in_ponderado_vertice = false;
 }
 
@@ -20,6 +22,7 @@ Grafo::Grafo(const string& filePath) {
         return;
     }
 
+    cout << "Lendo grafo do arquivo: " << filePath << endl;
     // Lê as propriedades do Grafo
     if (getline(file, line)) {
         stringstream ss(line);
@@ -291,6 +294,12 @@ void Grafo::gerarSaida(ostream& out) const {
     }
 }
 
+// Função para pegar todas as arestas de um nó
+vector<int> Grafo::getArestasDoNo(int no) {
+    // Retorna o vetor de nós adjacentes (arestas de saída do nó)
+    return adjacencias[no];
+}
+
 
 vector<char> Grafo::fecho_transitivo_direto(int id_no) {
     cout<<"Metodo nao implementado"<<endl;
@@ -303,24 +312,84 @@ vector<char> Grafo::fecho_transitivo_indireto(int id_no) {
 }
 
 vector<char> Grafo::caminho_minimo_dijkstra(int id_no_a, int id_no_b) {
-
-    //Vetores para verificar a distancia e se o nó foi visitado
-    int dist[ordem];
-    int visited[ordem];
-
-    //Inicializa os vetores do nó de origem
-    dist[id_no_a] = 0;
-    visited[id_no_a] = 1;
-
-    //Inicializa os outros nós como não visitados e com distância infinita
-    for (int i = 0; i < ordem; i++) {
-        visited[i] = 0;
-        dist[i] = INFINITY;
+    // Verificação de limites corrigida (>= ordem)
+    if (id_no_a < 0 || id_no_a > ordem || id_no_b < 0 || id_no_b > ordem) {
+        cout << "ERRO: Nós inválidos! Deve ser entre 0 e " << ordem-1 
+             << ". Recebido: " << id_no_a << " e " << id_no_b << endl;
+        return vector<char>();
     }
 
+    const int INF = std::numeric_limits<int>::max() - 1;
+    vector<int> dist(ordem, INF);
+    vector<bool> visited(ordem, false);
+    vector<int> pai(ordem, -1);
 
-    cout<<"Metodo nao implementado"<<endl;
-    return {};
+    dist[id_no_a] = 0;
+    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<>> fila;
+    fila.emplace(0, id_no_a);
+
+    cout << "Iniciando Dijkstra de " << id_no_a << " para " << id_no_b << endl;
+
+    while (!fila.empty()) {
+        int u_id = fila.top().second;
+        int u_dist = fila.top().first;
+        fila.pop();
+
+        if (visited[u_id]) continue;
+        visited[u_id] = true;
+
+        cout << "\nProcessando nó " << u_id << " (dist: " << u_dist << ")";
+        
+        if (u_id == id_no_b) {
+            cout << "\nDestino " << id_no_b << " alcançado!" << endl;
+            break;
+        }
+
+        No* no_atual = lista_adj[u_id];
+        if (!no_atual) {
+            cout << "ERRO: Nó " << u_id << " não existe!" << endl;
+            continue;
+        }
+
+        cout << "\nVizinhos:";
+        for (Aresta* a : no_atual->arestas) {
+            cout << " " << a->id_no_alvo;
+            int v_id = a->id_no_alvo;
+            int w = in_ponderado_aresta ? a->peso : 1;
+
+            cout << "\n  " << u_id << " -> " << v_id << " (peso: " << w << ")";
+
+            if (dist[u_id] != INF && dist[u_id] + w < dist[v_id]) {
+                dist[v_id] = dist[u_id] + w;
+                pai[v_id] = u_id;
+                fila.emplace(dist[v_id], v_id);
+                cout << " | Distância atualizada: " << dist[v_id];
+            }
+        }
+    }
+
+    // Reconstrução do caminho
+    vector<char> caminho;
+    int atual = id_no_b;
+    
+    while (atual != -1) {
+        caminho.push_back(static_cast<char>(atual + 'A'));
+        atual = pai[atual];
+    }
+    
+    reverse(caminho.begin(), caminho.end());
+
+    if (caminho.empty() || caminho[0] != static_cast<char>(id_no_a + 'A')) {
+        cout << "\nNenhum caminho encontrado de " << static_cast<char>(id_no_a + 'A') 
+             << " para " << static_cast<char>(id_no_b + 'A') << "!" << endl;
+        return vector<char>();
+    }
+
+    cout << "\nCaminho mínimo encontrado: ";
+    for (char c : caminho) cout << c << " ";
+    cout << endl;
+
+    return caminho;
 }
 
 vector<char> Grafo::caminho_minimo_floyd(int id_no, int id_no_b) {

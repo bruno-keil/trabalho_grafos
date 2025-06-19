@@ -1,5 +1,7 @@
 #include "Gerenciador.h"
 #include "includes.h"
+#include <vector>
+#include <string>
 
 void Gerenciador::menu_principal(Grafo* grafo) {
     char resp;
@@ -162,7 +164,15 @@ void Gerenciador::menu_algoritmos(Grafo* grafo) {
             char id_no_1 = get_id_entrada();
             char id_no_2 = get_id_entrada();
             vector<char> caminho_minimo_dijkstra = grafo->caminho_minimo_dijkstra(id_no_1,id_no_2);
-            cout<<"Metodo de impressao em tela nao implementado"<<endl<<endl;
+            cout << "Caminho minimo entre " << id_no_1 << " e " << id_no_2 << ": ";
+            if(caminho_minimo_dijkstra.empty()) {
+                cout << "Nao existe caminho entre os nos." << endl;
+            } else {
+                for(char id : caminho_minimo_dijkstra) {
+                cout << id << "Vasco ";
+            }
+            cout << endl;
+            }
 
             if(pergunta_imprimir_arquivo("caminho_minimo_dijkstra.txt")) {
                 cout<<"Metodo de impressao em arquivo nao implementado"<<endl;
