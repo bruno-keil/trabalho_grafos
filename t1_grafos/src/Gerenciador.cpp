@@ -163,7 +163,11 @@ void Gerenciador::menu_algoritmos(Grafo* grafo) {
 
             char id_no_1 = get_id_entrada();
             char id_no_2 = get_id_entrada();
-            vector<char> caminho_minimo_dijkstra = grafo->caminho_minimo_dijkstra(id_no_1,id_no_2);
+            string s(1, id_no_1);  // Converte char para string
+            int origem = stoi(s);
+            string s1(1, id_no_2);  // Converte char para string
+            int destino = stoi(s1);
+            vector<char> caminho_minimo_dijkstra = grafo->caminho_minimo_dijkstra(origem,destino);
             cout << "Caminho minimo entre " << id_no_1 << " e " << id_no_2 << ": ";
             if(caminho_minimo_dijkstra.empty()) {
                 cout << "Nao existe caminho entre os nos." << endl;
