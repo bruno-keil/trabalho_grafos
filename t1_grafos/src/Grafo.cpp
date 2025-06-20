@@ -311,10 +311,15 @@ vector<char> Grafo::fecho_transitivo_indireto(int id_no) {
     return {};
 }
 
-vector<char> Grafo::caminho_minimo_dijkstra(int id_no_a, int id_no_b) {
-    // Verificação de limites corrigida (>= ordem)
-    if (id_no_a < 0 || id_no_a > ordem || id_no_b < 0 || id_no_b > ordem) {
-        cout << "ERRO: Nós inválidos! Deve ser entre 0 e " << ordem-1 
+vector<char> Grafo::caminho_minimo_dijkstra(char id_no_a, char id_no_b) {
+    // Converte chars para índices inteiros (A=0, B=1, ...)
+    int inicio = toupper(id_no_a) - 'A';
+    int destino = toupper(id_no_b) - 'A';
+
+    // Verificação de limites
+    if (inicio < 0 || inicio >= ordem || destino < 0 || destino >= ordem) {
+        cout << "ERRO: Nós inválidos! Deve ser entre A e " 
+             << static_cast<char>('A' + ordem - 1) 
              << ". Recebido: " << id_no_a << " e " << id_no_b << endl;
         return vector<char>();
     }
@@ -324,11 +329,13 @@ vector<char> Grafo::caminho_minimo_dijkstra(int id_no_a, int id_no_b) {
     vector<bool> visited(ordem, false);
     vector<int> pai(ordem, -1);
 
-    dist[id_no_a] = 0;
-    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<>> fila;
-    fila.emplace(0, id_no_a);
+    dist[inicio] = 0;
 
-    cout << "Iniciando Dijkstra de " << id_no_a << " para " << id_no_b << endl;
+    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<>> fila;
+    fila.emplace(0, inicio);
+
+    cout << "Iniciando Dijkstra de " << id_no_a << " (" << inicio 
+         << ") para " << id_no_b << " (" << destino << ")" << endl;
 
     while (!fila.empty()) {
         int u_id = fila.top().second;
@@ -338,39 +345,41 @@ vector<char> Grafo::caminho_minimo_dijkstra(int id_no_a, int id_no_b) {
         if (visited[u_id]) continue;
         visited[u_id] = true;
 
-        cout << "\nProcessando nó " << u_id << " (dist: " << u_dist << ")";
+        cout << "\nProcessando no " << static_cast<char>(u_id + 'A') 
+             << " (" << u_id << "), dist: " << u_dist;
         
-        if (u_id == id_no_b) {
-            cout << "\nDestino " << id_no_b << " alcançado!" << endl;
+        if (u_id == destino) {
+            cout << "\nDestino " << id_no_b << " alcancado!" << endl;
             break;
         }
 
         No* no_atual = lista_adj[u_id];
         if (!no_atual) {
-            cout << "ERRO: Nó " << u_id << " não existe!" << endl;
+            cout << "ERRO: Nó " << static_cast<char>(u_id + 'A') 
+                 << " não existe!" << endl;
             continue;
         }
 
         cout << "\nVizinhos:";
         for (Aresta* a : no_atual->arestas) {
-            cout << " " << a->id_no_alvo;
-            int v_id = a->id_no_alvo;
+            int v_id = toupper(a->id_no_alvo) - 'A';
             int w = in_ponderado_aresta ? a->peso : 1;
 
-            cout << "\n  " << u_id << " -> " << v_id << " (peso: " << w << ")";
+            cout << "\n  " << static_cast<char>(u_id + 'A') << " -> " 
+                 << static_cast<char>(v_id + 'A') << " (peso: " << w << ")";
 
             if (dist[u_id] != INF && dist[u_id] + w < dist[v_id]) {
                 dist[v_id] = dist[u_id] + w;
                 pai[v_id] = u_id;
                 fila.emplace(dist[v_id], v_id);
-                cout << " | Distância atualizada: " << dist[v_id];
+                cout << " | Distancia atualizada: " << dist[v_id];
             }
         }
     }
 
     // Reconstrução do caminho
     vector<char> caminho;
-    int atual = id_no_b;
+    int atual = destino;
     
     while (atual != -1) {
         caminho.push_back(static_cast<char>(atual + 'A'));
@@ -379,15 +388,11 @@ vector<char> Grafo::caminho_minimo_dijkstra(int id_no_a, int id_no_b) {
     
     reverse(caminho.begin(), caminho.end());
 
-    if (caminho.empty() || caminho[0] != static_cast<char>(id_no_a + 'A')) {
-        cout << "\nNenhum caminho encontrado de " << static_cast<char>(id_no_a + 'A') 
-             << " para " << static_cast<char>(id_no_b + 'A') << "!" << endl;
+    if (caminho.empty() || caminho[0] != id_no_a) {
         return vector<char>();
     }
 
-    cout << "\nCaminho mínimo encontrado: ";
-    for (char c : caminho) cout << c << " ";
-    cout << endl;
+    
 
     return caminho;
 }
