@@ -7,4 +7,5 @@ d
 a b 8
 a c 7
 b d 1
+b c 90
 c d 2
