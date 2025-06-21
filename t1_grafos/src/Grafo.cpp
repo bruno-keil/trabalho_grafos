@@ -294,11 +294,6 @@ void Grafo::gerarSaida(ostream& out) const {
     }
 }
 
-// Função para pegar todas as arestas de um nó
-vector<int> Grafo::getArestasDoNo(int no) {
-    // Retorna o vetor de nós adjacentes (arestas de saída do nó)
-    return adjacencias[no];
-}
 
 
 vector<char> Grafo::fecho_transitivo_direto(int id_no) {

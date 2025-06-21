@@ -42,7 +42,6 @@ public:
 
     private:
     void gerarSaida(ostream& out) const;
-    vector<int> getArestasDoNo(int no); 
 };
 
 
