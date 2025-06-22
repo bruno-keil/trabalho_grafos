@@ -349,6 +349,8 @@ vector<char> Grafo::caminho_minimo_dijkstra(char id_no_a, char id_no_b) {
     cout << "Iniciando Dijkstra de " << id_no_a << " (" << inicio 
          << ") para " << id_no_b << " (" << destino << ")" << endl;
 
+    int dist_total = 0;
+
     while (!fila.empty()) {
         int u_id = fila.top().second;
         int u_dist = fila.top().first;
@@ -357,13 +359,9 @@ vector<char> Grafo::caminho_minimo_dijkstra(char id_no_a, char id_no_b) {
         if (visited[u_id]) continue;
         visited[u_id] = true;
 
-        cout << "\nProcessando no " << static_cast<char>(u_id + 'A') 
-             << " (" << u_id << "), dist: " << u_dist;
         
-        if (u_id == destino) {
-            cout << "\nDestino " << id_no_b << " alcancado!" << endl;
-            break;
-        }
+        if (u_id == destino) break;
+        
 
         No* no_atual = lista_adj[u_id];
         if (!no_atual) {
@@ -372,19 +370,19 @@ vector<char> Grafo::caminho_minimo_dijkstra(char id_no_a, char id_no_b) {
             continue;
         }
 
-        cout << "\nVizinhos:";
         for (Aresta* a : no_atual->arestas) {
             int v_id = toupper(a->id_no_alvo) - 'A';
             int w = in_ponderado_aresta ? a->peso : 1;
 
-            cout << "\n  " << static_cast<char>(u_id + 'A') << " -> " 
-                 << static_cast<char>(v_id + 'A') << " (peso: " << w << ")";
+            // cout << "\n  " << static_cast<char>(u_id + 'A') << " -> " 
+            //      << static_cast<char>(v_id + 'A') << " (peso: " << w << ")";
 
             if (dist[u_id] != INF && dist[u_id] + w < dist[v_id]) {
                 dist[v_id] = dist[u_id] + w;
                 pai[v_id] = u_id;
                 fila.emplace(dist[v_id], v_id);
-                cout << " | Distancia atualizada: " << dist[v_id];
+                dist_total = dist[v_id];
+                // cout << " | Distancia atualizada: " << dist[v_id];
             }
         }
     }
@@ -405,7 +403,7 @@ vector<char> Grafo::caminho_minimo_dijkstra(char id_no_a, char id_no_b) {
     }
 
     
-
+    cout << "Distância total do caminho: " << dist_total << endl;
     return caminho;
 }
 
@@ -448,7 +446,7 @@ Grafo * Grafo::arvore_geradora_minima_kruskal(vector<char> ids_nos) {
 
     //Ordenar as arestas por peso
     sort(arestas_subgrafo.begin(), arestas_subgrafo.end(), [](const Aresta* a, const Aresta* b) {
-        return a->peso < b->peso;
+        return a->peso > b->peso;
     });
 
     
@@ -494,7 +492,7 @@ Grafo * Grafo::arvore_geradora_minima_kruskal(vector<char> ids_nos) {
 
         // Verifica se u e v estão no mesmo subconjunto
         if(union_sets(u, v)) {
-            subgrafoAGM->adicionarAresta(u, v, aresta->peso);
+            subgrafoAGM->adicionarAresta(u, v, aresta->peso); // Adiciona a aresta ao subgrafo AGM
             cont++;
         }
     }
@@ -511,14 +509,7 @@ Grafo * Grafo::arvore_geradora_minima_kruskal(vector<char> ids_nos) {
         return nullptr;
     }
 
-    //Imprime o subgrafo AGM
-    cout << "Subgrafo AGM formado com os nós: ";
-    for(const auto& id : ids_nos) {
-        cout << id << " ";
-    }
-    cout << endl;
-
-    subgrafoAGM->imprimirNoTerminal();
+    
 
     return subgrafoAGM;
 }

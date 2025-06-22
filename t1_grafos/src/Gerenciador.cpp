@@ -170,7 +170,9 @@ void Gerenciador::menu_algoritmos(Grafo* grafo) {
             if(caminho_minimo_dijkstra.empty()) {
                 cout << "Nao existe caminho entre os nos." << endl;
             } else {
-                for (char c : caminho_minimo_dijkstra) cout << c << "->";
+                for (char c : caminho_minimo_dijkstra) {
+                    cout << c << " ";
+                }
                 cout << endl;
             
             cout << endl;
@@ -233,10 +235,18 @@ void Gerenciador::menu_algoritmos(Grafo* grafo) {
 
                 vector<char> ids = get_conjunto_ids(grafo,tam);
                 Grafo* arvore_geradora_minima_kruskal = grafo->arvore_geradora_minima_kruskal(ids);
-                cout<<"Metodo de impressao em tela nao implementado"<<endl<<endl;
+                
+                //Imprime o subgrafo AGM
+                cout << "Subgrafo AGM formado com os nós: ";
+                for(const auto& id : ids) {
+                    cout << id << " ";
+                }
+                cout << endl;
 
-                if(pergunta_imprimir_arquivo("agm_kruskal.txt")) {
-                    cout<<"Metodo de impressao em arquivo nao implementado"<<endl;
+                arvore_geradora_minima_kruskal->imprimirNoTerminal();
+
+                if(pergunta_imprimir_arquivo("../agm_kruskal.txt")) {
+                   arvore_geradora_minima_kruskal->imprimirEmArquivo("../agm_kruskal.txt");
                 }
 
                 delete arvore_geradora_minima_kruskal;
