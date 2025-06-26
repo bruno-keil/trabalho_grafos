@@ -1,7 +1,5 @@
 #include "Gerenciador.h"
 #include "includes.h"
-#include <vector>
-#include <string>
 
 void Gerenciador::menu_principal(Grafo* grafo) {
     char resp;
@@ -40,6 +38,7 @@ void Gerenciador::menu_basico(Grafo* grafo) {
         cout << "(5) Imprimir Grafo" << endl;
         cout << "(6) Imprimir Grafo em Arquivo." << endl;
         cout << "(7) Imprimir Grafo em Arquivo DOT." << endl;
+        cout << "(8) Imprimir Grafo em Arquivo CSAcademy." << endl;
         cout << "(0) Voltar ao Menu Principal" << endl;
         cin >> resp;
 
@@ -106,6 +105,13 @@ void Gerenciador::menu_basico(Grafo* grafo) {
                 grafo->imprimirEmArquivoDot(file);
                 break;
             }
+            case '8':{
+                string file;
+                cout << "Digite o nome do arquivo: ";
+                cin >> file;
+                grafo->imprimirEmArquivoCsAcademy(file);
+                break;
+            }
             case '0':
                 return;
             default:
@@ -118,16 +124,17 @@ void Gerenciador::menu_basico(Grafo* grafo) {
 void Gerenciador::menu_algoritmos(Grafo* grafo) {
     char resp;
     do {
-    cout<<"Digite uma das opcoes abaixo e pressione enter:"<<endl<<endl;
-    cout<<"(a) Fecho transitivo direto de um no;"<<endl;
-    cout<<"(b) Fecho transitivo indireto de um no;"<<endl;
-    cout<<"(c) Caminho minimo (Djikstra);"<<endl;
-    cout<<"(d) Caminho minimo (Floyd);"<<endl;
-    cout<<"(e) Arvore Geradora Minima (Algoritmo de Prim);"<<endl;
-    cout<<"(f) Arvore Geradora Minima (Algoritmo de Kruskal);"<<endl;
-    cout<<"(g) Arvore de caminhamento em profundidade;"<<endl;
-    cout<<"(h) Raio, diametro, centro e periferia do grafo;"<<endl;
-    cout<<"(0) Sair;"<<endl<<endl;
+        cout<<"Digite uma das opcoes abaixo e pressione enter:"<<endl<<endl;
+        cout<<"(a) Fecho transitivo direto de um no;"<<endl;
+        cout<<"(b) Fecho transitivo indireto de um no;"<<endl;
+        cout<<"(c) Caminho minimo (Djikstra);"<<endl;
+        cout<<"(d) Caminho minimo (Floyd);"<<endl;
+        cout<<"(e) Arvore Geradora Minima (Algoritmo de Prim);"<<endl;
+        cout<<"(f) Arvore Geradora Minima (Algoritmo de Kruskal);"<<endl;
+        cout<<"(g) Arvore de caminhamento em profundidade;"<<endl;
+        cout<<"(h) Raio, diametro, centro e periferia do grafo;"<<endl;
+        cout<<"(i) Vertices de Articulacao;"<<endl;
+        cout<<"(0) Sair;"<<endl<<endl;
     cin >> resp;
     
     switch (resp) {
@@ -259,38 +266,57 @@ void Gerenciador::menu_algoritmos(Grafo* grafo) {
         }
 
         case 'g': {
-
             char id_no = get_id_entrada();
-            Grafo* arvore_caminhamento_profundidade = grafo->arvore_caminhamento_profundidade(id_no);
-            cout<<"Metodo de impressao em tela nao implementado"<<endl<<endl;
+            pair<Grafo*, vector<pair<char, char>>> result = grafo->arvore_caminhamento_profundidade(id_no);
+            
+            Grafo* arvore = result.first;
+            vector<pair<char, char>> back_edges = result.second;
 
-            if(pergunta_imprimir_arquivo("arvore_caminhamento_profundidade.txt")) {
-                cout<<"Metodo de impressao em arquivo nao implementado"<<endl;
+            if (arvore) {
+                if (pergunta_imprimir_arquivo("arvore_caminhamento_profundidade.txt")) {
+                    arvore->printTreeToCsAcademy("arvore_caminhamento_profundidade.txt", back_edges);
+                }
+                delete arvore;
             }
-
-            delete arvore_caminhamento_profundidade;
             break;
         }
 
         case 'h': {
-            vector<char> articulacao = grafo->vertices_de_articulacao();
-            cout<<"Metodo de impressao em tela nao implementado"<<endl<<endl;
+            int r = grafo->raio();
+            if (r != -1) {
+                int d = grafo->diametro();
+                vector<char> c = grafo->centro();
+                vector<char> p = grafo->periferia();
 
-            if(pergunta_imprimir_arquivo("arvore_caminhamento_profundidade.txt")) {
-                cout<<"Metodo de impressao em arquivo nao implementado"<<endl;
+                cout << endl << "--- Propriedades do Grafo ---" << endl;
+                cout << "Raio: " << r << endl;
+                cout << "Diametro: " << d << endl;
+                
+                cout << "Centro: ";
+                for (size_t i = 0; i < c.size(); ++i) {
+                    cout << c[i] << (i == c.size() - 1 ? "" : ", ");
+                }
+                cout << endl;
+
+                cout << "Periferia: ";
+                for (size_t i = 0; i < p.size(); ++i) {
+                    cout << p[i] << (i == p.size() - 1 ? "" : ", ");
+                }
+                cout << endl << endl;
             }
-
             break;
         }
         case 'i': {
-
             vector<char> articulacao = grafo->vertices_de_articulacao();
-            cout<<"Metodo de impressao em tela nao implementado"<<endl<<endl;
-
-            if(pergunta_imprimir_arquivo("arvore_caminhamento_profundidade.txt")) {
-                cout<<"Metodo de impressao em arquivo nao implementado"<<endl;
+            cout << endl << "--- Vertices de Articulacao ---" << endl;
+            if(articulacao.empty()){
+                cout << "O grafo nao possui vertices de articulacao." << endl;
+            } else {
+                for (size_t i = 0; i < articulacao.size(); ++i) {
+                    cout << articulacao[i] << (i == articulacao.size() - 1 ? "" : ", ");
+                }
             }
-
+            cout << endl << endl;
             break;
         }
 

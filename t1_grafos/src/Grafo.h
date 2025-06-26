@@ -18,6 +18,9 @@ public:
     void imprimirNoTerminal() const;
     void imprimirEmArquivo(const string& nomeArquivo) const;
     void imprimirEmArquivoDot(const string& nomeArquivo) const;
+    void printTreeToDOT(const string& nomeArquivo, const vector<pair<char, char>>& back_edges) const;
+    void imprimirEmArquivoCsAcademy(const string& nomeArquivo) const;
+    void printTreeToCsAcademy(const string& nomeArquivo, const vector<pair<char, char>>& back_edges) const;
 
     vector<char> fecho_transitivo_direto(int id_no); // a
     vector<char> fecho_transitivo_indireto(int id_no); // b
@@ -25,7 +28,7 @@ public:
     vector<char> caminho_minimo_floyd(int id_no, int id_no_b); // d
     Grafo* arvore_geradora_minima_prim(vector<char> ids_nos); // e
     Grafo* arvore_geradora_minima_kruskal(vector<char> ids_nos); // f
-    Grafo* arvore_caminhamento_profundidade(int id_no); // g
+    pair<Grafo*, vector<pair<char, char>>> arvore_caminhamento_profundidade(char id_no); // g
     int raio(); // h 1
     int diametro(); // h 2
     vector<char> centro(); // h 3
@@ -42,6 +45,10 @@ public:
 
     private:
     void gerarSaida(ostream& out) const;
+    void dfs_profundidade_helper(char id_no, char parent_id, set<char>& visitados, set<char>& recursion_stack, Grafo* arvore, vector<char>& insertion_sequence, vector<pair<char, char>>& back_edges);
+    void dfs_articulacao_helper(char u, map<char, int>& desc, map<char, int>& low, map<char, char>& parent, set<char>& articulacoes, int& time, bool& is_root);
+    int calcular_distancia(char id_origem, char id_destino);
+
 };
 
 
