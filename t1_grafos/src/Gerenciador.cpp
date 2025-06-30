@@ -153,16 +153,42 @@ void Gerenciador::menu_algoritmos(Grafo* grafo) {
         }
 
         case 'b':{
-
+        
             char id_no = get_id_entrada();
             vector<char> fecho_transitivo_indireto = grafo->fecho_transitivo_indireto(id_no);
-            cout<<"Metodo de impressao em tela nao implementado"<<endl<<endl;
-
-            if(pergunta_imprimir_arquivo("fecho_trans_indir.txt")) {
-                cout<<"Metodo de impressao em arquivo nao implementado"<<endl;
+        
+            // Impressão em tela do fecho transitivo indireto
+            cout << "Fecho transitivo indireto do no " << id_no << ": ";
+            if (fecho_transitivo_indireto.empty()) {
+                cout << "Nenhum no alcanca " << id_no << ".";
+            } else {
+                for (size_t i = 0; i < fecho_transitivo_indireto.size(); ++i) {
+                    cout << fecho_transitivo_indireto[i];
+                    if (i != fecho_transitivo_indireto.size() - 1) cout << ", ";
+                }
             }
-
-;
+            cout << endl << endl;
+        
+            if(pergunta_imprimir_arquivo("fecho_trans_indir.txt")) {
+                ofstream out("fecho_trans_indir.txt");
+                if (!out.is_open()) {
+                    cout << "Erro ao abrir o arquivo para escrita." << endl;
+                } else {
+                    out << "Fecho transitivo indireto do no " << id_no << ": ";
+                    if (fecho_transitivo_indireto.empty()) {
+                        out << "Nenhum no alcanca " << id_no << ".";
+                    } else {
+                        for (size_t i = 0; i < fecho_transitivo_indireto.size(); ++i) {
+                            out << fecho_transitivo_indireto[i];
+                            if (i != fecho_transitivo_indireto.size() - 1) out << ", ";
+                        }
+                    }
+                    out << endl;
+                    out.close();
+                    cout << "Fecho transitivo indireto salvo em fecho_trans_indir.txt" << endl;
+                }
+            }
+        
             break;
         }
 
@@ -208,28 +234,41 @@ void Gerenciador::menu_algoritmos(Grafo* grafo) {
             break;
         }
         case 'e': {
+        
+           int tam;
+           cout << "Digite o tamanho do subconjunto: ";
+           cin >> tam;
+        
+           if (tam > 0 && tam <= grafo->ordem) {
 
-            int tam;
-            cout<<"Digite o tamanho do subconjunto: ";
-            cin>>tam;
+               vector<char> ids = get_conjunto_ids(grafo, tam);
+               Grafo* arvore_geradora_minima_prim = grafo->arvore_geradora_minima_prim(ids);
 
-            if(tam > 0 && tam <= grafo->ordem) {
-
-                vector<char> ids = get_conjunto_ids(grafo,tam);
-                Grafo* arvore_geradora_minima_prim = grafo->arvore_geradora_minima_prim(ids);
-                cout<<"Metodo de impressao em tela nao implementado"<<endl<<endl;
-
-                if(pergunta_imprimir_arquivo("agm_prim.txt")) {
-                    cout<<"Metodo de impressao em arquivo nao implementado"<<endl;
-                }
-
-                delete arvore_geradora_minima_prim;
-
-            }else {
-                cout<<"Valor invalido"<<endl;
-            }
-
-            break;
+               if (arvore_geradora_minima_prim) {
+                   // Impressão em tela da AGM de Prim
+                   cout << "Subgrafo AGM (Prim) formado com os nós: ";
+                   for (const auto& id : ids) {
+                       cout << id << " ";
+                   }
+                   cout << endl;
+                   arvore_geradora_minima_prim->imprimirNoTerminal();
+               
+                   if (pergunta_imprimir_arquivo("agm_prim.txt")) {
+                       arvore_geradora_minima_prim->imprimirEmArquivo("agm_prim.txt");
+                       cout << "AGM (Prim) salva em agm_prim.txt" << endl;
+                   }
+                   delete arvore_geradora_minima_prim;
+               } else {
+                   cout << "Nao foi possivel formar uma AGM com os nos fornecidos." << endl;
+               }
+           
+               
+           
+           } else {
+               cout << "Valor invalido" << endl;
+           }
+       
+           break;
         }
 
         case 'f': {

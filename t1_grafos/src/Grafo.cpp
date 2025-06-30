@@ -1,5 +1,6 @@
 #include "Grafo.h"
 #include "includes.h"
+#include "climits"
 
 
 Grafo::Grafo() {
@@ -105,6 +106,8 @@ void Grafo::removerNo(char id_no) {
     }
 }
 
+// Função Grafo::adicionarAresta CORRIGIDA
+
 void Grafo::adicionarAresta(char id_origem, char id_destino, int peso) {
     No* origem = nullptr;
     No* destino = nullptr;
@@ -117,13 +120,13 @@ void Grafo::adicionarAresta(char id_origem, char id_destino, int peso) {
             destino = no;
         }
         if(origem && destino) {
-            break; // Ambos os nós foram encontrados
+            break;
         }
     }
 
     if (origem) {
         Aresta* nova_aresta = new Aresta();
-        nova_aresta->id_no_origem = id_destino;
+        nova_aresta->id_no_origem = id_origem;
         nova_aresta->id_no_alvo = id_destino;
         nova_aresta->peso = peso;
         origem->arestas.push_back(nova_aresta);
@@ -131,27 +134,11 @@ void Grafo::adicionarAresta(char id_origem, char id_destino, int peso) {
 
     if (!this->in_direcionado && origem && destino) {
         Aresta* aresta_inversa = new Aresta();
-        aresta_inversa->id_no_origem  = id_destino;    // invertido
-        aresta_inversa->id_no_alvo = id_origem;     // invertido
-        aresta_inversa->peso       = peso;
+        aresta_inversa->id_no_origem = id_destino;
+        aresta_inversa->id_no_alvo = id_origem;
+        aresta_inversa->peso = peso;
         destino->arestas.push_back(aresta_inversa);
     }
-
-    // if (!this->in_direcionado) {
-    //     No* destino = nullptr;
-    //     for (No* no : lista_adj) {
-    //         if (no->id == id_destino) {
-    //             destino = no;
-    //             break;
-    //         }
-    //     }
-    //     if(destino) {
-    //         Aresta* aresta_inversa = new Aresta();
-    //         aresta_inversa->id_no_alvo = id_origem;
-    //         aresta_inversa->peso = peso;
-    //         destino->arestas.push_back(aresta_inversa);
-    //     }
-    // }
 }
 
 void Grafo::removerAresta(char id_origem, char id_destino, int peso) {
@@ -435,8 +422,46 @@ vector<char> Grafo::fecho_transitivo_direto(int id_no) {
 }
 
 vector<char> Grafo::fecho_transitivo_indireto(int id_no) {
-    cout<<"Metodo nao implementado"<<endl;
-    return {};
+    char alvo = static_cast<char>(id_no);
+
+    // Criar o grafo reverso
+    map<char, vector<char>> grafo_reverso; // A chave é o nó de destino, e o valor é uma lista de nós de origem.
+    for (const auto& no_origem : lista_adj) {
+        for (const auto& aresta : no_origem->arestas) {
+            grafo_reverso[aresta->id_no_alvo].push_back(no_origem->id);
+        }
+    }
+
+    // Busca BFS no grafo reverso
+    set<char> fecho; // Usa set para evitar repetição e manter ordenado
+    queue<char> fila;
+    
+    fila.push(alvo);
+    set<char> visitados;
+    visitados.insert(alvo);
+
+    while (!fila.empty()) {
+        char atual = fila.front();
+        fila.pop();
+
+        // Adiciona o nó atual, exceto o próprio nó
+        if (atual != alvo) {
+            fecho.insert(atual);
+        }
+
+        // Se o nó atual existe como chave no grafo reverso, visita os vizinhos
+        if (grafo_reverso.count(atual)) {
+            for (char vizinho_reverso : grafo_reverso[atual]) {
+                if (visitados.find(vizinho_reverso) == visitados.end()) {
+                    visitados.insert(vizinho_reverso);
+                    fila.push(vizinho_reverso);
+                }
+            }
+        }
+    }
+
+    vector<char> resultado(fecho.begin(), fecho.end());
+    return resultado;
 }
 
 vector<char> Grafo::caminho_minimo_dijkstra(char id_no_a, char id_no_b) {
@@ -529,8 +554,84 @@ vector<char> Grafo::caminho_minimo_floyd(int id_no, int id_no_b) {
 }
 
 Grafo * Grafo::arvore_geradora_minima_prim(vector<char> ids_nos) {
-    cout<<"Metodo nao implementado"<<endl;
-    return nullptr;
+    if (ids_nos.empty()) return nullptr;
+
+    unordered_set<char> subconjunto(ids_nos.begin(), ids_nos.end());
+    unordered_set<char> visitados;
+    vector<Aresta*> arestas_possiveis;
+
+    // Cria o subgrafo AGM
+    Grafo* agm = new Grafo();
+    agm->in_direcionado = this->in_direcionado;
+    agm->in_ponderado_aresta = this->in_ponderado_aresta;
+    agm->in_ponderado_vertice = this->in_ponderado_vertice;
+
+    // Adiciona os nós do subconjunto ao subgrafo AGM
+    for (char id : ids_nos) {
+        // Procura o nó original para copiar o peso, se houver
+        int peso = 0;
+        for (No* no : lista_adj) {
+            if (no->id == id) {
+                peso = no->peso;
+                break;
+            }
+        }
+        agm->adicionarNo(id, peso);
+    }
+
+    // Começa por qualquer nó do subconjunto
+    char inicial = ids_nos[0];
+    visitados.insert(inicial);
+
+    // Adiciona as arestas do nó inicial à lista de possíveis arestas
+    auto adicionar_arestas = [&](char no_id) {
+        No* no = nullptr;
+        for (No* n : lista_adj) {
+            if (n->id == no_id) {
+                no = n;
+                break;
+            }
+        }
+        if (!no) return;
+        for (Aresta* aresta : no->arestas) {
+            char vizinho = aresta->id_no_alvo;
+            if (subconjunto.count(vizinho) && !visitados.count(vizinho)) {
+                arestas_possiveis.push_back(aresta);
+            }
+        }
+    };
+
+    adicionar_arestas(inicial);
+
+    while (visitados.size() < subconjunto.size() && !arestas_possiveis.empty()) {
+        // Encontra a aresta de menor peso que conecta um nó visitado a um não visitado
+        auto it = min_element(arestas_possiveis.begin(), arestas_possiveis.end(),
+            [](Aresta* a, Aresta* b) { return a->peso < b->peso; });
+
+        Aresta* menor = *it;
+        arestas_possiveis.erase(it);
+
+        char u = menor->id_no_origem;
+        char v = menor->id_no_alvo;
+
+        // Garante que v é o nó ainda não visitado
+        if (visitados.count(v)) std::swap(u, v);
+        if (visitados.count(v)) continue; // Se ambos já visitados, ignora
+
+        agm->adicionarAresta(u, v, menor->peso);
+        visitados.insert(v);
+
+        adicionar_arestas(v);
+    }
+
+    // Se não foi possível conectar todos os nós do subconjunto, retorna nullptr
+    if (visitados.size() < subconjunto.size()) {
+        cout << "ERRO: Não foi possível formar uma árvore geradora mínima com os nós fornecidos." << endl;
+        delete agm;
+        return nullptr;
+    }
+
+    return agm;
 }
 
 Grafo * Grafo::arvore_geradora_minima_kruskal(vector<char> ids_nos) {
