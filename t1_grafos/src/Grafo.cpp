@@ -748,17 +748,17 @@ void Grafo::dfs_profundidade_helper(char id_no, char parent_id, set<char>& visit
 
     for (Aresta* aresta : no_origem->arestas) {
         char id_vizinho = aresta->id_no_alvo;
-        // Skip the edge leading back to the parent in the DFS tree
+        // Pula a aresta que está conectada ao pai já na árvore
         if (id_vizinho == parent_id) {
             continue;
         }
 
         if (visitados.find(id_vizinho) == visitados.end()) {
             arvore->adicionarAresta(id_no, id_vizinho, aresta->peso);
-            // UPDATED: Pass current node as parent in the recursive call
+            // Passa o nó atual como pai na chamada recursiva
             dfs_profundidade_helper(id_vizinho, id_no, visitados, recursion_stack, arvore, insertion_sequence, back_edges);
         }
-        // UPDATED: A back edge exists if the neighbor is in the recursion stack AND is not the parent
+        // Uma aresta de retorno existe se o vizinho esta na stack e não é o pai
         else if (recursion_stack.count(id_vizinho)) {
             back_edges.push_back({id_no, id_vizinho});
         }
