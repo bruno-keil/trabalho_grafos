@@ -259,7 +259,6 @@ void Gerenciador::menu_algoritmos(Grafo* grafo) {
                    }
                    delete arvore_geradora_minima_prim;
                } else {
-                   cout << "Nao foi possivel formar uma AGM com os nos fornecidos." << endl;
                }
            
                

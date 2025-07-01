@@ -626,7 +626,7 @@ Grafo * Grafo::arvore_geradora_minima_prim(vector<char> ids_nos) {
 
     // Se não foi possível conectar todos os nós do subconjunto, retorna nullptr
     if (visitados.size() < subconjunto.size()) {
-        cout << "ERRO: Não foi possível formar uma árvore geradora mínima com os nós fornecidos." << endl;
+        cout << "ERRO: Não foi possível formar uma árvore geradora mínima com os nós fornecidos.\n" << endl;
         delete agm;
         return nullptr;
     }
