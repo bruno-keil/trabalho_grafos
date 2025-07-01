@@ -1,4 +1,4 @@
 Micka- 2,5
 Vini- 3,6
-Caio-1,4,9
+Caio-1,4
 Bruno-7,8
