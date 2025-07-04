@@ -491,8 +491,56 @@ void Grafo::gerarSaida(ostream &out) const
 
 vector<char> Grafo::fecho_transitivo_direto(char id_no)
 {
-    cout << "Metodo nao implementado" << endl;
-    return {};
+    // Busca BFS para encontrar todos os nós alcançáveis a partir do nó dado
+    set<char> fecho; // Usa set para evitar repetição e manter ordenado
+    queue<char> fila;
+    
+    fila.push(id_no);
+    set<char> visitados;
+    visitados.insert(id_no);
+    
+    while (!fila.empty())
+    {
+        char atual = fila.front();
+        fila.pop();
+        
+        // Procura o nó atual na lista de adjacências
+        No *no_atual = nullptr;
+        for (No *no : lista_adj)
+        {
+            if (no->id == atual)
+            {
+                no_atual = no;
+                break;
+            }
+        }
+        
+        if (!no_atual)
+            continue;
+        
+        // Visita todos os vizinhos do nó atual
+        for (const auto &aresta : no_atual->arestas)
+        {
+            char vizinho = aresta->id_no_alvo;
+            
+            // Adiciona o vizinho ao fecho (exceto o próprio nó inicial)
+            if (vizinho != id_no)
+            {
+                fecho.insert(vizinho);
+            }
+            
+            // Se o vizinho ainda não foi visitado, adiciona à fila
+            if (visitados.find(vizinho) == visitados.end())
+            {
+                visitados.insert(vizinho);
+                fila.push(vizinho);
+            }
+        }
+    }
+    
+    // Converte o set para vector e retorna
+    vector<char> resultado(fecho.begin(), fecho.end());
+    return resultado;
 }
 
 vector<char> Grafo::fecho_transitivo_indireto(char id_no)
@@ -635,10 +683,106 @@ vector<char> Grafo::caminho_minimo_dijkstra(char id_no_a, char id_no_b)
     return caminho;
 }
 
-vector<char> Grafo::caminho_minimo_floyd(char id_no, char id_no_b)
+vector<char> Grafo::caminho_minimo_floyd(char id_no_a, char id_no_b)
 {
-    cout << "Metodo nao implementado" << endl;
-    return {};
+    // Criar mapeamentos de ID para índices
+    map<char, int> id_to_index;
+    map<int, char> index_to_id;
+    int index = 0;
+    for (const auto &no : lista_adj)
+    {
+        id_to_index[no->id] = index;
+        index_to_id[index] = no->id;
+        index++;
+    }
+
+    int inicio_idx = id_to_index.count(id_no_a) ? id_to_index[id_no_a] : -1;
+    int destino_idx = id_to_index.count(id_no_b) ? id_to_index[id_no_b] : -1;
+
+    // Verificação de nós válidos
+    if (inicio_idx == -1 || destino_idx == -1)
+    {
+        cout << "ERRO: Nós inválidos! Recebido: " << id_no_a << " e " << id_no_b << endl;
+        return vector<char>();
+    }
+
+    const int INF = std::numeric_limits<int>::max();
+    int n = ordem;
+    
+    // Inicializar matrizes de distância e predecessor
+    vector<vector<int>> dist(n, vector<int>(n, INF));
+    vector<vector<int>> next(n, vector<int>(n, -1));
+
+    // Inicializar distâncias para o próprio nó como 0
+    for (int i = 0; i < n; i++)
+    {
+        dist[i][i] = 0;
+    }
+
+    // Preencher a matriz de distâncias com as arestas do grafo
+    for (int i = 0; i < n; i++)
+    {
+        No *no_atual = lista_adj[i];
+        for (const auto &aresta : no_atual->arestas)
+        {
+            if (id_to_index.count(aresta->id_no_alvo))
+            {
+                int j = id_to_index[aresta->id_no_alvo];
+                int peso = in_ponderado_aresta ? aresta->peso : 1;
+                dist[i][j] = peso;
+                next[i][j] = j;
+            }
+        }
+    }
+
+    // Algoritmo de Floyd-Warshall
+    for (int k = 0; k < n; k++)
+    {
+        for (int i = 0; i < n; i++)
+        {
+            for (int j = 0; j < n; j++)
+            {
+                if (dist[i][k] != INF && dist[k][j] != INF)
+                {
+                    if (dist[i][k] + dist[k][j] < dist[i][j])
+                    {
+                        dist[i][j] = dist[i][k] + dist[k][j];
+                        next[i][j] = next[i][k];
+                    }
+                }
+            }
+        }
+    }
+
+    // Verificar se existe caminho
+    if (dist[inicio_idx][destino_idx] == INF)
+    {
+        cout << "Não existe caminho entre " << id_no_a << " e " << id_no_b << endl;
+        return vector<char>();
+    }
+
+    // Reconstruir o caminho
+    vector<char> caminho;
+    int atual = inicio_idx;
+    
+    while (atual != destino_idx)
+    {
+        caminho.push_back(index_to_id[atual]);
+        atual = next[atual][destino_idx];
+        
+        if (atual == -1)
+        {
+            // Erro na reconstrução do caminho
+            cout << "Erro na reconstrução do caminho" << endl;
+            return vector<char>();
+        }
+    }
+    
+    // Adicionar o nó de destino
+    caminho.push_back(index_to_id[destino_idx]);
+
+    cout << "Distância total do caminho: " << dist[inicio_idx][destino_idx] << endl;
+    return caminho;
 }
 
 Grafo *Grafo::arvore_geradora_minima_prim(vector<char> ids_nos)

@@ -142,11 +142,39 @@ void Gerenciador::menu_algoritmos(Grafo* grafo) {
 
             char id_no = get_id_entrada();
             vector<char> fecho_transitivo_direto = grafo->fecho_transitivo_direto(id_no);
-            cout<<"Metodo de impressao em tela nao implementado"<<endl<<endl;
 
-            if(pergunta_imprimir_arquivo("fecho_trans_dir.txt")) {
-                cout<<"Metodo de impressao em arquivo nao implementado"<<endl<<endl;
+            // Impressão em tela do fecho transitivo direto
+            cout << "Fecho transitivo direto do no " << id_no << ": ";
+            if (fecho_transitivo_direto.empty()) {
+                cout << "Nenhum no alcanca " << id_no << ".";
+            } else {
+                for (size_t i = 0; i < fecho_transitivo_direto.size(); ++i) {
+                    cout << fecho_transitivo_direto[i];
+                    if (i != fecho_transitivo_direto.size() - 1) cout << ", ";
+                }
             }
+            cout << endl << endl;
+            // Impressão em arquivo do fecho transitivo direto
+            if(pergunta_imprimir_arquivo("fecho_trans_dir.txt")) {
+                ofstream out("fecho_trans_dir.txt");
+                if (!out.is_open()) {
+                    cout << "Erro ao abrir o arquivo para escrita." << endl;
+                } else {
+                    out << "Fecho transitivo direto do no " << id_no << ": ";
+                    if (fecho_transitivo_direto.empty()) {
+                        out << "Nenhum no alcanca " << id_no << ".";
+                    } else {
+                        for (size_t i = 0; i < fecho_transitivo_direto.size(); ++i) {
+                            out << fecho_transitivo_direto[i];
+                            if (i != fecho_transitivo_direto.size() - 1) out << ", ";
+                        }
+                    }
+                    out << endl;
+                    out.close();
+                    cout << "Fecho transitivo direto salvo em fecho_trans_dir.txt" << endl;
+                }
+            }
+        
 
 
             break;
@@ -236,10 +264,36 @@ void Gerenciador::menu_algoritmos(Grafo* grafo) {
             char id_no_1 = get_id_entrada();
             char id_no_2 = get_id_entrada();
             vector<char> caminho_minimo_floyd = grafo->caminho_minimo_floyd(id_no_1,id_no_2);
-            cout<<"Metodo de impressao em tela nao implementado"<<endl<<endl;
+            
+            cout << "Caminho minimo entre " << id_no_1 << " e " << id_no_2 << ": ";
+            if(caminho_minimo_floyd.empty()) {
+                cout << "Nao existe caminho entre os nos." << endl;
+            } else {
+                for (char c : caminho_minimo_floyd) {
+                    cout << c << " ";
+                }
+                cout << endl;
+            
+            cout << endl;
+            }
 
-            if(pergunta_imprimir_arquivo("caminho_minimo_floyd.txt")) {
-                cout<<"Metodo de impressao em arquivo nao implementado"<<endl;
+
+            if (pergunta_imprimir_arquivo("caminho_minimo_floyd.txt")) {
+                ofstream outFile("caminho_minimo_floyd.txt");
+                if (outFile.is_open()) {
+                    if (caminho_minimo_floyd.empty()) {
+                        outFile << "Nao existe caminho entre " << id_no_1 << " e " << id_no_2 << "." << endl;
+                    } else {
+                        for (size_t i = 0; i < caminho_minimo_floyd.size(); ++i) {
+                            outFile << caminho_minimo_floyd[i] << (i == caminho_minimo_floyd.size() - 1 ? "" : " -> ");
+                        }
+                        outFile << endl;
+                    }
+                    cout << "Caminho minimo salvo em caminho_minimo_floyd.txt" << endl;
+                    outFile.close();
+                } else {
+                    cout << "Erro ao abrir o arquivo para escrita." << endl;
+                }
             }
 
 
