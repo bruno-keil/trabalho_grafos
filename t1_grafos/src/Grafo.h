@@ -22,10 +22,10 @@ public:
     void imprimirEmArquivoCsAcademy(const string& nomeArquivo) const;
     void printTreeToCsAcademy(const string& nomeArquivo, const vector<pair<char, char>>& back_edges) const;
 
-    vector<char> fecho_transitivo_direto(int id_no); // a
-    vector<char> fecho_transitivo_indireto(int id_no); // b
+    vector<char> fecho_transitivo_direto(char id_no); // a
+    vector<char> fecho_transitivo_indireto(char id_no); // b
     vector<char> caminho_minimo_dijkstra(char id_no_a, char id_no_b); // c
-    vector<char> caminho_minimo_floyd(int id_no, int id_no_b); // d
+    vector<char> caminho_minimo_floyd(char id_no, char id_no_b); // d
     Grafo* arvore_geradora_minima_prim(vector<char> ids_nos); // e
     Grafo* arvore_geradora_minima_kruskal(vector<char> ids_nos); // f
     pair<Grafo*, vector<pair<char, char>>> arvore_caminhamento_profundidade(char id_no); // g

@@ -196,8 +196,8 @@ void Gerenciador::menu_algoritmos(Grafo* grafo) {
 
             char id_no_1 = get_id_entrada();
             char id_no_2 = get_id_entrada();
-            id_no_1 = toupper(id_no_1);
-            id_no_2 = toupper(id_no_2);
+            id_no_1 = id_no_1;
+            id_no_2 = id_no_2;
             vector<char> caminho_minimo_dijkstra = grafo->caminho_minimo_dijkstra(id_no_1,id_no_2);
             cout << "Caminho minimo entre " << id_no_1 << " e " << id_no_2 << ": ";
             if(caminho_minimo_dijkstra.empty()) {
@@ -211,11 +211,23 @@ void Gerenciador::menu_algoritmos(Grafo* grafo) {
             cout << endl;
             }
 
-            if(pergunta_imprimir_arquivo("caminho_minimo_dijkstra.txt")) {
-                cout<<"Metodo de impressao em arquivo nao implementado"<<endl;
+            if (pergunta_imprimir_arquivo("caminho_minimo_dijkstra.txt")) {
+                ofstream outFile("caminho_minimo_dijkstra.txt");
+                if (outFile.is_open()) {
+                    if (caminho_minimo_dijkstra.empty()) {
+                        outFile << "Nao existe caminho entre " << id_no_1 << " e " << id_no_2 << "." << endl;
+                    } else {
+                        for (size_t i = 0; i < caminho_minimo_dijkstra.size(); ++i) {
+                            outFile << caminho_minimo_dijkstra[i] << (i == caminho_minimo_dijkstra.size() - 1 ? "" : " -> ");
+                        }
+                        outFile << endl;
+                    }
+                    cout << "Caminho minimo salvo em caminho_minimo_dijkstra.txt" << endl;
+                    outFile.close();
+                } else {
+                    cout << "Erro ao abrir o arquivo para escrita." << endl;
+                }
             }
-
-
             break;
         }
 
