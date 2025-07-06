@@ -494,16 +494,16 @@ vector<char> Grafo::fecho_transitivo_direto(char id_no)
     // Busca BFS para encontrar todos os nós alcançáveis a partir do nó dado
     set<char> fecho; // Usa set para evitar repetição e manter ordenado
     queue<char> fila;
-    
+
     fila.push(id_no);
     set<char> visitados;
     visitados.insert(id_no);
-    
+
     while (!fila.empty())
     {
         char atual = fila.front();
         fila.pop();
-        
+
         // Procura o nó atual na lista de adjacências
         No *no_atual = nullptr;
         for (No *no : lista_adj)
@@ -514,21 +514,21 @@ vector<char> Grafo::fecho_transitivo_direto(char id_no)
                 break;
             }
         }
-        
+
         if (!no_atual)
             continue;
-        
+
         // Visita todos os vizinhos do nó atual
         for (const auto &aresta : no_atual->arestas)
         {
             char vizinho = aresta->id_no_alvo;
-            
+
             // Adiciona o vizinho ao fecho (exceto o próprio nó inicial)
             if (vizinho != id_no)
             {
                 fecho.insert(vizinho);
             }
-            
+
             // Se o vizinho ainda não foi visitado, adiciona à fila
             if (visitados.find(vizinho) == visitados.end())
             {
@@ -537,7 +537,7 @@ vector<char> Grafo::fecho_transitivo_direto(char id_no)
             }
         }
     }
-    
+
     // Converte o set para vector e retorna
     vector<char> resultado(fecho.begin(), fecho.end());
     return resultado;
@@ -708,7 +708,7 @@ vector<char> Grafo::caminho_minimo_floyd(char id_no_a, char id_no_b)
 
     const int INF = std::numeric_limits<int>::max();
     int n = ordem;
-    
+
     // Inicializar matrizes de distância e predecessor
     vector<vector<int>> dist(n, vector<int>(n, INF));
     vector<vector<int>> next(n, vector<int>(n, -1));
@@ -764,12 +764,12 @@ vector<char> Grafo::caminho_minimo_floyd(char id_no_a, char id_no_b)
     // Reconstruir o caminho
     vector<char> caminho;
     int atual = inicio_idx;
-    
+
     while (atual != destino_idx)
     {
         caminho.push_back(index_to_id[atual]);
         atual = next[atual][destino_idx];
-        
+
         if (atual == -1)
         {
             // Erro na reconstrução do caminho
@@ -777,7 +777,7 @@ vector<char> Grafo::caminho_minimo_floyd(char id_no_a, char id_no_b)
             return vector<char>();
         }
     }
-    
+
     // Adicionar o nó de destino
     caminho.push_back(index_to_id[destino_idx]);
 
