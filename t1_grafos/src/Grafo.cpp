@@ -214,32 +214,7 @@ void Grafo::removerAresta(char id_origem, char id_destino, int peso)
 void Grafo::imprimirNoTerminal() const
 {
     cout << "--- Exibindo Grafo no Terminal ---" << endl;
-
-    for (const auto &no : lista_adj)
-    {
-        cout << no->id;
-
-        if (in_ponderado_vertice)
-        {
-            cout << " (Peso: " << no->peso << ")";
-        }
-
-        cout << " ---> ";
-
-        for (auto it = no->arestas.begin(); it != no->arestas.end(); ++it)
-        {
-            cout << (*it)->id_no_alvo;
-            if (next(it) != no->arestas.end())
-            {
-                cout << ", ";
-            }
-        }
-
-        cout << endl;
-    }
-
-    cout << "---------------------------------" << endl
-         << endl;
+    gerarSaida(cout);
 }
 
 void Grafo::imprimirEmArquivo(const string &nomeArquivo) const
@@ -252,6 +227,7 @@ void Grafo::imprimirEmArquivo(const string &nomeArquivo) const
     }
     cout << "Imprimindo grafo no arquivo: " << nomeArquivo << endl
          << endl;
+    outFile << "--- Exibindo Grafo no Arquivo ---" << endl;
     gerarSaida(outFile);
     outFile.close();
 }
@@ -458,35 +434,34 @@ void Grafo::printTreeToCsAcademy(const string &nomeArquivo, const vector<pair<ch
 
 void Grafo::gerarSaida(ostream &out) const
 {
-    out << in_direcionado << " " << in_ponderado_aresta << " " << in_ponderado_vertice << endl;
-    out << ordem << endl;
 
     for (const auto &no : lista_adj)
     {
         out << no->id;
+
         if (in_ponderado_vertice)
         {
-            out << " " << no->peso;
+            out << " (Peso: " << no->peso << ")";
+        }
+
+        out << " ---> ";
+
+        for (auto it = no->arestas.begin(); it != no->arestas.end(); ++it)
+        {
+            out << (*it)->id_no_alvo;
+            if (in_ponderado_aresta)
+            {
+                out << "(" << (*it)->peso << ")";
+            }
+            if (next(it) != no->arestas.end())
+            {
+                out << ", ";
+            }
         }
         out << endl;
     }
 
-    for (const auto &no_origem : lista_adj)
-    {
-        for (const auto &aresta : no_origem->arestas)
-        {
-            if (!in_direcionado && no_origem->id > aresta->id_no_alvo)
-            {
-                continue; // Avoids duplicate edges in non-directed graphs
-            }
-            out << no_origem->id << " " << aresta->id_no_alvo;
-            if (in_ponderado_aresta)
-            {
-                out << " " << aresta->peso;
-            }
-            out << endl;
-        }
-    }
+    out << "---------------------------------" << endl << endl;
 }
 
 vector<char> Grafo::fecho_transitivo_direto(char id_no)

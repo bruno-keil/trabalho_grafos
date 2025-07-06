@@ -400,7 +400,7 @@ void Gerenciador::menu_algoritmos(Grafo *grafo)
 
                     if (pergunta_imprimir_arquivo("agm_prim.txt"))
                     {
-                        arvore_geradora_minima_prim->imprimirEmArquivoCsAcademy("agm_prim.txt");
+                        arvore_geradora_minima_prim->imprimirEmArquivo("agm_prim.txt");
                         cout << "AGM (Prim) salva em agm_prim.txt" << endl;
                     }
                     delete arvore_geradora_minima_prim;
@@ -442,7 +442,7 @@ void Gerenciador::menu_algoritmos(Grafo *grafo)
 
                 if (pergunta_imprimir_arquivo("../agm_kruskal.txt"))
                 {
-                    arvore_geradora_minima_kruskal->imprimirEmArquivoCsAcademy("../agm_kruskal.txt");
+                    arvore_geradora_minima_kruskal->imprimirEmArquivo("../agm_kruskal.txt");
                 }
 
                 delete arvore_geradora_minima_kruskal;
