@@ -153,6 +153,7 @@ void Gerenciador::menu_algoritmos(Grafo *grafo)
         cout << "(g) Arvore de caminhamento em profundidade;" << endl;
         cout << "(h) Raio, diametro, centro e periferia do grafo;" << endl;
         cout << "(i) Vertices de Articulacao;" << endl;
+        cout << "(j) 2-distance Dominating Set (Greedy);" << endl;
         cout << "(0) Sair;" << endl
              << endl;
         cin >> resp;
@@ -523,6 +524,18 @@ void Gerenciador::menu_algoritmos(Grafo *grafo)
             }
             cout << endl
                  << endl;
+            break;
+        }
+
+        case 'j':
+        {
+            vector<char> resultado = grafo->ds_2_greedy();
+            cout << "Conjunto Dominante a 2-distancia: ";
+            for (size_t i = 0; i < resultado.size(); ++i)
+            {
+                cout << resultado[i] << (i == resultado.size() - 1 ? "" : ", ");
+            }
+            cout << endl << endl;
             break;
         }
 

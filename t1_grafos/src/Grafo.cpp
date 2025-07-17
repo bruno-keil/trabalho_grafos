@@ -1363,3 +1363,55 @@ vector<char> Grafo::vertices_de_articulacao()
     // Converte o conjunto de articulações para um vetor e o retorna.
     return vector<char>(articulacoes.begin(), articulacoes.end());
 }
+
+vector<char> Grafo::ds_2_greedy()
+{
+    vector<char> D;
+    set<char> U;
+
+    // Initialize U with all vertices
+    for (const auto &no : lista_adj)
+    {
+        U.insert(no->id);
+    }
+
+    while (!U.empty())
+    {
+        char melhor_no = '\0';
+        int max_cobertos = -1;
+        set<char> melhores_cobertos;
+
+        // Iterate over all nodes to find the best candidate
+        for (const auto &candidato : lista_adj)
+        {
+            set<char> cobertos_pelo_candidato;
+            // Check which uncovered vertices are covered by the current candidate
+            for (char u_node : U)
+            {
+                if (calcular_distancia(candidato->id, u_node) <= 2)
+                {
+                    cobertos_pelo_candidato.insert(u_node);
+                }
+            }
+
+            if ((int)cobertos_pelo_candidato.size() > max_cobertos)
+            {
+                max_cobertos = cobertos_pelo_candidato.size();
+                melhor_no = candidato->id;
+                melhores_cobertos = cobertos_pelo_candidato;
+            }
+        }
+
+        // Add the best node to the dominating set
+        D.push_back(melhor_no);
+        cout << "Nó adicionado ao conjunto dominante: " << melhor_no << endl;
+
+
+        // Remove the newly covered vertices from U
+        for (char no_coberto : melhores_cobertos)
+        {
+            U.erase(no_coberto);
+        }
+    }
+    return D;
+}

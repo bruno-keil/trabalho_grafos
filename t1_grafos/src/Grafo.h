@@ -35,6 +35,7 @@ public:
     vector<char> centro();                                                                // h 3
     vector<char> periferia();                                                             // h 4
     vector<char> vertices_de_articulacao();                                               // i
+    vector<char> ds_2_greedy();
 
     int ordem;
     bool in_direcionado;
