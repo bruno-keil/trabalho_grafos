@@ -22,6 +22,7 @@ public:
     void printTreeToDOT(const string &nomeArquivo, const vector<pair<char, char>> &back_edges) const;
     void imprimirEmArquivoCsAcademy(const string &nomeArquivo) const;
     void printTreeToCsAcademy(const string &nomeArquivo, const vector<pair<char, char>> &back_edges) const;
+    void printTreeToArquivo(const string &nomeArquivo, const vector<pair<char, char>> &back_edges) const;
 
     vector<char> fecho_transitivo_direto(char id_no);                                     // a
     vector<char> fecho_transitivo_indireto(char id_no);                                   // b

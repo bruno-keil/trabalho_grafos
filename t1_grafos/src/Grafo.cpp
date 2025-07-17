@@ -432,6 +432,77 @@ void Grafo::printTreeToCsAcademy(const string &nomeArquivo, const vector<pair<ch
     outFile.close();
 }
 
+void Grafo::printTreeToArquivo(const string &nomeArquivo, const vector<pair<char, char>> &back_edges) const
+{
+    ofstream outFile(nomeArquivo);
+    if (!outFile.is_open())
+    {
+        cerr << "Erro ao abrir o arquivo para escrita: " << nomeArquivo << endl;
+        return;
+    }
+
+    cout << "Imprimindo arvore no formato de arquivo em: " << nomeArquivo << endl
+         << endl;
+
+    outFile << "--- Exibindo Arvore no Arquivo ---" << endl;
+
+    for (const auto &no : lista_adj)
+    {
+        outFile << no->id;
+
+        if (in_ponderado_vertice)
+        {
+            outFile << " (Peso: " << no->peso << ")";
+        }
+
+        outFile << " ---> ";
+
+        bool first_edge_in_line = true; // Used to correctly place commas
+        for (const auto &aresta : no->arestas)
+        {
+            // For an undirected graph, this check ensures we only print the edge once.
+            if (!this->in_direcionado && no->id > aresta->id_no_alvo)
+            {
+                continue;
+            }
+
+            if (!first_edge_in_line)
+            {
+                outFile << ", ";
+            }
+
+            outFile << aresta->id_no_alvo;
+
+            bool is_back_edge = false;
+            for (const auto &back_edge : back_edges)
+            {
+                if ((back_edge.first == no->id && back_edge.second == aresta->id_no_alvo) ||
+                    (!in_direcionado && back_edge.first == aresta->id_no_alvo && back_edge.second == no->id))
+                {
+                    is_back_edge = true;
+                    break;
+                }
+            }
+
+            if (is_back_edge)
+            {
+                outFile << "(-1)";
+            }
+            else if (in_ponderado_aresta)
+            {
+                outFile << "(" << aresta->peso << ")";
+            }
+            
+            first_edge_in_line = false;
+        }
+        outFile << endl;
+    }
+
+    outFile << "---------------------------------" << endl
+            << endl;
+    outFile.close();
+}
+
 void Grafo::gerarSaida(ostream &out) const
 {
 

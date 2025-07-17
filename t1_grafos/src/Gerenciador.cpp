@@ -468,7 +468,7 @@ void Gerenciador::menu_algoritmos(Grafo *grafo)
             {
                 if (pergunta_imprimir_arquivo("arvore_caminhamento_profundidade.txt"))
                 {
-                    arvore->printTreeToCsAcademy("arvore_caminhamento_profundidade.txt", back_edges);
+                    arvore->printTreeToArquivo("arvore_caminhamento_profundidade.txt", back_edges);
                 }
                 delete arvore;
             }
