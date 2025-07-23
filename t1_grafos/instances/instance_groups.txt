@@ -1,0 +1,26 @@
+Instance groups
+rnd9:  30 random connected graphs with order in [10,20] and density in (0%, 20%].
+rnd10: 30 random connected graphs with order in [10,20] and density in (20%, 40%].
+rnd11: 30 random connected graphs with order in [10,20] and density in (40%, 60%].
+rnd12: 30 random connected graphs with order in [10,20] and density in (60%, 80%].
+rnd13: 30 random connected graphs with order in [10,20] and density in (80%, 100%].
+rnd14: 30 random connected graphs with order in [21,30] and density in (0%, 20%].
+rnd15: 30 random connected graphs with order in [21,30] and density in (20%, 40%].
+rnd16: 30 random connected graphs with order in [21,30] and density in (40%, 60%].
+rnd17: 30 random connected graphs with order in [21,30] and density in (60%, 80%].
+rnd18: 30 random connected graphs with order in [21,30] and density in (80%, 100%].
+rnd19: 30 random connected graphs with order in [31,40] and density in (0%, 20%].
+rnd20: 30 random connected graphs with order in [31,40] and density in (20%, 40%].
+rnd21: 30 random connected graphs with order in [31,40] and density in (40%, 60%].
+rnd22: 30 random connected graphs with order in [31,40] and density in (60%, 80%].
+rnd23: 30 random connected graphs with order in [31,40] and density in (80%, 100%].
+rnd24: 30 random connected graphs with order in [41,50] and density in (0%, 20%].
+rnd25: 30 random connected graphs with order in [41,50] and density in (20%, 40%].
+rnd26: 30 random connected graphs with order in [41,50] and density in (40%, 60%].
+rnd27: 30 random connected graphs with order in [41,50] and density in (60%, 80%].
+rnd28: 30 random connected graphs with order in [41,50] and density in (80%, 100%].
+rnd29: 30 random connected graphs with order in [51,60] and density in (0%, 20%].
+rnd30: 30 random connected graphs with order in [61,70] and density in (0%, 20%].
+rnd31: 30 random connected graphs with order in [71,80] and density in (0%, 20%].
+rnd32: 30 random connected graphs with order in [81,90] and density in (0%, 20%].
+rnd33: 30 random connected graphs with order in [91,100] and density in (0%, 20%].
