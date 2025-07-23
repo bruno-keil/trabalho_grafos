@@ -10,7 +10,7 @@ Grafo::Grafo()
     this->in_ponderado_vertice = false;
 }
 
-Grafo::Grafo(const string &filePath)
+/*Grafo::Grafo(const string &filePath)
 {
     this->ordem = 0;
     ifstream file(filePath);
@@ -22,7 +22,7 @@ Grafo::Grafo(const string &filePath)
         return;
     }
 
-    cout << "Lendo grafo do arquivo: " << filePath << endl;
+    std::cout << "Lendo grafo do arquivo: " << filePath << endl;
     // Lê as propriedades do Grafo
     if (getline(file, line))
     {
@@ -48,7 +48,7 @@ Grafo::Grafo(const string &filePath)
         if (getline(file, line))
         {
             stringstream ss(line);
-            char id;
+            int id;
             int peso = 0;
             ss >> id;
             if (this->in_ponderado_vertice)
@@ -63,7 +63,7 @@ Grafo::Grafo(const string &filePath)
     while (getline(file, line))
     {
         stringstream ss(line);
-        char id_origem, id_destino;
+        int id_origem, id_destino;
         int peso = 0;
         ss >> id_origem >> id_destino;
         if (this->in_ponderado_aresta)
@@ -71,6 +71,56 @@ Grafo::Grafo(const string &filePath)
             ss >> peso;
         }
         adicionarAresta(id_origem, id_destino, peso);
+    }
+
+    file.close();
+} */
+Grafo::Grafo(const string &filePath)
+{
+    this->ordem = 0;
+    this->in_direcionado = false;
+    this->in_ponderado_aresta = false;
+    this->in_ponderado_vertice = false;
+
+    ifstream file(filePath);
+    string line;
+
+    if (!file.is_open())
+    {
+        cerr << "Erro ao abrir o arquivo: " << filePath << endl;
+        return;
+    }
+
+    std::cout << "Lendo grafo no formato DIMACS do arquivo: " << filePath << endl;
+
+    int num_vertices = 0;
+    int num_edges = 0;
+
+    while (getline(file, line))
+    {
+        stringstream ss(line);
+        char type;
+        ss >> type;
+
+        if (type == 'c')
+        {
+            continue;
+        }
+        if (type == 'p')
+        {
+            string format;
+            ss >> format >> num_vertices >> num_edges;
+            for (int i = 1; i <= num_vertices; ++i)
+            {
+                adicionarNo(i);
+            }
+        }
+        else if (type == 'e')
+        {
+            int u, v;
+            ss >> u >> v;
+            adicionarAresta(u, v);
+        }
     }
 
     file.close();
@@ -84,7 +134,7 @@ Grafo::~Grafo()
     }
 }
 
-void Grafo::adicionarNo(char id_no, int peso)
+void Grafo::adicionarNo(int id_no, int peso)
 {
     No *novo_no = new No();
     novo_no->id = id_no;
@@ -93,7 +143,7 @@ void Grafo::adicionarNo(char id_no, int peso)
     this->ordem++;
 }
 
-void Grafo::removerNo(char id_no)
+void Grafo::removerNo(int id_no)
 {
     auto it = remove_if(lista_adj.begin(), lista_adj.end(), [id_no](No *no)
                         {
@@ -125,7 +175,7 @@ void Grafo::removerNo(char id_no)
 
 // Função Grafo::adicionarAresta CORRIGIDA
 
-void Grafo::adicionarAresta(char id_origem, char id_destino, int peso)
+void Grafo::adicionarAresta(int id_origem, int id_destino, int peso)
 {
     No *origem = nullptr;
     No *destino = nullptr;
@@ -165,7 +215,7 @@ void Grafo::adicionarAresta(char id_origem, char id_destino, int peso)
     }
 }
 
-void Grafo::removerAresta(char id_origem, char id_destino, int peso)
+void Grafo::removerAresta(int id_origem, int id_destino, int peso)
 {
     for (No *no : lista_adj)
     {
@@ -213,8 +263,8 @@ void Grafo::removerAresta(char id_origem, char id_destino, int peso)
 
 void Grafo::imprimirNoTerminal() const
 {
-    cout << "--- Exibindo Grafo no Terminal ---" << endl;
-    gerarSaida(cout);
+    std::cout << "--- Exibindo Grafo no Terminal ---" << endl;
+    gerarSaida(std::cout);
 }
 
 void Grafo::imprimirEmArquivo(const string &nomeArquivo) const
@@ -225,7 +275,7 @@ void Grafo::imprimirEmArquivo(const string &nomeArquivo) const
         cerr << "Erro ao abrir o arquivo para escrita: " << nomeArquivo << endl;
         return;
     }
-    cout << "Imprimindo grafo no arquivo: " << nomeArquivo << endl
+    std::cout << "Imprimindo grafo no arquivo: " << nomeArquivo << endl
          << endl;
     outFile << "--- Exibindo Grafo no Arquivo ---" << endl;
     gerarSaida(outFile);
@@ -241,7 +291,7 @@ void Grafo::imprimirEmArquivoDot(const string &nomeArquivo) const
         return;
     }
 
-    cout << "Imprimindo grafo no formato DOT em: " << nomeArquivo << endl
+    std::cout << "Imprimindo grafo no formato DOT em: " << nomeArquivo << endl
          << endl;
 
     if (in_direcionado)
@@ -298,7 +348,7 @@ void Grafo::imprimirEmArquivoDot(const string &nomeArquivo) const
     outFile.close();
 }
 
-void Grafo::printTreeToDOT(const string &nomeArquivo, const vector<pair<char, char>> &back_edges) const
+void Grafo::printTreeToDOT(const string &nomeArquivo, const vector<pair<int, int>> &back_edges) const
 {
     ofstream outFile(nomeArquivo);
     if (!outFile.is_open())
@@ -307,7 +357,7 @@ void Grafo::printTreeToDOT(const string &nomeArquivo, const vector<pair<char, ch
         return;
     }
 
-    cout << "Imprimindo arvore no formato DOT em: " << nomeArquivo << endl
+    std::cout << "Imprimindo arvore no formato DOT em: " << nomeArquivo << endl
          << endl;
 
     if (in_direcionado)
@@ -383,7 +433,7 @@ void Grafo::imprimirEmArquivoCsAcademy(const string &nomeArquivo) const
         cerr << "Erro ao abrir o arquivo para escrita: " << nomeArquivo << endl;
         return;
     }
-    cout << "Imprimindo grafo no formato CSAcademy em: " << nomeArquivo << endl
+    std::cout << "Imprimindo grafo no formato CSAcademy em: " << nomeArquivo << endl
          << endl;
 
     for (const auto &no_origem : lista_adj)
@@ -405,7 +455,7 @@ void Grafo::imprimirEmArquivoCsAcademy(const string &nomeArquivo) const
     outFile.close();
 }
 
-void Grafo::printTreeToCsAcademy(const string &nomeArquivo, const vector<pair<char, char>> &back_edges) const
+void Grafo::printTreeToCsAcademy(const string &nomeArquivo, const vector<pair<int, int>> &back_edges) const
 {
     ofstream outFile(nomeArquivo);
     if (!outFile.is_open())
@@ -413,7 +463,7 @@ void Grafo::printTreeToCsAcademy(const string &nomeArquivo, const vector<pair<ch
         cerr << "Erro ao abrir o arquivo para escrita: " << nomeArquivo << endl;
         return;
     }
-    cout << "Imprimindo arvore no formato CSAcademy em: " << nomeArquivo << endl
+    std::cout << "Imprimindo arvore no formato CSAcademy em: " << nomeArquivo << endl
          << endl;
 
     for (const auto &no_origem : lista_adj)
@@ -432,7 +482,7 @@ void Grafo::printTreeToCsAcademy(const string &nomeArquivo, const vector<pair<ch
     outFile.close();
 }
 
-void Grafo::printTreeToArquivo(const string &nomeArquivo, const vector<pair<char, char>> &back_edges) const
+void Grafo::printTreeToArquivo(const string &nomeArquivo, const vector<pair<int, int>> &back_edges) const
 {
     ofstream outFile(nomeArquivo);
     if (!outFile.is_open())
@@ -441,7 +491,7 @@ void Grafo::printTreeToArquivo(const string &nomeArquivo, const vector<pair<char
         return;
     }
 
-    cout << "Imprimindo arvore no formato de arquivo em: " << nomeArquivo << endl
+    std::cout << "Imprimindo arvore no formato de arquivo em: " << nomeArquivo << endl
          << endl;
 
     outFile << "--- Exibindo Arvore no Arquivo ---" << endl;
@@ -492,7 +542,7 @@ void Grafo::printTreeToArquivo(const string &nomeArquivo, const vector<pair<char
             {
                 outFile << "(" << aresta->peso << ")";
             }
-            
+
             first_edge_in_line = false;
         }
         outFile << endl;
@@ -524,7 +574,7 @@ void Grafo::gerarSaida(ostream &out) const
             {
                 out << "(" << (*it)->peso << ")";
             }
-            if (next(it) != no->arestas.end())
+            if (std::next(it) != no->arestas.end())
             {
                 out << ", ";
             }
@@ -532,22 +582,23 @@ void Grafo::gerarSaida(ostream &out) const
         out << endl;
     }
 
-    out << "---------------------------------" << endl << endl;
+    out << "---------------------------------" << endl
+        << endl;
 }
 
-vector<char> Grafo::fecho_transitivo_direto(char id_no)
+vector<int> Grafo::fecho_transitivo_direto(int id_no)
 {
     // Busca BFS para encontrar todos os nós alcançáveis a partir do nó dado
-    set<char> fecho; // Usa set para evitar repetição e manter ordenado
-    queue<char> fila;
+    set<int> fecho; // Usa set para evitar repetição e manter ordenado
+    queue<int> fila;
 
     fila.push(id_no);
-    set<char> visitados;
+    set<int> visitados;
     visitados.insert(id_no);
 
     while (!fila.empty())
     {
-        char atual = fila.front();
+        int atual = fila.front();
         fila.pop();
 
         // Procura o nó atual na lista de adjacências
@@ -567,7 +618,7 @@ vector<char> Grafo::fecho_transitivo_direto(char id_no)
         // Visita todos os vizinhos do nó atual
         for (const auto &aresta : no_atual->arestas)
         {
-            char vizinho = aresta->id_no_alvo;
+            int vizinho = aresta->id_no_alvo;
 
             // Adiciona o vizinho ao fecho (exceto o próprio nó inicial)
             if (vizinho != id_no)
@@ -585,16 +636,16 @@ vector<char> Grafo::fecho_transitivo_direto(char id_no)
     }
 
     // Converte o set para vector e retorna
-    vector<char> resultado(fecho.begin(), fecho.end());
+    vector<int> resultado(fecho.begin(), fecho.end());
     return resultado;
 }
 
-vector<char> Grafo::fecho_transitivo_indireto(char id_no)
+vector<int> Grafo::fecho_transitivo_indireto(int id_no)
 {
-    char alvo = static_cast<char>(id_no);
+    int alvo = static_cast<int>(id_no);
 
     // Criar o grafo reverso
-    map<char, vector<char>> grafo_reverso; // A chave é o nó de destino, e o valor é uma lista de nós de origem.
+    map<int, vector<int>> grafo_reverso; // A chave é o nó de destino, e o valor é uma lista de nós de origem.
     for (const auto &no_origem : lista_adj)
     {
         for (const auto &aresta : no_origem->arestas)
@@ -604,16 +655,16 @@ vector<char> Grafo::fecho_transitivo_indireto(char id_no)
     }
 
     // Busca BFS no grafo reverso
-    set<char> fecho; // Usa set para evitar repetição e manter ordenado
-    queue<char> fila;
+    set<int> fecho; // Usa set para evitar repetição e manter ordenado
+    queue<int> fila;
 
     fila.push(alvo);
-    set<char> visitados;
+    set<int> visitados;
     visitados.insert(alvo);
 
     while (!fila.empty())
     {
-        char atual = fila.front();
+        int atual = fila.front();
         fila.pop();
 
         // Adiciona o nó atual, exceto o próprio nó
@@ -625,7 +676,7 @@ vector<char> Grafo::fecho_transitivo_indireto(char id_no)
         // Se o nó atual existe como chave no grafo reverso, visita os vizinhos
         if (grafo_reverso.count(atual))
         {
-            for (char vizinho_reverso : grafo_reverso[atual])
+            for (int vizinho_reverso : grafo_reverso[atual])
             {
                 if (visitados.find(vizinho_reverso) == visitados.end())
                 {
@@ -636,14 +687,14 @@ vector<char> Grafo::fecho_transitivo_indireto(char id_no)
         }
     }
 
-    vector<char> resultado(fecho.begin(), fecho.end());
+    vector<int> resultado(fecho.begin(), fecho.end());
     return resultado;
 }
 
-vector<char> Grafo::caminho_minimo_dijkstra(char id_no_a, char id_no_b)
+vector<int> Grafo::caminho_minimo_dijkstra(int id_no_a, int id_no_b)
 {
-    map<char, int> id_to_index;
-    map<int, char> index_to_id;
+    map<int, int> id_to_index;
+    map<int, int> index_to_id;
     int index = 0;
     for (const auto &no : lista_adj)
     {
@@ -658,8 +709,8 @@ vector<char> Grafo::caminho_minimo_dijkstra(char id_no_a, char id_no_b)
     // Verificação de limites
     if (inicio_idx == -1 || destino_idx == -1)
     {
-        cout << "ERRO: Nós inválidos! Recebido: " << id_no_a << " e " << id_no_b << endl;
-        return vector<char>();
+        std::cout << "ERRO: Nós inválidos! Recebido: " << id_no_a << " e " << id_no_b << endl;
+        return vector<int>();
     }
 
     const int INF = std::numeric_limits<int>::max();
@@ -709,12 +760,12 @@ vector<char> Grafo::caminho_minimo_dijkstra(char id_no_a, char id_no_b)
     }
 
     // Reconstrução do caminho
-    vector<char> caminho;
+    vector<int> caminho;
     int atual_idx = destino_idx;
 
     if (dist[atual_idx] == INF)
     { // Caminho não encontrado
-        return vector<char>();
+        return vector<int>();
     }
 
     while (atual_idx != -1)
@@ -725,15 +776,15 @@ vector<char> Grafo::caminho_minimo_dijkstra(char id_no_a, char id_no_b)
 
     reverse(caminho.begin(), caminho.end());
 
-    cout << "Distância total do caminho: " << dist_total << endl;
+    std::cout << "Distância total do caminho: " << dist_total << endl;
     return caminho;
 }
 
-vector<char> Grafo::caminho_minimo_floyd(char id_no_a, char id_no_b)
+vector<int> Grafo::caminho_minimo_floyd(int id_no_a, int id_no_b)
 {
     // Criar mapeamentos de ID para índices
-    map<char, int> id_to_index;
-    map<int, char> index_to_id;
+    map<int, int> id_to_index;
+    map<int, int> index_to_id;
     int index = 0;
     for (const auto &no : lista_adj)
     {
@@ -748,8 +799,8 @@ vector<char> Grafo::caminho_minimo_floyd(char id_no_a, char id_no_b)
     // Verificação de nós válidos
     if (inicio_idx == -1 || destino_idx == -1)
     {
-        cout << "ERRO: Nós inválidos! Recebido: " << id_no_a << " e " << id_no_b << endl;
-        return vector<char>();
+        std::cout << "ERRO: Nós inválidos! Recebido: " << id_no_a << " e " << id_no_b << endl;
+        return vector<int>();
     }
 
     const int INF = std::numeric_limits<int>::max();
@@ -803,12 +854,12 @@ vector<char> Grafo::caminho_minimo_floyd(char id_no_a, char id_no_b)
     // Verificar se existe caminho
     if (dist[inicio_idx][destino_idx] == INF)
     {
-        cout << "Não existe caminho entre " << id_no_a << " e " << id_no_b << endl;
-        return vector<char>();
+        std::cout << "Não existe caminho entre " << id_no_a << " e " << id_no_b << endl;
+        return vector<int>();
     }
 
     // Reconstruir o caminho
-    vector<char> caminho;
+    vector<int> caminho;
     int atual = inicio_idx;
 
     while (atual != destino_idx)
@@ -819,25 +870,25 @@ vector<char> Grafo::caminho_minimo_floyd(char id_no_a, char id_no_b)
         if (atual == -1)
         {
             // Erro na reconstrução do caminho
-            cout << "Erro na reconstrução do caminho" << endl;
-            return vector<char>();
+            std::cout << "Erro na reconstrução do caminho" << endl;
+            return vector<int>();
         }
     }
 
     // Adicionar o nó de destino
     caminho.push_back(index_to_id[destino_idx]);
 
-    cout << "Distância total do caminho: " << dist[inicio_idx][destino_idx] << endl;
+    std::cout << "Distância total do caminho: " << dist[inicio_idx][destino_idx] << endl;
     return caminho;
 }
 
-Grafo *Grafo::arvore_geradora_minima_prim(vector<char> ids_nos)
+Grafo *Grafo::arvore_geradora_minima_prim(vector<int> ids_nos)
 {
     if (ids_nos.empty())
         return nullptr;
 
-    unordered_set<char> subconjunto(ids_nos.begin(), ids_nos.end());
-    unordered_set<char> visitados;
+    unordered_set<int> subconjunto(ids_nos.begin(), ids_nos.end());
+    unordered_set<int> visitados;
     vector<Aresta *> arestas_possiveis;
 
     // Cria o subgrafo AGM
@@ -847,7 +898,7 @@ Grafo *Grafo::arvore_geradora_minima_prim(vector<char> ids_nos)
     agm->in_ponderado_vertice = this->in_ponderado_vertice;
 
     // Adiciona os nós do subconjunto ao subgrafo AGM
-    for (char id : ids_nos)
+    for (int id : ids_nos)
     {
         // Procura o nó original para copiar o peso, se houver
         int peso = 0;
@@ -863,11 +914,11 @@ Grafo *Grafo::arvore_geradora_minima_prim(vector<char> ids_nos)
     }
 
     // Começa por qualquer nó do subconjunto
-    char inicial = ids_nos[0];
+    int inicial = ids_nos[0];
     visitados.insert(inicial);
 
     // Adiciona as arestas do nó inicial à lista de possíveis arestas
-    auto adicionar_arestas = [&](char no_id)
+    auto adicionar_arestas = [&](int no_id)
     {
         No *no = nullptr;
         for (No *n : lista_adj)
@@ -882,7 +933,7 @@ Grafo *Grafo::arvore_geradora_minima_prim(vector<char> ids_nos)
             return;
         for (Aresta *aresta : no->arestas)
         {
-            char vizinho = aresta->id_no_alvo;
+            int vizinho = aresta->id_no_alvo;
             if (subconjunto.count(vizinho) && !visitados.count(vizinho))
             {
                 arestas_possiveis.push_back(aresta);
@@ -902,8 +953,8 @@ Grafo *Grafo::arvore_geradora_minima_prim(vector<char> ids_nos)
         Aresta *menor = *it;
         arestas_possiveis.erase(it);
 
-        char u = menor->id_no_origem;
-        char v = menor->id_no_alvo;
+        int u = menor->id_no_origem;
+        int v = menor->id_no_alvo;
 
         // Garante que v é o nó ainda não visitado
         if (visitados.count(v))
@@ -920,7 +971,7 @@ Grafo *Grafo::arvore_geradora_minima_prim(vector<char> ids_nos)
     // Se não foi possível conectar todos os nós do subconjunto, retorna nullptr
     if (visitados.size() < subconjunto.size())
     {
-        cout << "ERRO: Não foi possível formar uma árvore geradora mínima com os nós fornecidos.\n"
+        std::cout << "ERRO: Não foi possível formar uma árvore geradora mínima com os nós fornecidos.\n"
              << endl;
         delete agm;
         return nullptr;
@@ -929,23 +980,23 @@ Grafo *Grafo::arvore_geradora_minima_prim(vector<char> ids_nos)
     return agm;
 }
 
-Grafo *Grafo::arvore_geradora_minima_kruskal(vector<char> ids_nos)
+Grafo *Grafo::arvore_geradora_minima_kruskal(vector<int> ids_nos)
 {
 
-    unordered_set<char> subconjunto_nos(ids_nos.begin(), ids_nos.end());
+    unordered_set<int> subconjunto_nos(ids_nos.begin(), ids_nos.end());
     vector<Aresta *> arestas_subgrafo;
 
     // Incialmente pegar todos as arestas dos nós do subgrafo
     for (const auto &no : lista_adj)
     {
-        char u = no->id;
+        int u = no->id;
         if (subconjunto_nos.find(u) == subconjunto_nos.end())
             continue; // Ignora nós que não estão no subconjunto
 
         // Pegar as arestas do nó atual
         for (const auto &aresta : no->arestas)
         {
-            char v = aresta->id_no_alvo;
+            int v = aresta->id_no_alvo;
             int peso = aresta->peso;
 
             if (subconjunto_nos.find(v) == subconjunto_nos.end())
@@ -975,13 +1026,13 @@ Grafo *Grafo::arvore_geradora_minima_kruskal(vector<char> ids_nos)
     }
 
     // Estrutura Union-Find para detectar ciclos
-    unordered_map<char, char> parent;
+    unordered_map<int, int> parent;
     for (const auto &id : ids_nos)
     {
         parent[id] = id;
     }
 
-    auto find = [&parent](char node)
+    auto find = [&parent](int node)
     {
         while (parent[node] != node)
         {
@@ -990,10 +1041,10 @@ Grafo *Grafo::arvore_geradora_minima_kruskal(vector<char> ids_nos)
         return node;
     };
 
-    auto union_sets = [&parent, &find](char u, char v)
+    auto union_sets = [&parent, &find](int u, int v)
     {
-        char root_u = find(u);
-        char root_v = find(v);
+        int root_u = find(u);
+        int root_v = find(v);
         if (root_u != root_v)
         {
             parent[root_v] = root_u;
@@ -1009,8 +1060,8 @@ Grafo *Grafo::arvore_geradora_minima_kruskal(vector<char> ids_nos)
         Aresta *aresta = arestas_subgrafo.back();
         arestas_subgrafo.pop_back();
 
-        char u = aresta->id_no_origem;
-        char v = aresta->id_no_alvo;
+        int u = aresta->id_no_origem;
+        int v = aresta->id_no_alvo;
 
         // Verifica se u e v estão no mesmo subconjunto
         if (union_sets(u, v))
@@ -1028,14 +1079,14 @@ Grafo *Grafo::arvore_geradora_minima_kruskal(vector<char> ids_nos)
 
     if (cont < subconjunto_nos.size() - 1)
     {
-        cout << "ERRO: Não foi possível formar uma árvore geradora mínima com os nós fornecidos." << endl;
+        std::cout << "ERRO: Não foi possível formar uma árvore geradora mínima com os nós fornecidos." << endl;
         delete subgrafoAGM; // Libera memória se não for possível formar a árvore
         return nullptr;
     }
     return subgrafoAGM;
 }
 
-void Grafo::dfs_profundidade_helper(char id_no, char parent_id, set<char> &visitados, set<char> &recursion_stack, Grafo *arvore, vector<char> &insertion_sequence, vector<pair<char, char>> &back_edges)
+void Grafo::dfs_profundidade_helper(int id_no, int parent_id, set<int> &visitados, set<int> &recursion_stack, Grafo *arvore, vector<int> &insertion_sequence, vector<pair<int, int>> &back_edges)
 {
     visitados.insert(id_no);
     recursion_stack.insert(id_no);
@@ -1056,7 +1107,7 @@ void Grafo::dfs_profundidade_helper(char id_no, char parent_id, set<char> &visit
 
     for (Aresta *aresta : no_origem->arestas)
     {
-        char id_vizinho = aresta->id_no_alvo;
+        int id_vizinho = aresta->id_no_alvo;
         if (id_vizinho == parent_id)
         {
             continue;
@@ -1077,10 +1128,10 @@ void Grafo::dfs_profundidade_helper(char id_no, char parent_id, set<char> &visit
     recursion_stack.erase(id_no);
 }
 
-int Grafo::calcular_distancia(char id_origem, char id_destino)
+int Grafo::calcular_distancia(int id_origem, int id_destino)
 {
-    map<char, int> id_to_index;
-    map<int, char> index_to_id;
+    map<int, int> id_to_index;
+    map<int, int> index_to_id;
     int index = 0;
     for (const auto &no : lista_adj)
     {
@@ -1135,7 +1186,7 @@ int Grafo::calcular_distancia(char id_origem, char id_destino)
     return dist[destino_idx];
 }
 
-void Grafo::dfs_articulacao_helper(char u, map<char, int> &desc, map<char, int> &low, map<char, char> &parent, set<char> &articulacoes, int &time, bool &is_root)
+void Grafo::dfs_articulacao_helper(int u, map<int, int> &desc, map<int, int> &low, map<int, int> &parent, set<int> &articulacoes, int &time, bool &is_root)
 {
     // Define o tempo de descoberta e o low-link para o nó atual.
     desc[u] = low[u] = ++time;
@@ -1156,7 +1207,7 @@ void Grafo::dfs_articulacao_helper(char u, map<char, int> &desc, map<char, int> 
     // Itera sobre os vizinhos do nó 'u'.
     for (Aresta *aresta : no_u->arestas)
     {
-        char v = aresta->id_no_alvo;
+        int v = aresta->id_no_alvo;
         // Se 'v' é o pai de 'u' na árvore de busca, ignora.
         if (parent.count(u) && v == parent[u])
         {
@@ -1191,7 +1242,7 @@ void Grafo::dfs_articulacao_helper(char u, map<char, int> &desc, map<char, int> 
     }
 }
 
-pair<Grafo *, vector<pair<char, char>>> Grafo::arvore_caminhamento_profundidade(char id_no)
+pair<Grafo *, vector<pair<int, int>>> Grafo::arvore_caminhamento_profundidade(int id_no)
 {
     Grafo *arvore = new Grafo();
     arvore->in_direcionado = this->in_direcionado;
@@ -1203,10 +1254,10 @@ pair<Grafo *, vector<pair<char, char>>> Grafo::arvore_caminhamento_profundidade(
         arvore->adicionarNo(no->id, no->peso);
     }
 
-    set<char> visitados;
-    set<char> recursion_stack;
-    vector<char> insertion_sequence;
-    vector<pair<char, char>> back_edges;
+    set<int> visitados;
+    set<int> recursion_stack;
+    vector<int> insertion_sequence;
+    vector<pair<int, int>> back_edges;
 
     dfs_profundidade_helper(id_no, '\0', visitados, recursion_stack, arvore, insertion_sequence, back_edges);
 
@@ -1223,26 +1274,26 @@ pair<Grafo *, vector<pair<char, char>>> Grafo::arvore_caminhamento_profundidade(
         arvore->adicionarAresta(edge.first, edge.second, 0);
     }
 
-    cout << "Arvore de caminhamento em profundidade gerada." << endl;
-    cout << "Sequencia de insercao (ordem de visita): ";
+    std::cout << "Arvore de caminhamento em profundidade gerada." << endl;
+    std::cout << "Sequencia de insercao (ordem de visita): ";
     for (size_t i = 0; i < insertion_sequence.size(); ++i)
     {
-        cout << insertion_sequence[i] << (i == insertion_sequence.size() - 1 ? "" : ", ");
+        std::cout << insertion_sequence[i] << (i == insertion_sequence.size() - 1 ? "" : ", ");
     }
-    cout << endl;
-    cout << "Arestas de retorno (back edges): ";
+    std::cout << endl;
+    std::cout << "Arestas de retorno (back edges): ";
     if (back_edges.empty())
     {
-        cout << "Nenhuma.";
+        std::cout << "Nenhuma.";
     }
     else
     {
         for (size_t i = 0; i < back_edges.size(); ++i)
         {
-            cout << "(" << back_edges[i].first << ", " << back_edges[i].second << ")" << (i == back_edges.size() - 1 ? "" : "");
+            std::cout << "(" << back_edges[i].first << ", " << back_edges[i].second << ")" << (i == back_edges.size() - 1 ? "" : "");
         }
     }
-    cout << endl
+    std::cout << endl
          << endl;
 
     return {arvore, back_edges};
@@ -1290,7 +1341,7 @@ int Grafo::raio()
     // Se o grafo for desconexo, o raio é considerado infinito.
     if (!is_conexo)
     {
-        cout << "O grafo e desconexo, portanto o raio e o diametro sao infinitos." << endl;
+        std::cout << "O grafo e desconexo, portanto o raio e o diametro sao infinitos." << endl;
         return -1;
     }
 
@@ -1346,9 +1397,9 @@ int Grafo::diametro()
 }
 
 // Encontra o centro do grafo.
-vector<char> Grafo::centro()
+vector<int> Grafo::centro()
 {
-    vector<char> centro_nos;
+    vector<int> centro_nos;
     int r = raio();
 
     // Se o grafo for desconexo, não há centro.
@@ -1379,9 +1430,9 @@ vector<char> Grafo::centro()
 }
 
 // Encontra a periferia do grafo.
-vector<char> Grafo::periferia()
+vector<int> Grafo::periferia()
 {
-    vector<char> periferia_nos;
+    vector<int> periferia_nos;
     int d = diametro();
 
     // Se o grafo for desconexo, não há periferia.
@@ -1412,12 +1463,12 @@ vector<char> Grafo::periferia()
 }
 
 // Encontra todos os vértices de articulação (pontos de corte) do grafo.
-vector<char> Grafo::vertices_de_articulacao()
+vector<int> Grafo::vertices_de_articulacao()
 {
-    map<char, int> desc;
-    map<char, int> low;
-    map<char, char> parent;
-    set<char> articulacoes;
+    map<int, int> desc;
+    map<int, int> low;
+    map<int, int> parent;
+    set<int> articulacoes;
     int time = 0;
 
     // Itera sobre todos os nós do grafo.
@@ -1432,13 +1483,13 @@ vector<char> Grafo::vertices_de_articulacao()
     }
 
     // Converte o conjunto de articulações para um vetor e o retorna.
-    return vector<char>(articulacoes.begin(), articulacoes.end());
+    return vector<int>(articulacoes.begin(), articulacoes.end());
 }
 
-vector<char> Grafo::ds_2_greedy()
+vector<int> Grafo::ds_2_greedy()
 {
-    vector<char> D;
-    set<char> U;
+    vector<int> D;
+    set<int> U;
 
     // Initialize U with all vertices
     for (const auto &no : lista_adj)
@@ -1448,16 +1499,16 @@ vector<char> Grafo::ds_2_greedy()
 
     while (!U.empty())
     {
-        char melhor_no = '\0';
+        int melhor_no = '\0';
         int max_cobertos = -1;
-        set<char> melhores_cobertos;
+        set<int> melhores_cobertos;
 
         // Iterate over all nodes to find the best candidate
         for (const auto &candidato : lista_adj)
         {
-            set<char> cobertos_pelo_candidato;
+            set<int> cobertos_pelo_candidato;
             // Check which uncovered vertices are covered by the current candidate
-            for (char u_node : U)
+            for (int u_node : U)
             {
                 if (calcular_distancia(candidato->id, u_node) <= 2)
                 {
@@ -1475,11 +1526,10 @@ vector<char> Grafo::ds_2_greedy()
 
         // Add the best node to the dominating set
         D.push_back(melhor_no);
-        cout << "Nó adicionado ao conjunto dominante: " << melhor_no << endl;
-
+        std::cout << "Nó adicionado ao conjunto dominante: " << melhor_no << endl;
 
         // Remove the newly covered vertices from U
-        for (char no_coberto : melhores_cobertos)
+        for (int no_coberto : melhores_cobertos)
         {
             U.erase(no_coberto);
         }

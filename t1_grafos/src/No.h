@@ -11,7 +11,7 @@ public:
     No();
     ~No();
 
-    char id;
+    int id;
     int peso;
     vector<Aresta *> arestas;
 };

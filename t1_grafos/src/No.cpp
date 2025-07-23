@@ -2,7 +2,7 @@
 
 No::No()
 {
-    this->id = '\0';
+    this->id = 0;
     this->peso = 0;
 }
 
