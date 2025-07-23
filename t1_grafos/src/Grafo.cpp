@@ -1491,7 +1491,6 @@ vector<int> Grafo::ds_2_greedy()
     vector<int> D;
     set<int> U;
 
-    // Initialize U with all vertices
     for (const auto &no : lista_adj)
     {
         U.insert(no->id);
@@ -1499,15 +1498,13 @@ vector<int> Grafo::ds_2_greedy()
 
     while (!U.empty())
     {
-        int melhor_no = '\0';
+        int melhor_no = 0;
         int max_cobertos = -1;
         set<int> melhores_cobertos;
 
-        // Iterate over all nodes to find the best candidate
         for (const auto &candidato : lista_adj)
         {
             set<int> cobertos_pelo_candidato;
-            // Check which uncovered vertices are covered by the current candidate
             for (int u_node : U)
             {
                 if (calcular_distancia(candidato->id, u_node) <= 2)
@@ -1524,11 +1521,9 @@ vector<int> Grafo::ds_2_greedy()
             }
         }
 
-        // Add the best node to the dominating set
         D.push_back(melhor_no);
         std::cout << "Nó adicionado ao conjunto dominante: " << melhor_no << endl;
 
-        // Remove the newly covered vertices from U
         for (int no_coberto : melhores_cobertos)
         {
             U.erase(no_coberto);
