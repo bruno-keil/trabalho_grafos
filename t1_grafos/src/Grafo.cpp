@@ -1556,11 +1556,16 @@ vector<int> Grafo::ds_2_greedy()
         }
     }
     auto end_time = chrono::high_resolution_clock::now(); // End timer
-    auto total_duration_ms = chrono::duration_cast<chrono::milliseconds>(end_time - start_time);
-    long long seconds = total_duration_ms.count() / 1000;
-    long long milliseconds = total_duration_ms.count();
-    cout << "\nTempo de execução (Greedy): " << seconds << "." << milliseconds << "s" << endl;
 
+    auto total_duration_ms = chrono::duration_cast<chrono::milliseconds>(end_time - start_time);
+    long long minutes = total_duration_ms.count() / 60000;
+    long long seconds = (total_duration_ms.count() % 60000) / 1000;
+    long long milliseconds = total_duration_ms.count() % 1000;
+
+    cout << "\nTempo de execução (Guloso): "
+         << setfill('0') << setw(2) << minutes << ":"
+         << setfill('0') << setw(2) << seconds << ":"
+         << setfill('0') << setw(3) << milliseconds << endl;
 
     return dominating_set;
 }
@@ -1635,10 +1640,150 @@ vector<int> Grafo::ds_2_randomized_greedy(int max_iter, float alpha)
         }
     }
     auto end_time = chrono::high_resolution_clock::now(); // End timer
+
     auto total_duration_ms = chrono::duration_cast<chrono::milliseconds>(end_time - start_time);
-    long long seconds = total_duration_ms.count() / 1000;
+    long long minutes = total_duration_ms.count() / 60000;
+    long long seconds = (total_duration_ms.count() % 60000) / 1000;
     long long milliseconds = total_duration_ms.count() % 1000;
-    cout << "\nTempo de execução (Randomized Greedy): " << seconds << ":" << milliseconds << " s" << endl;
+
+    cout << "\nTempo de execução (Guloso Randomizado): "
+         << setfill('0') << setw(2) << minutes << ":"
+         << setfill('0') << setw(2) << seconds << ":"
+         << setfill('0') << setw(3) << milliseconds << endl;
 
     return best_solution;
+}
+
+vector<int> Grafo::ds_2_reactive_randomized_greedy(vector<float> alfaVet, int numIter, int bloco)
+{
+    auto start_time = chrono::high_resolution_clock::now();
+    
+    // solBest = {}
+    vector<int> melhor_solucao;
+    int melhor_tamanho = INT_MAX;
+
+    // inicializaVetores(P, M, m)
+    int m = alfaVet.size();
+    vector<float> P(m, 1.0 / m); // Probabilities for each alpha, initially uniform
+    vector<float> M(m, 0.0);     // Average solution quality for each alpha
+    vector<int> usos(m, 0);      // Usage count for each alpha
+
+    srand(time(NULL)); // Seed for random number generation
+
+    // while (i < numIter)
+    for (int iter = 1; iter <= numIter; iter++)
+    {
+        // α = escolheAlfa(P)
+        float r = (float)rand() / RAND_MAX;
+        float acumulado = 0.0;
+        int indice_alfa = 0;
+        for (int j = 0; j < m; j++)
+        {
+            acumulado += P[j];
+            if (r <= acumulado)
+            {
+                indice_alfa = j;
+                break;
+            }
+        }
+        float alfa = alfaVet[indice_alfa];
+
+        // s = {}
+        vector<int> D; // Current solution
+        set<int> U;    // Set of uncovered nodes
+        for (const auto &no : lista_adj)
+        {
+            U.insert(no->id);
+        }
+
+        // do { ... } while s não finalizada
+        while (!U.empty())
+        {
+            // LC = ordenaCandidatos(I)
+            vector<pair<int, set<int>>> LC; // Candidate List: {node_id, covered_nodes}
+            for (const auto &candidato : lista_adj)
+            {
+                set<int> cobertos;
+                for (int u_node : U)
+                {
+                    if (calcular_distancia(candidato->id, u_node) <= 2)
+                    {
+                        cobertos.insert(u_node);
+                    }
+                }
+                if (!cobertos.empty())
+                {
+                    LC.push_back({candidato->id, cobertos});
+                }
+            }
+
+            if (LC.empty()) break; // No more nodes can be covered
+
+            // Sort candidates by the number of nodes they cover (descending)
+            sort(LC.begin(), LC.end(), [](const pair<int, set<int>> &a, const pair<int, set<int>> &b) {
+                return a.second.size() > b.second.size();
+            });
+
+            // k = randomRange(0, α * LC.count() - 1)
+            int limite = max(1, int(alfa * LC.size())); // Build the RCL
+            int indice_escolhido = rand() % limite;
+            auto escolhido = LC[indice_escolhido];
+
+            // s = s ⋃ LC[k]
+            D.push_back(escolhido.first);
+
+            // atualizaListaCandidatos(LC, k)
+            for (int no_coberto : escolhido.second)
+            {
+                U.erase(no_coberto);
+            }
+        }
+
+        // atualizaMedias(M, s, α)
+        usos[indice_alfa]++;
+        float qualidade = 1.0 / D.size(); // Better solution (smaller size) has higher quality
+        // Incremental average update
+        M[indice_alfa] += (qualidade - M[indice_alfa]) / usos[indice_alfa];
+
+        // if (s.val < solBest.val) solBest = s
+        if ((int)D.size() < melhor_tamanho)
+        {
+            melhor_tamanho = D.size();
+            melhor_solucao = D;
+        }
+
+        // if (i % bloco == 0) atualizaProbabilidades(P, M, alfa, solBest)
+        if (iter % bloco == 0)
+        {
+            float somaM = accumulate(M.begin(), M.end(), 0.0f);
+            if (somaM > 0)
+            {
+                for (int j = 0; j < m; j++)
+                {
+                    P[j] = M[j] / somaM;
+                }
+            }
+            else // If all averages are zero, reset to uniform
+            {
+                for (int j = 0; j < m; j++)
+                {
+                    P[j] = 1.0 / m;
+                }
+            }
+        }
+    }
+
+    auto end_time = chrono::high_resolution_clock::now(); // End timer
+
+    auto total_duration_ms = chrono::duration_cast<chrono::milliseconds>(end_time - start_time);
+    long long minutes = total_duration_ms.count() / 60000;
+    long long seconds = (total_duration_ms.count() % 60000) / 1000;
+    long long milliseconds = total_duration_ms.count() % 1000;
+
+    cout << "\nTempo de execução (Reactive Randomized Greedy): "
+         << setfill('0') << setw(2) << minutes << ":"
+         << setfill('0') << setw(2) << seconds << ":"
+         << setfill('0') << setw(3) << milliseconds << endl;
+
+    return melhor_solucao;
 }

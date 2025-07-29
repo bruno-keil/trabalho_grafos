@@ -9,6 +9,7 @@ void Gerenciador::menu_principal(Grafo *grafo)
         cout << "--- Menu Principal ---" << endl;
         cout << "(1) Funcoes Basicas" << endl;
         cout << "(2) Algoritmos em Grafos" << endl;
+        cout << "(3) 2-distance dominating set (Heuristicas)" << endl;
         cout << "(0) Sair" << endl;
         cin >> resp;
 
@@ -20,6 +21,9 @@ void Gerenciador::menu_principal(Grafo *grafo)
         case '2':
             menu_algoritmos(grafo);
             break;
+        case '3':
+            menu_heuristics(grafo);
+        break;
         case '0':
             cout << "Saindo..." << endl;
             exit(0);
@@ -153,7 +157,7 @@ void Gerenciador::menu_algoritmos(Grafo *grafo)
         cout << "(g) Arvore de caminhamento em profundidade;" << endl;
         cout << "(h) Raio, diametro, centro e periferia do grafo;" << endl;
         cout << "(i) Vertices de Articulacao;" << endl;
-        cout << "(j) 2-distance Dominating Set (Greedy);" << endl;
+        cout << "(j) Heurísticas;" << endl;
         cout << "(0) Sair;" << endl
              << endl;
         cin >> resp;
@@ -526,19 +530,6 @@ void Gerenciador::menu_algoritmos(Grafo *grafo)
                  << endl;
             break;
         }
-
-        case 'j':
-        {
-            vector<int> resultado = grafo->ds_2_greedy();
-            cout << "Conjunto Dominante a 2-distancia: ";
-            for (size_t i = 0; i < resultado.size(); ++i)
-            {
-                cout << resultado[i] << (i == resultado.size() - 1 ? "" : ", ");
-            }
-            cout << endl << endl;
-            break;
-        }
-
         case '0':
         {
             menu_principal(grafo);
@@ -549,6 +540,91 @@ void Gerenciador::menu_algoritmos(Grafo *grafo)
             cout << "Opção inválida" << endl;
             break;
         }
+        }
+    } while (resp != '0');
+}
+
+void Gerenciador::menu_heuristics(Grafo *grafo)
+{
+    char resp;
+    do
+    {
+        cout << "--- Heurísticas ---" << endl;
+        cout << "(1) 2-distance Dominating Set (Guloso)" << endl;
+        cout << "(2) 2-distance Dominating Set (Guloso Randomizado)" << endl;
+        cout << "(3) 2-distance Dominating Set (Guloso Randomizado Reativo)" << endl;
+        cout << "(0) Voltar ao Menu" << endl;
+        cin >> resp;
+
+        switch (resp)
+        {
+        case '1':
+        {
+            vector<int> resultado = grafo->ds_2_greedy();
+            cout << "Conjunto Dominante a 2-distancia (Guloso): ";
+            for (size_t i = 0; i < resultado.size(); ++i)
+            {
+                cout << resultado[i] << (i == resultado.size() - 1 ? "" : ", ");
+            }
+            cout << endl
+                 << endl;
+            break;
+        }
+        case '2':
+        {
+            int max_iter;
+            float alpha;
+
+            cout << "Digite o numero maximo de iteracoes: ";
+            cin >> max_iter;
+            cout << "Digite o valor de alfa (entre 0 e 1): ";
+            cin >> alpha;
+
+            vector<int> resultado = grafo->ds_2_randomized_greedy(max_iter, alpha);
+            cout << "Conjunto Dominante a 2-distancia (Randomizado): ";
+            for (size_t i = 0; i < resultado.size(); ++i)
+            {
+                cout << resultado[i] << (i == resultado.size() - 1 ? "" : ", ");
+            }
+            cout << endl
+                 << endl;
+            break;
+        }
+        case '3':
+        {
+            int numIter;
+            int bloco;
+            int numAlfas;
+
+            cout << "Digite o numero maximo de iteracoes: ";
+            cin >> numIter;
+            cout << "Digite o tamanho do bloco: ";
+            cin >> bloco;
+            cout << "Digite o numero de alfas a serem testados: ";
+            cin >> numAlfas;
+
+            vector<float> alfaVet(numAlfas);
+            cout << "Digite os " << numAlfas << " valores de alfa (entre 0 e 1):" << endl;
+            for (int i = 0; i < numAlfas; ++i) {
+                cout << "Alfa " << i + 1 << ": ";
+                cin >> alfaVet[i];
+            }
+
+            vector<int> resultado = grafo->ds_2_reactive_randomized_greedy(alfaVet, numIter, bloco);
+            cout << "Conjunto Dominante a 2-distancia (Reativo): ";
+            for (size_t i = 0; i < resultado.size(); ++i)
+            {
+                cout << resultado[i] << (i == resultado.size() - 1 ? "" : ", ");
+            }
+            cout << endl
+                 << endl;
+            break;
+        }
+        case '0':
+            return;
+        default:
+            cout << "Opcao invalida!" << endl;
+            break;
         }
     } while (resp != '0');
 }

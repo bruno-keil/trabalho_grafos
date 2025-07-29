@@ -16,6 +16,8 @@
 #include <cstdlib>
 #include <ctime>
 #include <chrono>
+#include <iomanip>
+#include <numeric>
 
 using namespace std;
 

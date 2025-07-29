@@ -38,7 +38,7 @@ public:
     vector<int> vertices_de_articulacao();                                               // i
     vector<int> ds_2_greedy();
     vector<int> ds_2_randomized_greedy(int max_iter, float alpha);
-    vector<int> ds_2_reactive_randomized_greedy();
+    vector<int> ds_2_reactive_randomized_greedy(vector<float> alfaVet, int numIter, int bloco);
 
     int ordem;
     bool in_direcionado;
