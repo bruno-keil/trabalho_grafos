@@ -1486,26 +1486,49 @@ vector<int> Grafo::vertices_de_articulacao()
     return vector<int>(articulacoes.begin(), articulacoes.end());
 }
 
+
+/**
+ * @brief Acha um 2-distance dominating set usando uma heuristica gulosa.
+ *
+ * Essa função implementa um algoritmo guloso para achar um 2-distance dominating set.
+ * Um 2-distance dominating set é um subconjunto de vertices D para que todo nó no grafo
+ * está a uma distancia de no maximo 2 para algum vertice em D.
+ *
+ * O algoritmo funciona da seguinte forma:
+ * 1. Inicializa um conjunto_dominante vazio e um conjunto de todos os nos não visitados.
+ * 2. Enquanto tiver nós não visitados:
+ * a. Ache o no que cobre o numero maximo de nos nao visitados em um raio de 2 de distancia.
+ * b. Adicione esse melhor no ao conjunto_dominante.
+ * c. Marque todos os nos cobertos pelo melhor no como visitados.
+ * 3. Retorne o conjunto_dominante construido.
+ */
+
 vector<int> Grafo::ds_2_greedy()
 {
-    vector<int> D;
-    set<int> U;
+    auto start_time = chrono::high_resolution_clock::now();
+    // Cria vetor do resultado e de nós não visitados
+    vector<int> dominating_set;
+    set<int> unvisited_nodes;
 
+    // Adiciona todos os nós de um grafo ao conjunto de nós não visitados
     for (const auto &no : lista_adj)
     {
-        U.insert(no->id);
+        unvisited_nodes.insert(no->id);
     }
 
-    while (!U.empty())
+    // Loop até que todos os nós sejam visitados.
+    while (!unvisited_nodes.empty())
     {
         int melhor_no = 0;
         int max_cobertos = -1;
         set<int> melhores_cobertos;
 
+        // Itera entre todos os nos até achar um que cobre o maior numero de nos não visitados.
         for (const auto &candidato : lista_adj)
         {
             set<int> cobertos_pelo_candidato;
-            for (int u_node : U)
+            // Checa qual nos não visitados estão cobertos pelo atual candidato.
+            for (int u_node : unvisited_nodes)
             {
                 if (calcular_distancia(candidato->id, u_node) <= 2)
                 {
@@ -1513,6 +1536,7 @@ vector<int> Grafo::ds_2_greedy()
                 }
             }
 
+            // Se o atual candidato cobre mais nos que o anterior, o atual vira o melhor no.
             if ((int)cobertos_pelo_candidato.size() > max_cobertos)
             {
                 max_cobertos = cobertos_pelo_candidato.size();
@@ -1521,13 +1545,100 @@ vector<int> Grafo::ds_2_greedy()
             }
         }
 
-        D.push_back(melhor_no);
+        // Adiciona o melhor no achado nessa iteraçao ao conjunto_dominante.
+        dominating_set.push_back(melhor_no);
         std::cout << "Nó adicionado ao conjunto dominante: " << melhor_no << endl;
 
+        // Remove os nos cobertos dos nos não visitados.
         for (int no_coberto : melhores_cobertos)
         {
-            U.erase(no_coberto);
+            unvisited_nodes.erase(no_coberto);
         }
     }
-    return D;
+    auto end_time = chrono::high_resolution_clock::now(); // End timer
+    auto total_duration_ms = chrono::duration_cast<chrono::milliseconds>(end_time - start_time);
+    long long seconds = total_duration_ms.count() / 1000;
+    long long milliseconds = total_duration_ms.count();
+    cout << "\nTempo de execução (Greedy): " << seconds << "." << milliseconds << "s" << endl;
+
+
+    return dominating_set;
+}
+
+vector<int> Grafo::ds_2_randomized_greedy(int max_iter, float alpha)
+{
+    auto start_time = chrono::high_resolution_clock::now();
+
+    vector<int> best_solution; // solBest
+    srand(time(0)); // Seed the random number generator
+
+    for (int i = 0; i < max_iter; ++i)
+    {
+        vector<int> current_solution; // s
+        set<int> unvisited_nodes;
+        for (const auto &no : lista_adj)
+        {
+            unvisited_nodes.insert(no->id);
+        }
+
+        while (!unvisited_nodes.empty())
+        {
+            // LC = ordenaCandidatos(I)
+            vector<pair<int, int>> candidates; // Pair of (coverage_count, node_id)
+            for (const auto &candidate_node : lista_adj)
+            {
+                int coverage_count = 0;
+                for (int unvisited_node_id : unvisited_nodes)
+                {
+                    if (calcular_distancia(candidate_node->id, unvisited_node_id) <= 2)
+                    {
+                        coverage_count++;
+                    }
+                }
+                if (coverage_count > 0)
+                {
+                    candidates.push_back({coverage_count, candidate_node->id});
+                }
+            }
+            // Sort candidates by coverage count in descending order
+            sort(candidates.rbegin(), candidates.rend());
+
+            // k = randomRange(0, alfa * LC.count() - 1)
+            int rcl_size = max(1, (int)(alpha * candidates.size()));
+            int random_index = rand() % rcl_size;
+
+            int chosen_node_id = candidates[random_index].second;
+
+            // s = s U LC[k]
+            current_solution.push_back(chosen_node_id);
+
+            // atualizaListaCandidatos(LC, k)
+            set<int> newly_covered;
+            for (int unvisited_node_id : unvisited_nodes)
+            {
+                if (calcular_distancia(chosen_node_id, unvisited_node_id) <= 2)
+                {
+                    newly_covered.insert(unvisited_node_id);
+                }
+            }
+
+            for (int covered_node : newly_covered)
+            {
+                unvisited_nodes.erase(covered_node);
+            }
+        }
+
+        // if (s.val < solBest.val)
+        if (best_solution.empty() || current_solution.size() < best_solution.size())
+        {
+            best_solution = current_solution;
+        }
+    }
+    auto end_time = chrono::high_resolution_clock::now(); // End timer
+    auto total_duration_ms = chrono::duration_cast<chrono::milliseconds>(end_time - start_time);
+    long long seconds = total_duration_ms.count() / 1000;
+    long long milliseconds = total_duration_ms.count() % 1000;
+    cout << "\nTempo de execução (Randomized Greedy): " << seconds << ":" << milliseconds << " s" << endl;
+
+    return best_solution;
 }
