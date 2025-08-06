@@ -55,7 +55,7 @@ void Gerenciador::menu_basico(Grafo *grafo)
         {
         case '1':
         {
-            int id;
+            char id;
             int peso = 0;
             cout << "Digite o id do no: ";
             cin >> id;
@@ -69,13 +69,13 @@ void Gerenciador::menu_basico(Grafo *grafo)
         }
         case '2':
         {
-            int id = get_id_entrada();
+            char id = get_id_entrada();
             grafo->removerNo(id);
             break;
         }
         case '3':
         {
-            int id_origem, id_destino;
+            char id_origem, id_destino;
             int peso = 0;
             cout << "Digite o id do no de origem: ";
             cin >> id_origem;
@@ -91,7 +91,7 @@ void Gerenciador::menu_basico(Grafo *grafo)
         }
         case '4':
         {
-            int id_origem, id_destino;
+            char id_origem, id_destino;
             int peso = 0;
             cout << "Digite o id do no de origem: ";
             cin >> id_origem;
@@ -167,8 +167,8 @@ void Gerenciador::menu_algoritmos(Grafo *grafo)
         case 'a':
         {
 
-            int id_no = get_id_entrada();
-            vector<int> fecho_transitivo_direto = grafo->fecho_transitivo_direto(id_no);
+            char id_no = get_id_entrada();
+            vector<char> fecho_transitivo_direto = grafo->fecho_transitivo_direto(id_no);
 
             // Impressão em tela do fecho transitivo direto
             cout << "Fecho transitivo direto do no " << id_no << ": ";
@@ -223,8 +223,8 @@ void Gerenciador::menu_algoritmos(Grafo *grafo)
         case 'b':
         {
 
-            int id_no = get_id_entrada();
-            vector<int> fecho_transitivo_indireto = grafo->fecho_transitivo_indireto(id_no);
+            char id_no = get_id_entrada();
+            vector<char> fecho_transitivo_indireto = grafo->fecho_transitivo_indireto(id_no);
 
             // Impressão em tela do fecho transitivo indireto
             cout << "Fecho transitivo indireto do no " << id_no << ": ";
@@ -279,11 +279,9 @@ void Gerenciador::menu_algoritmos(Grafo *grafo)
         case 'c':
         {
 
-            int id_no_1 = get_id_entrada();
-            int id_no_2 = get_id_entrada();
-            id_no_1 = id_no_1;
-            id_no_2 = id_no_2;
-            vector<int> caminho_minimo_dijkstra = grafo->caminho_minimo_dijkstra(id_no_1, id_no_2);
+            char id_no_1 = get_id_entrada();
+            char id_no_2 = get_id_entrada();
+            vector<char> caminho_minimo_dijkstra = grafo->caminho_minimo_dijkstra(id_no_1, id_no_2);
             cout << "Caminho minimo entre " << id_no_1 << " e " << id_no_2 << ": ";
             if (caminho_minimo_dijkstra.empty())
             {
@@ -291,7 +289,7 @@ void Gerenciador::menu_algoritmos(Grafo *grafo)
             }
             else
             {
-                for (int c : caminho_minimo_dijkstra)
+                for (char c : caminho_minimo_dijkstra)
                 {
                     cout << c << " ";
                 }
@@ -331,9 +329,9 @@ void Gerenciador::menu_algoritmos(Grafo *grafo)
         case 'd':
         {
 
-            int id_no_1 = get_id_entrada();
-            int id_no_2 = get_id_entrada();
-            vector<int> caminho_minimo_floyd = grafo->caminho_minimo_floyd(id_no_1, id_no_2);
+            char id_no_1 = get_id_entrada();
+            char id_no_2 = get_id_entrada();
+            vector<char> caminho_minimo_floyd = grafo->caminho_minimo_floyd(id_no_1, id_no_2);
 
             cout << "Caminho minimo entre " << id_no_1 << " e " << id_no_2 << ": ";
             if (caminho_minimo_floyd.empty())
@@ -342,7 +340,7 @@ void Gerenciador::menu_algoritmos(Grafo *grafo)
             }
             else
             {
-                for (int c : caminho_minimo_floyd)
+                for (char c : caminho_minimo_floyd)
                 {
                     cout << c << " ";
                 }
@@ -389,7 +387,7 @@ void Gerenciador::menu_algoritmos(Grafo *grafo)
             if (tam > 0 && tam <= grafo->ordem)
             {
 
-                vector<int> ids = get_conjunto_ids(grafo, tam);
+                vector<char> ids = get_conjunto_ids(grafo, tam);
                 Grafo *arvore_geradora_minima_prim = grafo->arvore_geradora_minima_prim(ids);
 
                 if (arvore_geradora_minima_prim)
@@ -432,7 +430,7 @@ void Gerenciador::menu_algoritmos(Grafo *grafo)
             if (tam > 0 && tam <= grafo->ordem)
             {
 
-                vector<int> ids = get_conjunto_ids(grafo, tam);
+                vector<char> ids = get_conjunto_ids(grafo, tam);
                 Grafo *arvore_geradora_minima_kruskal = grafo->arvore_geradora_minima_kruskal(ids);
 
                 // Imprime o subgrafo AGM
@@ -462,11 +460,11 @@ void Gerenciador::menu_algoritmos(Grafo *grafo)
 
         case 'g':
         {
-            int id_no = get_id_entrada();
-            pair<Grafo *, vector<pair<int, int>>> result = grafo->arvore_caminhamento_profundidade(id_no);
+            char id_no = get_id_entrada();
+            pair<Grafo *, vector<pair<char, char>>> result = grafo->arvore_caminhamento_profundidade(id_no);
 
             Grafo *arvore = result.first;
-            vector<pair<int, int>> back_edges = result.second;
+            vector<pair<char, char>> back_edges = result.second;
 
             if (arvore)
             {
@@ -485,8 +483,8 @@ void Gerenciador::menu_algoritmos(Grafo *grafo)
             if (r != -1)
             {
                 int d = grafo->diametro();
-                vector<int> c = grafo->centro();
-                vector<int> p = grafo->periferia();
+                vector<char> c = grafo->centro();
+                vector<char> p = grafo->periferia();
 
                 cout << endl
                      << "--- Propriedades do Grafo ---" << endl;
@@ -512,7 +510,7 @@ void Gerenciador::menu_algoritmos(Grafo *grafo)
         }
         case 'i':
         {
-            vector<int> articulacao = grafo->vertices_de_articulacao();
+            vector<char> articulacao = grafo->vertices_de_articulacao();
             cout << endl
                  << "--- Vertices de Articulacao ---" << endl;
             if (articulacao.empty())
@@ -560,7 +558,7 @@ void Gerenciador::menu_heuristics(Grafo *grafo)
         {
         case '1':
         {
-            vector<int> resultado = grafo->ds_2_greedy();
+            vector<char> resultado = grafo->ds_2_greedy();
             cout << "Conjunto Dominante a 2-distancia (Guloso): ";
             for (size_t i = 0; i < resultado.size(); ++i)
             {
@@ -580,7 +578,7 @@ void Gerenciador::menu_heuristics(Grafo *grafo)
             cout << "Digite o valor de alfa (entre 0 e 1): ";
             cin >> alpha;
 
-            vector<int> resultado = grafo->ds_2_randomized_greedy(max_iter, alpha);
+            vector<char> resultado = grafo->ds_2_randomized_greedy(max_iter, alpha);
             cout << "Conjunto Dominante a 2-distancia (Randomizado): ";
             for (size_t i = 0; i < resultado.size(); ++i)
             {
@@ -610,7 +608,7 @@ void Gerenciador::menu_heuristics(Grafo *grafo)
                 cin >> alfaVet[i];
             }
 
-            vector<int> resultado = grafo->ds_2_reactive_randomized_greedy(alfaVet, numIter, bloco);
+            vector<char> resultado = grafo->ds_2_reactive_randomized_greedy(alfaVet, numIter, bloco);
             cout << "Conjunto Dominante a 2-distancia (Reativo): ";
             for (size_t i = 0; i < resultado.size(); ++i)
             {
@@ -629,21 +627,21 @@ void Gerenciador::menu_heuristics(Grafo *grafo)
     } while (resp != '0');
 }
 
-int Gerenciador::get_id_entrada()
+char Gerenciador::get_id_entrada()
 {
     cout << "Digite o id de um no: ";
-    int id;
+    char id;
     cin >> id;
     cout << endl;
     return id;
 }
 
-vector<int> Gerenciador::get_conjunto_ids(Grafo *grafo, int tam)
+vector<char> Gerenciador::get_conjunto_ids(Grafo *grafo, int tam)
 {
-    vector<int> ids = {};
+    vector<char> ids = {};
     while ((int)ids.size() < tam)
     {
-        int id_no = get_id_entrada();
+        char id_no = get_id_entrada();
         bool existe = false;
         for (No *no : grafo->lista_adj)
         {

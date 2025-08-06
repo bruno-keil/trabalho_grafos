@@ -8,8 +8,8 @@ public:
     ~Aresta();
 
     // Adição desse nó de origem tanto aqui quanto no cpp e nas adições de arestas no Grafo.cpp
-    int id_no_origem;
-    int id_no_alvo;
+    char id_no_origem;
+    char id_no_alvo;
     int peso;
 };
 

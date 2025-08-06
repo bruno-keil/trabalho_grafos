@@ -10,7 +10,7 @@ Grafo::Grafo()
     this->in_ponderado_vertice = false;
 }
 
-/*Grafo::Grafo(const string &filePath)
+Grafo::Grafo(const string &filePath)
 {
     this->ordem = 0;
     ifstream file(filePath);
@@ -48,7 +48,7 @@ Grafo::Grafo()
         if (getline(file, line))
         {
             stringstream ss(line);
-            int id;
+            char id;
             int peso = 0;
             ss >> id;
             if (this->in_ponderado_vertice)
@@ -63,7 +63,7 @@ Grafo::Grafo()
     while (getline(file, line))
     {
         stringstream ss(line);
-        int id_origem, id_destino;
+        char id_origem, id_destino;
         int peso = 0;
         ss >> id_origem >> id_destino;
         if (this->in_ponderado_aresta)
@@ -74,8 +74,8 @@ Grafo::Grafo()
     }
 
     file.close();
-} */
-Grafo::Grafo(const string &filePath)
+}
+/*Grafo::Grafo(const string &filePath)
 {
     this->ordem = 0;
     this->in_direcionado = false;
@@ -117,7 +117,7 @@ Grafo::Grafo(const string &filePath)
         }
         else if (type == 'e')
         {
-            int u, v;
+            char u, v;
             ss >> u >> v;
             adicionarAresta(u, v);
         }
@@ -125,6 +125,7 @@ Grafo::Grafo(const string &filePath)
 
     file.close();
 }
+    */
 
 Grafo::~Grafo()
 {
@@ -134,7 +135,7 @@ Grafo::~Grafo()
     }
 }
 
-void Grafo::adicionarNo(int id_no, int peso)
+void Grafo::adicionarNo(char id_no, int peso)
 {
     No *novo_no = new No();
     novo_no->id = id_no;
@@ -143,7 +144,7 @@ void Grafo::adicionarNo(int id_no, int peso)
     this->ordem++;
 }
 
-void Grafo::removerNo(int id_no)
+void Grafo::removerNo(char id_no)
 {
     auto it = remove_if(lista_adj.begin(), lista_adj.end(), [id_no](No *no)
                         {
@@ -175,7 +176,7 @@ void Grafo::removerNo(int id_no)
 
 // Função Grafo::adicionarAresta CORRIGIDA
 
-void Grafo::adicionarAresta(int id_origem, int id_destino, int peso)
+void Grafo::adicionarAresta(char id_origem, char id_destino, int peso)
 {
     No *origem = nullptr;
     No *destino = nullptr;
@@ -215,7 +216,7 @@ void Grafo::adicionarAresta(int id_origem, int id_destino, int peso)
     }
 }
 
-void Grafo::removerAresta(int id_origem, int id_destino, int peso)
+void Grafo::removerAresta(char id_origem, char id_destino, int peso)
 {
     for (No *no : lista_adj)
     {
@@ -306,7 +307,7 @@ void Grafo::imprimirEmArquivoDot(const string &nomeArquivo) const
     // Define os nós
     for (const auto &no : lista_adj)
     {
-        outFile << "    " << no->id;
+        outFile << "    \"" << no->id << "\"";
         if (in_ponderado_vertice)
         {
             outFile << " [label=\"" << no->id << " (" << no->peso << ")\"]";
@@ -325,7 +326,7 @@ void Grafo::imprimirEmArquivoDot(const string &nomeArquivo) const
                 continue;
             }
 
-            outFile << "    " << no_origem->id;
+            outFile << "    \"" << no_origem->id << "\"";
             if (in_direcionado)
             {
                 outFile << " -> ";
@@ -334,7 +335,7 @@ void Grafo::imprimirEmArquivoDot(const string &nomeArquivo) const
             {
                 outFile << " -- ";
             }
-            outFile << aresta->id_no_alvo;
+            outFile << "\"" << aresta->id_no_alvo << "\"";
 
             if (in_ponderado_aresta)
             {
@@ -348,7 +349,7 @@ void Grafo::imprimirEmArquivoDot(const string &nomeArquivo) const
     outFile.close();
 }
 
-void Grafo::printTreeToDOT(const string &nomeArquivo, const vector<pair<int, int>> &back_edges) const
+void Grafo::printTreeToDOT(const string &nomeArquivo, const vector<pair<char, char>> &back_edges) const
 {
     ofstream outFile(nomeArquivo);
     if (!outFile.is_open())
@@ -372,7 +373,7 @@ void Grafo::printTreeToDOT(const string &nomeArquivo, const vector<pair<int, int
     // Define os nós
     for (const auto &no : lista_adj)
     {
-        outFile << "    " << no->id;
+        outFile << "    \"" << no->id << "\"";
         if (in_ponderado_vertice)
         {
             outFile << " [label=\"" << no->id << " (" << no->peso << ")\"]";
@@ -390,7 +391,7 @@ void Grafo::printTreeToDOT(const string &nomeArquivo, const vector<pair<int, int
                 continue;
             }
 
-            outFile << "    " << no_origem->id;
+            outFile << "    \"" << no_origem->id << "\"";
             if (in_direcionado)
             {
                 outFile << " -> ";
@@ -399,7 +400,7 @@ void Grafo::printTreeToDOT(const string &nomeArquivo, const vector<pair<int, int
             {
                 outFile << " -- ";
             }
-            outFile << aresta->id_no_alvo;
+            outFile << "\"" << aresta->id_no_alvo << "\"";
 
             bool is_back_edge = false;
             for (const auto &back_edge : back_edges)
@@ -455,7 +456,7 @@ void Grafo::imprimirEmArquivoCsAcademy(const string &nomeArquivo) const
     outFile.close();
 }
 
-void Grafo::printTreeToCsAcademy(const string &nomeArquivo, const vector<pair<int, int>> &back_edges) const
+void Grafo::printTreeToCsAcademy(const string &nomeArquivo, const vector<pair<char, char>> &back_edges) const
 {
     ofstream outFile(nomeArquivo);
     if (!outFile.is_open())
@@ -482,7 +483,7 @@ void Grafo::printTreeToCsAcademy(const string &nomeArquivo, const vector<pair<in
     outFile.close();
 }
 
-void Grafo::printTreeToArquivo(const string &nomeArquivo, const vector<pair<int, int>> &back_edges) const
+void Grafo::printTreeToArquivo(const string &nomeArquivo, const vector<pair<char, char>> &back_edges) const
 {
     ofstream outFile(nomeArquivo);
     if (!outFile.is_open())
@@ -586,19 +587,19 @@ void Grafo::gerarSaida(ostream &out) const
         << endl;
 }
 
-vector<int> Grafo::fecho_transitivo_direto(int id_no)
+vector<char> Grafo::fecho_transitivo_direto(char id_no)
 {
     // Busca BFS para encontrar todos os nós alcançáveis a partir do nó dado
-    set<int> fecho; // Usa set para evitar repetição e manter ordenado
-    queue<int> fila;
+    set<char> fecho; // Usa set para evitar repetição e manter ordenado
+    queue<char> fila;
 
     fila.push(id_no);
-    set<int> visitados;
+    set<char> visitados;
     visitados.insert(id_no);
 
     while (!fila.empty())
     {
-        int atual = fila.front();
+        char atual = fila.front();
         fila.pop();
 
         // Procura o nó atual na lista de adjacências
@@ -618,7 +619,7 @@ vector<int> Grafo::fecho_transitivo_direto(int id_no)
         // Visita todos os vizinhos do nó atual
         for (const auto &aresta : no_atual->arestas)
         {
-            int vizinho = aresta->id_no_alvo;
+            char vizinho = aresta->id_no_alvo;
 
             // Adiciona o vizinho ao fecho (exceto o próprio nó inicial)
             if (vizinho != id_no)
@@ -636,16 +637,16 @@ vector<int> Grafo::fecho_transitivo_direto(int id_no)
     }
 
     // Converte o set para vector e retorna
-    vector<int> resultado(fecho.begin(), fecho.end());
+    vector<char> resultado(fecho.begin(), fecho.end());
     return resultado;
 }
 
-vector<int> Grafo::fecho_transitivo_indireto(int id_no)
+vector<char> Grafo::fecho_transitivo_indireto(char id_no)
 {
-    int alvo = static_cast<int>(id_no);
+    char alvo = id_no;
 
     // Criar o grafo reverso
-    map<int, vector<int>> grafo_reverso; // A chave é o nó de destino, e o valor é uma lista de nós de origem.
+    map<char, vector<char>> grafo_reverso; // A chave é o nó de destino, e o valor é uma lista de nós de origem.
     for (const auto &no_origem : lista_adj)
     {
         for (const auto &aresta : no_origem->arestas)
@@ -655,16 +656,16 @@ vector<int> Grafo::fecho_transitivo_indireto(int id_no)
     }
 
     // Busca BFS no grafo reverso
-    set<int> fecho; // Usa set para evitar repetição e manter ordenado
-    queue<int> fila;
+    set<char> fecho; // Usa set para evitar repetição e manter ordenado
+    queue<char> fila;
 
     fila.push(alvo);
-    set<int> visitados;
+    set<char> visitados;
     visitados.insert(alvo);
 
     while (!fila.empty())
     {
-        int atual = fila.front();
+        char atual = fila.front();
         fila.pop();
 
         // Adiciona o nó atual, exceto o próprio nó
@@ -676,7 +677,7 @@ vector<int> Grafo::fecho_transitivo_indireto(int id_no)
         // Se o nó atual existe como chave no grafo reverso, visita os vizinhos
         if (grafo_reverso.count(atual))
         {
-            for (int vizinho_reverso : grafo_reverso[atual])
+            for (char vizinho_reverso : grafo_reverso[atual])
             {
                 if (visitados.find(vizinho_reverso) == visitados.end())
                 {
@@ -687,14 +688,14 @@ vector<int> Grafo::fecho_transitivo_indireto(int id_no)
         }
     }
 
-    vector<int> resultado(fecho.begin(), fecho.end());
+    vector<char> resultado(fecho.begin(), fecho.end());
     return resultado;
 }
 
-vector<int> Grafo::caminho_minimo_dijkstra(int id_no_a, int id_no_b)
+vector<char> Grafo::caminho_minimo_dijkstra(char id_no_a, char id_no_b)
 {
-    map<int, int> id_to_index;
-    map<int, int> index_to_id;
+    map<char, int> id_to_index;
+    map<int, char> index_to_id;
     int index = 0;
     for (const auto &no : lista_adj)
     {
@@ -710,7 +711,7 @@ vector<int> Grafo::caminho_minimo_dijkstra(int id_no_a, int id_no_b)
     if (inicio_idx == -1 || destino_idx == -1)
     {
         std::cout << "ERRO: Nós inválidos! Recebido: " << id_no_a << " e " << id_no_b << endl;
-        return vector<int>();
+        return vector<char>();
     }
 
     const int INF = std::numeric_limits<int>::max();
@@ -760,12 +761,12 @@ vector<int> Grafo::caminho_minimo_dijkstra(int id_no_a, int id_no_b)
     }
 
     // Reconstrução do caminho
-    vector<int> caminho;
+    vector<char> caminho;
     int atual_idx = destino_idx;
 
     if (dist[atual_idx] == INF)
     { // Caminho não encontrado
-        return vector<int>();
+        return vector<char>();
     }
 
     while (atual_idx != -1)
@@ -780,11 +781,11 @@ vector<int> Grafo::caminho_minimo_dijkstra(int id_no_a, int id_no_b)
     return caminho;
 }
 
-vector<int> Grafo::caminho_minimo_floyd(int id_no_a, int id_no_b)
+vector<char> Grafo::caminho_minimo_floyd(char id_no_a, char id_no_b)
 {
     // Criar mapeamentos de ID para índices
-    map<int, int> id_to_index;
-    map<int, int> index_to_id;
+    map<char, int> id_to_index;
+    map<int, char> index_to_id;
     int index = 0;
     for (const auto &no : lista_adj)
     {
@@ -800,7 +801,7 @@ vector<int> Grafo::caminho_minimo_floyd(int id_no_a, int id_no_b)
     if (inicio_idx == -1 || destino_idx == -1)
     {
         std::cout << "ERRO: Nós inválidos! Recebido: " << id_no_a << " e " << id_no_b << endl;
-        return vector<int>();
+        return vector<char>();
     }
 
     const int INF = std::numeric_limits<int>::max();
@@ -855,11 +856,11 @@ vector<int> Grafo::caminho_minimo_floyd(int id_no_a, int id_no_b)
     if (dist[inicio_idx][destino_idx] == INF)
     {
         std::cout << "Não existe caminho entre " << id_no_a << " e " << id_no_b << endl;
-        return vector<int>();
+        return vector<char>();
     }
 
     // Reconstruir o caminho
-    vector<int> caminho;
+    vector<char> caminho;
     int atual = inicio_idx;
 
     while (atual != destino_idx)
@@ -871,7 +872,7 @@ vector<int> Grafo::caminho_minimo_floyd(int id_no_a, int id_no_b)
         {
             // Erro na reconstrução do caminho
             std::cout << "Erro na reconstrução do caminho" << endl;
-            return vector<int>();
+            return vector<char>();
         }
     }
 
@@ -882,13 +883,13 @@ vector<int> Grafo::caminho_minimo_floyd(int id_no_a, int id_no_b)
     return caminho;
 }
 
-Grafo *Grafo::arvore_geradora_minima_prim(vector<int> ids_nos)
+Grafo *Grafo::arvore_geradora_minima_prim(vector<char> ids_nos)
 {
     if (ids_nos.empty())
         return nullptr;
 
-    unordered_set<int> subconjunto(ids_nos.begin(), ids_nos.end());
-    unordered_set<int> visitados;
+    unordered_set<char> subconjunto(ids_nos.begin(), ids_nos.end());
+    unordered_set<char> visitados;
     vector<Aresta *> arestas_possiveis;
 
     // Cria o subgrafo AGM
@@ -898,7 +899,7 @@ Grafo *Grafo::arvore_geradora_minima_prim(vector<int> ids_nos)
     agm->in_ponderado_vertice = this->in_ponderado_vertice;
 
     // Adiciona os nós do subconjunto ao subgrafo AGM
-    for (int id : ids_nos)
+    for (char id : ids_nos)
     {
         // Procura o nó original para copiar o peso, se houver
         int peso = 0;
@@ -914,11 +915,11 @@ Grafo *Grafo::arvore_geradora_minima_prim(vector<int> ids_nos)
     }
 
     // Começa por qualquer nó do subconjunto
-    int inicial = ids_nos[0];
+    char inicial = ids_nos[0];
     visitados.insert(inicial);
 
     // Adiciona as arestas do nó inicial à lista de possíveis arestas
-    auto adicionar_arestas = [&](int no_id)
+    auto adicionar_arestas = [&](char no_id)
     {
         No *no = nullptr;
         for (No *n : lista_adj)
@@ -933,7 +934,7 @@ Grafo *Grafo::arvore_geradora_minima_prim(vector<int> ids_nos)
             return;
         for (Aresta *aresta : no->arestas)
         {
-            int vizinho = aresta->id_no_alvo;
+            char vizinho = aresta->id_no_alvo;
             if (subconjunto.count(vizinho) && !visitados.count(vizinho))
             {
                 arestas_possiveis.push_back(aresta);
@@ -953,8 +954,8 @@ Grafo *Grafo::arvore_geradora_minima_prim(vector<int> ids_nos)
         Aresta *menor = *it;
         arestas_possiveis.erase(it);
 
-        int u = menor->id_no_origem;
-        int v = menor->id_no_alvo;
+        char u = menor->id_no_origem;
+        char v = menor->id_no_alvo;
 
         // Garante que v é o nó ainda não visitado
         if (visitados.count(v))
@@ -980,23 +981,23 @@ Grafo *Grafo::arvore_geradora_minima_prim(vector<int> ids_nos)
     return agm;
 }
 
-Grafo *Grafo::arvore_geradora_minima_kruskal(vector<int> ids_nos)
+Grafo *Grafo::arvore_geradora_minima_kruskal(vector<char> ids_nos)
 {
 
-    unordered_set<int> subconjunto_nos(ids_nos.begin(), ids_nos.end());
+    unordered_set<char> subconjunto_nos(ids_nos.begin(), ids_nos.end());
     vector<Aresta *> arestas_subgrafo;
 
     // Incialmente pegar todos as arestas dos nós do subgrafo
     for (const auto &no : lista_adj)
     {
-        int u = no->id;
+        char u = no->id;
         if (subconjunto_nos.find(u) == subconjunto_nos.end())
             continue; // Ignora nós que não estão no subconjunto
 
         // Pegar as arestas do nó atual
         for (const auto &aresta : no->arestas)
         {
-            int v = aresta->id_no_alvo;
+            char v = aresta->id_no_alvo;
             int peso = aresta->peso;
 
             if (subconjunto_nos.find(v) == subconjunto_nos.end())
@@ -1026,13 +1027,13 @@ Grafo *Grafo::arvore_geradora_minima_kruskal(vector<int> ids_nos)
     }
 
     // Estrutura Union-Find para detectar ciclos
-    unordered_map<int, int> parent;
+    unordered_map<char, char> parent;
     for (const auto &id : ids_nos)
     {
         parent[id] = id;
     }
 
-    auto find = [&parent](int node)
+    auto find = [&parent](char node)
     {
         while (parent[node] != node)
         {
@@ -1041,10 +1042,10 @@ Grafo *Grafo::arvore_geradora_minima_kruskal(vector<int> ids_nos)
         return node;
     };
 
-    auto union_sets = [&parent, &find](int u, int v)
+    auto union_sets = [&parent, &find](char u, char v)
     {
-        int root_u = find(u);
-        int root_v = find(v);
+        char root_u = find(u);
+        char root_v = find(v);
         if (root_u != root_v)
         {
             parent[root_v] = root_u;
@@ -1055,13 +1056,13 @@ Grafo *Grafo::arvore_geradora_minima_kruskal(vector<int> ids_nos)
 
     int cont = 0;
 
-    while (cont < subconjunto_nos.size() - 1 && !arestas_subgrafo.empty())
+    while (cont < (int)subconjunto_nos.size() - 1 && !arestas_subgrafo.empty())
     {
         Aresta *aresta = arestas_subgrafo.back();
         arestas_subgrafo.pop_back();
 
-        int u = aresta->id_no_origem;
-        int v = aresta->id_no_alvo;
+        char u = aresta->id_no_origem;
+        char v = aresta->id_no_alvo;
 
         // Verifica se u e v estão no mesmo subconjunto
         if (union_sets(u, v))
@@ -1077,7 +1078,7 @@ Grafo *Grafo::arvore_geradora_minima_kruskal(vector<int> ids_nos)
         delete aresta; // Libera memória das arestas que não foram usadas
     }
 
-    if (cont < subconjunto_nos.size() - 1)
+    if (cont < (int)subconjunto_nos.size() - 1)
     {
         std::cout << "ERRO: Não foi possível formar uma árvore geradora mínima com os nós fornecidos." << endl;
         delete subgrafoAGM; // Libera memória se não for possível formar a árvore
@@ -1086,7 +1087,7 @@ Grafo *Grafo::arvore_geradora_minima_kruskal(vector<int> ids_nos)
     return subgrafoAGM;
 }
 
-void Grafo::dfs_profundidade_helper(int id_no, int parent_id, set<int> &visitados, set<int> &recursion_stack, Grafo *arvore, vector<int> &insertion_sequence, vector<pair<int, int>> &back_edges)
+void Grafo::dfs_profundidade_helper(char id_no, char parent_id, set<char> &visitados, set<char> &recursion_stack, Grafo *arvore, vector<char> &insertion_sequence, vector<pair<char, char>> &back_edges)
 {
     visitados.insert(id_no);
     recursion_stack.insert(id_no);
@@ -1107,7 +1108,7 @@ void Grafo::dfs_profundidade_helper(int id_no, int parent_id, set<int> &visitado
 
     for (Aresta *aresta : no_origem->arestas)
     {
-        int id_vizinho = aresta->id_no_alvo;
+        char id_vizinho = aresta->id_no_alvo;
         if (id_vizinho == parent_id)
         {
             continue;
@@ -1128,10 +1129,10 @@ void Grafo::dfs_profundidade_helper(int id_no, int parent_id, set<int> &visitado
     recursion_stack.erase(id_no);
 }
 
-int Grafo::calcular_distancia(int id_origem, int id_destino)
+int Grafo::calcular_distancia(char id_origem, char id_destino)
 {
-    map<int, int> id_to_index;
-    map<int, int> index_to_id;
+    map<char, int> id_to_index;
+    map<int, char> index_to_id;
     int index = 0;
     for (const auto &no : lista_adj)
     {
@@ -1186,7 +1187,7 @@ int Grafo::calcular_distancia(int id_origem, int id_destino)
     return dist[destino_idx];
 }
 
-void Grafo::dfs_articulacao_helper(int u, map<int, int> &desc, map<int, int> &low, map<int, int> &parent, set<int> &articulacoes, int &time, bool &is_root)
+void Grafo::dfs_articulacao_helper(char u, map<char, int> &desc, map<char, int> &low, map<char, char> &parent, set<char> &articulacoes, int &time, bool &is_root)
 {
     // Define o tempo de descoberta e o low-link para o nó atual.
     desc[u] = low[u] = ++time;
@@ -1207,7 +1208,7 @@ void Grafo::dfs_articulacao_helper(int u, map<int, int> &desc, map<int, int> &lo
     // Itera sobre os vizinhos do nó 'u'.
     for (Aresta *aresta : no_u->arestas)
     {
-        int v = aresta->id_no_alvo;
+        char v = aresta->id_no_alvo;
         // Se 'v' é o pai de 'u' na árvore de busca, ignora.
         if (parent.count(u) && v == parent[u])
         {
@@ -1242,7 +1243,7 @@ void Grafo::dfs_articulacao_helper(int u, map<int, int> &desc, map<int, int> &lo
     }
 }
 
-pair<Grafo *, vector<pair<int, int>>> Grafo::arvore_caminhamento_profundidade(int id_no)
+pair<Grafo *, vector<pair<char, char>>> Grafo::arvore_caminhamento_profundidade(char id_no)
 {
     Grafo *arvore = new Grafo();
     arvore->in_direcionado = this->in_direcionado;
@@ -1254,10 +1255,10 @@ pair<Grafo *, vector<pair<int, int>>> Grafo::arvore_caminhamento_profundidade(in
         arvore->adicionarNo(no->id, no->peso);
     }
 
-    set<int> visitados;
-    set<int> recursion_stack;
-    vector<int> insertion_sequence;
-    vector<pair<int, int>> back_edges;
+    set<char> visitados;
+    set<char> recursion_stack;
+    vector<char> insertion_sequence;
+    vector<pair<char, char>> back_edges;
 
     dfs_profundidade_helper(id_no, '\0', visitados, recursion_stack, arvore, insertion_sequence, back_edges);
 
@@ -1397,9 +1398,9 @@ int Grafo::diametro()
 }
 
 // Encontra o centro do grafo.
-vector<int> Grafo::centro()
+vector<char> Grafo::centro()
 {
-    vector<int> centro_nos;
+    vector<char> centro_nos;
     int r = raio();
 
     // Se o grafo for desconexo, não há centro.
@@ -1430,9 +1431,9 @@ vector<int> Grafo::centro()
 }
 
 // Encontra a periferia do grafo.
-vector<int> Grafo::periferia()
+vector<char> Grafo::periferia()
 {
-    vector<int> periferia_nos;
+    vector<char> periferia_nos;
     int d = diametro();
 
     // Se o grafo for desconexo, não há periferia.
@@ -1463,12 +1464,12 @@ vector<int> Grafo::periferia()
 }
 
 // Encontra todos os vértices de articulação (pontos de corte) do grafo.
-vector<int> Grafo::vertices_de_articulacao()
+vector<char> Grafo::vertices_de_articulacao()
 {
-    map<int, int> desc;
-    map<int, int> low;
-    map<int, int> parent;
-    set<int> articulacoes;
+    map<char, int> desc;
+    map<char, int> low;
+    map<char, char> parent;
+    set<char> articulacoes;
     int time = 0;
 
     // Itera sobre todos os nós do grafo.
@@ -1483,7 +1484,7 @@ vector<int> Grafo::vertices_de_articulacao()
     }
 
     // Converte o conjunto de articulações para um vetor e o retorna.
-    return vector<int>(articulacoes.begin(), articulacoes.end());
+    return vector<char>(articulacoes.begin(), articulacoes.end());
 }
 
 
@@ -1503,12 +1504,12 @@ vector<int> Grafo::vertices_de_articulacao()
  * 3. Retorne o conjunto_dominante construido.
  */
 
-vector<int> Grafo::ds_2_greedy()
+vector<char> Grafo::ds_2_greedy()
 {
     auto start_time = chrono::high_resolution_clock::now();
     // Cria vetor do resultado e de nós não visitados
-    vector<int> dominating_set;
-    set<int> unvisited_nodes;
+    vector<char> dominating_set;
+    set<char> unvisited_nodes;
 
     // Adiciona todos os nós de um grafo ao conjunto de nós não visitados
     for (const auto &no : lista_adj)
@@ -1519,16 +1520,16 @@ vector<int> Grafo::ds_2_greedy()
     // Loop até que todos os nós sejam visitados.
     while (!unvisited_nodes.empty())
     {
-        int melhor_no = 0;
+        char melhor_no = 0;
         int max_cobertos = -1;
-        set<int> melhores_cobertos;
+        set<char> melhores_cobertos;
 
         // Itera entre todos os nos até achar um que cobre o maior numero de nos não visitados.
         for (const auto &candidato : lista_adj)
         {
-            set<int> cobertos_pelo_candidato;
+            set<char> cobertos_pelo_candidato;
             // Checa qual nos não visitados estão cobertos pelo atual candidato.
-            for (int u_node : unvisited_nodes)
+            for (char u_node : unvisited_nodes)
             {
                 if (calcular_distancia(candidato->id, u_node) <= 2)
                 {
@@ -1550,7 +1551,7 @@ vector<int> Grafo::ds_2_greedy()
         std::cout << "Nó adicionado ao conjunto dominante: " << melhor_no << endl;
 
         // Remove os nos cobertos dos nos não visitados.
-        for (int no_coberto : melhores_cobertos)
+        for (char no_coberto : melhores_cobertos)
         {
             unvisited_nodes.erase(no_coberto);
         }
@@ -1570,17 +1571,17 @@ vector<int> Grafo::ds_2_greedy()
     return dominating_set;
 }
 
-vector<int> Grafo::ds_2_randomized_greedy(int max_iter, float alpha)
+vector<char> Grafo::ds_2_randomized_greedy(int max_iter, float alpha)
 {
     auto start_time = chrono::high_resolution_clock::now();
 
-    vector<int> best_solution; // solBest
+    vector<char> best_solution; // solBest
     srand(time(0)); // Seed the random number generator
 
     for (int i = 0; i < max_iter; ++i)
     {
-        vector<int> current_solution; // s
-        set<int> unvisited_nodes;
+        vector<char> current_solution; // s
+        set<char> unvisited_nodes;
         for (const auto &no : lista_adj)
         {
             unvisited_nodes.insert(no->id);
@@ -1589,11 +1590,11 @@ vector<int> Grafo::ds_2_randomized_greedy(int max_iter, float alpha)
         while (!unvisited_nodes.empty())
         {
             // LC = ordenaCandidatos(I)
-            vector<pair<int, int>> candidates; // Pair of (coverage_count, node_id)
+            vector<pair<int, char>> candidates; // Pair of (coverage_count, node_id)
             for (const auto &candidate_node : lista_adj)
             {
                 int coverage_count = 0;
-                for (int unvisited_node_id : unvisited_nodes)
+                for (char unvisited_node_id : unvisited_nodes)
                 {
                     if (calcular_distancia(candidate_node->id, unvisited_node_id) <= 2)
                     {
@@ -1612,14 +1613,14 @@ vector<int> Grafo::ds_2_randomized_greedy(int max_iter, float alpha)
             int rcl_size = max(1, (int)(alpha * candidates.size()));
             int random_index = rand() % rcl_size;
 
-            int chosen_node_id = candidates[random_index].second;
+            char chosen_node_id = candidates[random_index].second;
 
             // s = s U LC[k]
             current_solution.push_back(chosen_node_id);
 
             // atualizaListaCandidatos(LC, k)
-            set<int> newly_covered;
-            for (int unvisited_node_id : unvisited_nodes)
+            set<char> newly_covered;
+            for (char unvisited_node_id : unvisited_nodes)
             {
                 if (calcular_distancia(chosen_node_id, unvisited_node_id) <= 2)
                 {
@@ -1627,7 +1628,7 @@ vector<int> Grafo::ds_2_randomized_greedy(int max_iter, float alpha)
                 }
             }
 
-            for (int covered_node : newly_covered)
+            for (char covered_node : newly_covered)
             {
                 unvisited_nodes.erase(covered_node);
             }
@@ -1654,12 +1655,12 @@ vector<int> Grafo::ds_2_randomized_greedy(int max_iter, float alpha)
     return best_solution;
 }
 
-vector<int> Grafo::ds_2_reactive_randomized_greedy(vector<float> alfaVet, int numIter, int bloco)
+vector<char> Grafo::ds_2_reactive_randomized_greedy(vector<float> alfaVet, int numIter, int bloco)
 {
     auto start_time = chrono::high_resolution_clock::now();
     
     // solBest = {}
-    vector<int> melhor_solucao;
+    vector<char> melhor_solucao;
     int melhor_tamanho = INT_MAX;
 
     // inicializaVetores(P, M, m)
@@ -1689,8 +1690,8 @@ vector<int> Grafo::ds_2_reactive_randomized_greedy(vector<float> alfaVet, int nu
         float alfa = alfaVet[indice_alfa];
 
         // s = {}
-        vector<int> D; // Current solution
-        set<int> U;    // Set of uncovered nodes
+        vector<char> D; // Current solution
+        set<char> U;    // Set of uncovered nodes
         for (const auto &no : lista_adj)
         {
             U.insert(no->id);
@@ -1700,11 +1701,11 @@ vector<int> Grafo::ds_2_reactive_randomized_greedy(vector<float> alfaVet, int nu
         while (!U.empty())
         {
             // LC = ordenaCandidatos(I)
-            vector<pair<int, set<int>>> LC; // Candidate List: {node_id, covered_nodes}
+            vector<pair<char, set<char>>> LC; // Candidate List: {node_id, covered_nodes}
             for (const auto &candidato : lista_adj)
             {
-                set<int> cobertos;
-                for (int u_node : U)
+                set<char> cobertos;
+                for (char u_node : U)
                 {
                     if (calcular_distancia(candidato->id, u_node) <= 2)
                     {
@@ -1720,7 +1721,7 @@ vector<int> Grafo::ds_2_reactive_randomized_greedy(vector<float> alfaVet, int nu
             if (LC.empty()) break; // No more nodes can be covered
 
             // Sort candidates by the number of nodes they cover (descending)
-            sort(LC.begin(), LC.end(), [](const pair<int, set<int>> &a, const pair<int, set<int>> &b) {
+            sort(LC.begin(), LC.end(), [](const pair<char, set<char>> &a, const pair<char, set<char>> &b) {
                 return a.second.size() > b.second.size();
             });
 
@@ -1733,7 +1734,7 @@ vector<int> Grafo::ds_2_reactive_randomized_greedy(vector<float> alfaVet, int nu
             D.push_back(escolhido.first);
 
             // atualizaListaCandidatos(LC, k)
-            for (int no_coberto : escolhido.second)
+            for (char no_coberto : escolhido.second)
             {
                 U.erase(no_coberto);
             }
