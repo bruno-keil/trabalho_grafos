@@ -1,7 +1,7 @@
 #include "Gerenciador.h"
 #include "includes.h"
 
-void Gerenciador::menu_principal(Grafo *grafo)
+void Gerenciador::menu_principal(Grafo *grafo, const string &instanceName)
 {
     char resp;
     do
@@ -22,7 +22,7 @@ void Gerenciador::menu_principal(Grafo *grafo)
             menu_algoritmos(grafo);
             break;
         case '3':
-            menu_heuristics(grafo);
+            menu_heuristics(grafo, instanceName);
         break;
         case '0':
             cout << "Saindo..." << endl;
@@ -157,7 +157,6 @@ void Gerenciador::menu_algoritmos(Grafo *grafo)
         cout << "(g) Arvore de caminhamento em profundidade;" << endl;
         cout << "(h) Raio, diametro, centro e periferia do grafo;" << endl;
         cout << "(i) Vertices de Articulacao;" << endl;
-        cout << "(j) Heurísticas;" << endl;
         cout << "(0) Sair;" << endl
              << endl;
         cin >> resp;
@@ -530,8 +529,7 @@ void Gerenciador::menu_algoritmos(Grafo *grafo)
         }
         case '0':
         {
-            menu_principal(grafo);
-            break;
+            return;
         }
         default:
         {
@@ -542,7 +540,7 @@ void Gerenciador::menu_algoritmos(Grafo *grafo)
     } while (resp != '0');
 }
 
-void Gerenciador::menu_heuristics(Grafo *grafo)
+void Gerenciador::menu_heuristics(Grafo *grafo, const string &instanceName)
 {
     char resp;
     do
@@ -551,6 +549,7 @@ void Gerenciador::menu_heuristics(Grafo *grafo)
         cout << "(1) 2-distance Dominating Set (Guloso)" << endl;
         cout << "(2) 2-distance Dominating Set (Guloso Randomizado)" << endl;
         cout << "(3) 2-distance Dominating Set (Guloso Randomizado Reativo)" << endl;
+        cout << "(4) Experimento para todas as heuristicas" << endl;
         cout << "(0) Voltar ao Menu" << endl;
         cin >> resp;
 
@@ -618,6 +617,11 @@ void Gerenciador::menu_heuristics(Grafo *grafo)
                  << endl;
             break;
         }
+        case '4':
+        {
+            run_all_heuristics(grafo, instanceName);
+            break;
+        }
         case '0':
             return;
         default:
@@ -625,6 +629,102 @@ void Gerenciador::menu_heuristics(Grafo *grafo)
             break;
         }
     } while (resp != '0');
+}
+
+void Gerenciador::run_all_heuristics(Grafo *grafo, const string &instanceName)
+{
+
+    // --- Algoritmo Guloso ---
+    cout << "Executando o algoritmo guloso 30 vezes..." << endl;
+    string greedy_filename = "resultados/" + instanceName + "_greedy_all_runs.txt";
+    ofstream greedy_outFile(greedy_filename);
+    streambuf *coutbuf = cout.rdbuf(); // Salva o buffer antigo
+
+    for (int i = 0; i < 30; ++i)
+    {
+        cout.rdbuf(greedy_outFile.rdbuf()); // Redireciona o cout para o arquivo
+
+        greedy_outFile << "--- Execucao " << i + 1 << " ---" << endl;
+        unsigned int seed = time(0) + i;
+        srand(seed);
+        greedy_outFile << "Seed: " << seed << endl;
+
+        vector<char> resultado = grafo->ds_2_greedy();
+        greedy_outFile << "Conjunto Dominante a 2-distancia (Guloso): ";
+        for (size_t j = 0; j < resultado.size(); ++j)
+        {
+            greedy_outFile << resultado[j] << (j == resultado.size() - 1 ? "" : ", ");
+        }
+        greedy_outFile << endl;
+        greedy_outFile << "---------------------------\n"
+                       << endl;
+    }
+    cout.rdbuf(coutbuf); // Restaura o cout
+    greedy_outFile.close();
+    cout << "Resultados do Guloso salvos em: " << greedy_filename << endl;
+
+    // --- Algoritmo Guloso Randomizado ---
+    vector<float> alphas = {0.3, 0.6, 0.9};
+    cout << "Executando o algoritmo guloso randomizado 30 vezes para cada alfa..." << endl;
+    string randomized_filename = "resultados/" + instanceName + "_randomized_all_runs.txt";
+    ofstream randomized_outFile(randomized_filename);
+
+    for (float alpha : alphas)
+    {
+        for (int i = 0; i < 30; ++i)
+        {
+            cout.rdbuf(randomized_outFile.rdbuf());
+
+            randomized_outFile << "--- Execucao " << i + 1 << " para o alpha " << alpha << " ---" << endl;
+            unsigned int seed = time(0) + i + (int)(alpha * 100);
+            srand(seed);
+            randomized_outFile << "Seed: " << seed << endl;
+            randomized_outFile << "Alpha: " << alpha << endl;
+
+            vector<char> resultado = grafo->ds_2_randomized_greedy(150, alpha);
+            randomized_outFile << "Conjunto Dominante a 2-distancia (Randomizado): ";
+            for (size_t j = 0; j < resultado.size(); ++j)
+            {
+                randomized_outFile << resultado[j] << (j == resultado.size() - 1 ? "" : ", ");
+            }
+            randomized_outFile << endl;
+            randomized_outFile << "--------------------------------------------------\n"
+                               << endl;
+        }
+    }
+    cout.rdbuf(coutbuf);
+    randomized_outFile.close();
+    cout << "Resultados do Guloso Randomizado salvos em: " << randomized_filename << endl;
+
+    // --- Algoritmo Guloso Randomizado Reativo ---
+    cout << "Executando o algoritmo guloso randomizado reativo 30 vezes..." << endl;
+    string reactive_filename = "resultados/" + instanceName + "_reactive_all_runs.txt";
+    ofstream reactive_outFile(reactive_filename);
+    for (int i = 0; i < 30; ++i)
+    {
+        cout.rdbuf(reactive_outFile.rdbuf());
+
+        reactive_outFile << "--- Execucao " << i + 1 << " ---" << endl;
+        unsigned int seed = time(0) + i + 1000;
+        srand(seed);
+        reactive_outFile << "Seed: " << seed << endl;
+        vector<float> reactive_alphas = {0.3, 0.6, 0.9};
+
+        vector<char> resultado = grafo->ds_2_reactive_randomized_greedy(reactive_alphas, 150, 30);
+        reactive_outFile << "Conjunto Dominante a 2-distancia (Reativo): ";
+        for (size_t j = 0; j < resultado.size(); ++j)
+        {
+            reactive_outFile << resultado[j] << (j == resultado.size() - 1 ? "" : ", ");
+        }
+        reactive_outFile << endl;
+        reactive_outFile << "---------------------------\n"
+                         << endl;
+    }
+    cout.rdbuf(coutbuf);
+    reactive_outFile.close();
+    cout << "Resultados do Guloso Reativo salvos em: " << reactive_filename << endl;
+
+    cout << "\nTodas as heuristicas foram executadas. Os resultados estao na pasta 'results'." << endl;
 }
 
 char Gerenciador::get_id_entrada()

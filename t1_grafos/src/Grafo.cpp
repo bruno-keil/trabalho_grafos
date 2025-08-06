@@ -1662,6 +1662,7 @@ vector<char> Grafo::ds_2_reactive_randomized_greedy(vector<float> alfaVet, int n
     // solBest = {}
     vector<char> melhor_solucao;
     int melhor_tamanho = INT_MAX;
+    float best_alpha = -1.0;
 
     // inicializaVetores(P, M, m)
     int m = alfaVet.size();
@@ -1751,6 +1752,7 @@ vector<char> Grafo::ds_2_reactive_randomized_greedy(vector<float> alfaVet, int n
         {
             melhor_tamanho = D.size();
             melhor_solucao = D;
+            best_alpha = alfa;
         }
 
         // if (i % bloco == 0) atualizaProbabilidades(P, M, alfa, solBest)
@@ -1785,6 +1787,8 @@ vector<char> Grafo::ds_2_reactive_randomized_greedy(vector<float> alfaVet, int n
          << setfill('0') << setw(2) << minutes << ":"
          << setfill('0') << setw(2) << seconds << ":"
          << setfill('0') << setw(3) << milliseconds << endl;
+
+    cout << "Melhor alfa encontrado: " << best_alpha << endl;
 
     return melhor_solucao;
 }

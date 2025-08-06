@@ -11,7 +11,15 @@ int main(int argc, char *argv[])
 
     Grafo *grafo = new Grafo(argv[1]);
 
-    Gerenciador::menu_principal(grafo);
+    string path = argv[1];
+    string instanceName = path.substr(path.find_last_of("/\\") + 1);
+    size_t dot_pos = instanceName.find_last_of('.');
+    if (dot_pos != string::npos) {
+        instanceName = instanceName.substr(0, dot_pos);
+    }
+
+
+    Gerenciador::menu_principal(grafo, instanceName);
 
     delete grafo;
     return 0;
