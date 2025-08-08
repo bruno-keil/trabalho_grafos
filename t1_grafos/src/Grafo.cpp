@@ -1571,13 +1571,42 @@ vector<char> Grafo::ds_2_greedy()
     return dominating_set;
 }
 
-vector<char> Grafo::ds_2_randomized_greedy(int max_iter, float alpha)
+/**
+ * @brief Acha um 2-distance dominating set usando uma heurística gulosa randomizada.
+ *
+ * Essa função implementa uma variação randomizada do algoritmo guloso para encontrar
+ * um 2-distance dominating set. Um 2-distance dominating set é um subconjunto de vértices D
+ * tal que todo nó do grafo está a uma distância máxima de 2 de algum vértice em D.
+ *
+ * O algoritmo funciona assim:
+ * 1. Para cada iteração até max_iter:
+ *    a. Inicializa o conjunto de nós não visitados.
+ *    b. Enquanto houver nós não visitados:
+ *       i. Calcula, para cada candidato, quantos nós não visitados ele cobre (distância ≤ 2).
+ *       ii. Ordena os candidatos por cobertura decrescente.
+ *       iii. Constrói uma lista restrita de candidatos (RCL) com tamanho proporcional a alpha.
+ *       iv. Escolhe aleatoriamente um candidato da RCL e o adiciona à solução.
+ *       v. Remove da lista de não visitados todos os nós cobertos pelo candidato escolhido.
+ *    c. Se a solução atual for melhor (menor) que a melhor conhecida, atualiza a melhor solução.
+ * 2. Retorna a melhor solução encontrada.
+ *
+ * @param max_iter Número máximo de iterações.
+ * @param alpha Fator que controla o tamanho da lista restrita de candidatos (RCL).
+ * @param seed Semente para o gerador de números aleatórios (0 para gerar automaticamente).
+ * @return Um vetor com os vértices do melhor conjunto dominante encontrado.
+ */
+
+vector<char> Grafo::ds_2_randomized_greedy(int max_iter, float alpha, unsigned int seed)
 {
     auto start_time = chrono::high_resolution_clock::now();
 
     vector<char> best_solution; // solBest
-    unsigned int seed = time(0) + 30 + (int)(alpha * 100);
-    srand(seed); // Seed the random number generator
+    
+    unsigned int effective_seed = seed;
+    if (effective_seed == 0) {
+        effective_seed = time(0) + 30 + (int)(alpha * 100);
+    }
+    srand(effective_seed); // Seed the random number generator
 
     for (int i = 0; i < max_iter; ++i)
     {
@@ -1653,12 +1682,44 @@ vector<char> Grafo::ds_2_randomized_greedy(int max_iter, float alpha)
          << setfill('0') << setw(2) << seconds << ":"
          << setfill('0') << setw(3) << milliseconds << endl;
 
-    cout << "Seed: " << seed << endl;
+    cout << "Seed: " << effective_seed << endl;
 
     return best_solution;
 }
 
-vector<char> Grafo::ds_2_reactive_randomized_greedy(vector<float> alfaVet, int numIter, int bloco)
+/**
+ * @brief Acha um 2-distance dominating set usando a heurística gulosa randomizada reativa.
+ *
+ * Essa função implementa a versão reativa da heurística gulosa randomizada para encontrar
+ * um 2-distance dominating set. A versão reativa ajusta dinamicamente as probabilidades
+ * associadas a diferentes valores de alpha com base no desempenho obtido ao longo das iterações.
+ *
+ * O algoritmo funciona assim:
+ * 1. Inicializa um conjunto de valores possíveis de alpha e probabilidades iguais para cada um.
+ * 2. Para cada iteração até numIter:
+ *    a. Escolhe um valor de alpha com base nas probabilidades atuais.
+ *    b. Constrói uma solução usando o algoritmo guloso randomizado com o alpha escolhido:
+ *       i. Inicializa o conjunto de nós não cobertos.
+ *       ii. Enquanto houver nós não cobertos:
+ *           - Calcula a cobertura de cada candidato.
+ *           - Ordena candidatos por cobertura.
+ *           - Constrói a lista restrita de candidatos (RCL) proporcional a alpha.
+ *           - Escolhe aleatoriamente um nó da RCL e o adiciona à solução.
+ *           - Remove todos os nós cobertos pelo nó escolhido.
+ *    c. Avalia a qualidade da solução e atualiza a média associada ao alpha usado.
+ *    d. Se a solução for melhor que a melhor encontrada até então, atualiza a melhor solução.
+ *    e. A cada "bloco" de iterações, recalcula as probabilidades dos valores de alpha
+ *       proporcionalmente ao desempenho médio obtido.
+ * 3. Retorna a melhor solução encontrada.
+ *
+ * @param alfaVet Vetor de valores possíveis para alpha.
+ * @param numIter Número total de iterações.
+ * @param bloco Intervalo de iterações para atualizar as probabilidades dos alphas.
+ * @param seed Semente para o gerador de números aleatórios (0 para gerar automaticamente).
+ * @return Um vetor com os vértices do melhor conjunto dominante encontrado.
+ */
+
+vector<char> Grafo::ds_2_reactive_randomized_greedy(vector<float> alfaVet, int numIter, int bloco, unsigned int seed)
 {
     auto start_time = chrono::high_resolution_clock::now();
     
@@ -1673,8 +1734,11 @@ vector<char> Grafo::ds_2_reactive_randomized_greedy(vector<float> alfaVet, int n
     vector<float> M(m, 0.0);     // Average solution quality for each alpha
     vector<int> usos(m, 0);      // Usage count for each alpha
 
-    unsigned int seed = time(0) + 30 + 1000;
-    srand(seed); // Seed for random number generation
+    unsigned int effective_seed = seed;
+    if (effective_seed == 0) {
+        effective_seed = time(0) + 30 + 1000;
+    }
+    srand(effective_seed); // Seed for random number generation
 
     // while (i < numIter)
     for (int iter = 1; iter <= numIter; iter++)
@@ -1793,7 +1857,7 @@ vector<char> Grafo::ds_2_reactive_randomized_greedy(vector<float> alfaVet, int n
          << setfill('0') << setw(3) << milliseconds << endl;
 
     cout << "Melhor alfa encontrado: " << best_alpha << endl;
-    cout << "Seed: " << seed << endl;
+    cout << "Seed: " << effective_seed << endl;
 
     return melhor_solucao;
 }

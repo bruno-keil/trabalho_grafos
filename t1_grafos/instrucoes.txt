@@ -15,7 +15,7 @@ Para compilar e executar o projeto, por favor, siga estas etapas:
     ```
 
 3.  **Execute o script de teste:**
-    Este comando executa o script 'run_tests.sh', faz os testes de todas as instancias com os parametros pedidos.
+    Este comando executa o script 'run_tests.sh', faz os testes de todas as instancias com os parametros usados no experimento.
 
     ```bash
     ./run_tests.sh
@@ -35,5 +35,9 @@ Para compilar e executar o projeto, por favor, siga estas etapas:
     Os seguintes valores foram usados nos experimentos:
     Para aquelas que usam um parâmetro alfa, use os valores (0.3, 0.6, 0.9). 
     O número máximo de iterações deve ser definido como 150 e o tamanho do bloco como 30.
+    Utilizando os metodos implementados após pressionar 4 e 5, automaticamente será iniciado os testes com os seguintes parametros:
+    4- Algoritmos executados 30 vezes, maxIter = 150, Bloco = 30, alfas = {0.3,0.6,0.9}, seed aleatoria.
+    5- Algoritmos executados 1 vez, maxIter = 150, Bloco = 30, alfas = {0.3,0.6,0.9}, seed aleatoria.
+
 
     

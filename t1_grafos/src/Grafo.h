@@ -37,8 +37,8 @@ public:
     vector<char> periferia();                                                             // h 4
     vector<char> vertices_de_articulacao();                                               // i
     vector<char> ds_2_greedy();
-    vector<char> ds_2_randomized_greedy(int max_iter, float alpha);
-    vector<char> ds_2_reactive_randomized_greedy(vector<float> alfaVet, int numIter, int bloco);
+    vector<char> ds_2_randomized_greedy(int max_iter, float alpha, unsigned int seed);
+    vector<char> ds_2_reactive_randomized_greedy(vector<float> alfaVet, int numIter, int bloco, unsigned int seed);
 
     int ordem;
     bool in_direcionado;
