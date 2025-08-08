@@ -1,0 +1,810 @@
+--- Execucao 1 para o alpha 0.3 ---
+Seed: 1754637171
+Alpha: 0.3
+
+Tempo de execução (Guloso Randomizado): 01:04:648
+Seed: 1754637171
+Conjunto Dominante a 2-distancia (Randomizado): g, q
+--------------------------------------------------
+
+--- Execucao 2 para o alpha 0.3 ---
+Seed: 1754637235
+Alpha: 0.3
+
+Tempo de execução (Guloso Randomizado): 01:04:270
+Seed: 1754637235
+Conjunto Dominante a 2-distancia (Randomizado): J, r
+--------------------------------------------------
+
+--- Execucao 3 para o alpha 0.3 ---
+Seed: 1754637300
+Alpha: 0.3
+
+Tempo de execução (Guloso Randomizado): 01:04:243
+Seed: 1754637300
+Conjunto Dominante a 2-distancia (Randomizado): q, g
+--------------------------------------------------
+
+--- Execucao 4 para o alpha 0.3 ---
+Seed: 1754637364
+Alpha: 0.3
+
+Tempo de execução (Guloso Randomizado): 01:04:330
+Seed: 1754637364
+Conjunto Dominante a 2-distancia (Randomizado): q, M
+--------------------------------------------------
+
+--- Execucao 5 para o alpha 0.3 ---
+Seed: 1754637428
+Alpha: 0.3
+
+Tempo de execução (Guloso Randomizado): 01:04:446
+Seed: 1754637428
+Conjunto Dominante a 2-distancia (Randomizado): g, q
+--------------------------------------------------
+
+--- Execucao 6 para o alpha 0.3 ---
+Seed: 1754637493
+Alpha: 0.3
+
+Tempo de execução (Guloso Randomizado): 01:03:949
+Seed: 1754637493
+Conjunto Dominante a 2-distancia (Randomizado): 5, q
+--------------------------------------------------
+
+--- Execucao 7 para o alpha 0.3 ---
+Seed: 1754637557
+Alpha: 0.3
+
+Tempo de execução (Guloso Randomizado): 01:04:162
+Seed: 1754637557
+Conjunto Dominante a 2-distancia (Randomizado): q, 5
+--------------------------------------------------
+
+--- Execucao 8 para o alpha 0.3 ---
+Seed: 1754637621
+Alpha: 0.3
+
+Tempo de execução (Guloso Randomizado): 01:04:678
+Seed: 1754637621
+Conjunto Dominante a 2-distancia (Randomizado): q, g
+--------------------------------------------------
+
+--- Execucao 9 para o alpha 0.3 ---
+Seed: 1754637685
+Alpha: 0.3
+
+Tempo de execução (Guloso Randomizado): 01:04:469
+Seed: 1754637685
+Conjunto Dominante a 2-distancia (Randomizado): q, 5
+--------------------------------------------------
+
+--- Execucao 10 para o alpha 0.3 ---
+Seed: 1754637750
+Alpha: 0.3
+
+Tempo de execução (Guloso Randomizado): 01:04:665
+Seed: 1754637750
+Conjunto Dominante a 2-distancia (Randomizado): q, M
+--------------------------------------------------
+
+--- Execucao 11 para o alpha 0.3 ---
+Seed: 1754637815
+Alpha: 0.3
+
+Tempo de execução (Guloso Randomizado): 01:04:184
+Seed: 1754637815
+Conjunto Dominante a 2-distancia (Randomizado): q, 5
+--------------------------------------------------
+
+--- Execucao 12 para o alpha 0.3 ---
+Seed: 1754637879
+Alpha: 0.3
+
+Tempo de execução (Guloso Randomizado): 01:04:938
+Seed: 1754637879
+Conjunto Dominante a 2-distancia (Randomizado): J, r
+--------------------------------------------------
+
+--- Execucao 13 para o alpha 0.3 ---
+Seed: 1754637944
+Alpha: 0.3
+
+Tempo de execução (Guloso Randomizado): 01:04:283
+Seed: 1754637944
+Conjunto Dominante a 2-distancia (Randomizado): r, J
+--------------------------------------------------
+
+--- Execucao 14 para o alpha 0.3 ---
+Seed: 1754638008
+Alpha: 0.3
+
+Tempo de execução (Guloso Randomizado): 01:04:663
+Seed: 1754638008
+Conjunto Dominante a 2-distancia (Randomizado): J, r
+--------------------------------------------------
+
+--- Execucao 15 para o alpha 0.3 ---
+Seed: 1754638073
+Alpha: 0.3
+
+Tempo de execução (Guloso Randomizado): 01:04:661
+Seed: 1754638073
+Conjunto Dominante a 2-distancia (Randomizado): 5, q
+--------------------------------------------------
+
+--- Execucao 16 para o alpha 0.3 ---
+Seed: 1754638137
+Alpha: 0.3
+
+Tempo de execução (Guloso Randomizado): 01:04:995
+Seed: 1754638137
+Conjunto Dominante a 2-distancia (Randomizado): q, g
+--------------------------------------------------
+
+--- Execucao 17 para o alpha 0.3 ---
+Seed: 1754638202
+Alpha: 0.3
+
+Tempo de execução (Guloso Randomizado): 01:04:628
+Seed: 1754638202
+Conjunto Dominante a 2-distancia (Randomizado): J, r
+--------------------------------------------------
+
+--- Execucao 18 para o alpha 0.3 ---
+Seed: 1754638267
+Alpha: 0.3
+
+Tempo de execução (Guloso Randomizado): 01:04:740
+Seed: 1754638267
+Conjunto Dominante a 2-distancia (Randomizado): 5, 7, t
+--------------------------------------------------
+
+--- Execucao 19 para o alpha 0.3 ---
+Seed: 1754638332
+Alpha: 0.3
+
+Tempo de execução (Guloso Randomizado): 01:04:087
+Seed: 1754638332
+Conjunto Dominante a 2-distancia (Randomizado): q, 5
+--------------------------------------------------
+
+--- Execucao 20 para o alpha 0.3 ---
+Seed: 1754638396
+Alpha: 0.3
+
+Tempo de execução (Guloso Randomizado): 01:04:271
+Seed: 1754638396
+Conjunto Dominante a 2-distancia (Randomizado): q, 5
+--------------------------------------------------
+
+--- Execucao 21 para o alpha 0.3 ---
+Seed: 1754638460
+Alpha: 0.3
+
+Tempo de execução (Guloso Randomizado): 01:04:180
+Seed: 1754638460
+Conjunto Dominante a 2-distancia (Randomizado): r, J
+--------------------------------------------------
+
+--- Execucao 22 para o alpha 0.3 ---
+Seed: 1754638524
+Alpha: 0.3
+
+Tempo de execução (Guloso Randomizado): 01:04:424
+Seed: 1754638524
+Conjunto Dominante a 2-distancia (Randomizado): 5, q
+--------------------------------------------------
+
+--- Execucao 23 para o alpha 0.3 ---
+Seed: 1754638589
+Alpha: 0.3
+
+Tempo de execução (Guloso Randomizado): 01:04:119
+Seed: 1754638589
+Conjunto Dominante a 2-distancia (Randomizado): J, r
+--------------------------------------------------
+
+--- Execucao 24 para o alpha 0.3 ---
+Seed: 1754638653
+Alpha: 0.3
+
+Tempo de execução (Guloso Randomizado): 01:04:768
+Seed: 1754638653
+Conjunto Dominante a 2-distancia (Randomizado): g, q
+--------------------------------------------------
+
+--- Execucao 25 para o alpha 0.3 ---
+Seed: 1754638718
+Alpha: 0.3
+
+Tempo de execução (Guloso Randomizado): 01:04:537
+Seed: 1754638718
+Conjunto Dominante a 2-distancia (Randomizado): 5, q
+--------------------------------------------------
+
+--- Execucao 26 para o alpha 0.3 ---
+Seed: 1754638782
+Alpha: 0.3
+
+Tempo de execução (Guloso Randomizado): 01:04:361
+Seed: 1754638782
+Conjunto Dominante a 2-distancia (Randomizado): g, q
+--------------------------------------------------
+
+--- Execucao 27 para o alpha 0.3 ---
+Seed: 1754638846
+Alpha: 0.3
+
+Tempo de execução (Guloso Randomizado): 01:04:638
+Seed: 1754638846
+Conjunto Dominante a 2-distancia (Randomizado): r, J
+--------------------------------------------------
+
+--- Execucao 28 para o alpha 0.3 ---
+Seed: 1754638911
+Alpha: 0.3
+
+Tempo de execução (Guloso Randomizado): 01:04:167
+Seed: 1754638911
+Conjunto Dominante a 2-distancia (Randomizado): q, g
+--------------------------------------------------
+
+--- Execucao 29 para o alpha 0.3 ---
+Seed: 1754638975
+Alpha: 0.3
+
+Tempo de execução (Guloso Randomizado): 01:04:528
+Seed: 1754638975
+Conjunto Dominante a 2-distancia (Randomizado): g, q
+--------------------------------------------------
+
+--- Execucao 30 para o alpha 0.3 ---
+Seed: 1754639040
+Alpha: 0.3
+
+Tempo de execução (Guloso Randomizado): 01:04:601
+Seed: 1754639040
+Conjunto Dominante a 2-distancia (Randomizado): g, q
+--------------------------------------------------
+
+--- Execucao 1 para o alpha 0.6 ---
+Seed: 1754639134
+Alpha: 0.6
+
+Tempo de execução (Guloso Randomizado): 01:11:563
+Seed: 1754639134
+Conjunto Dominante a 2-distancia (Randomizado): 5, q
+--------------------------------------------------
+
+--- Execucao 2 para o alpha 0.6 ---
+Seed: 1754639206
+Alpha: 0.6
+
+Tempo de execução (Guloso Randomizado): 01:12:149
+Seed: 1754639206
+Conjunto Dominante a 2-distancia (Randomizado): H, b, 7
+--------------------------------------------------
+
+--- Execucao 3 para o alpha 0.6 ---
+Seed: 1754639278
+Alpha: 0.6
+
+Tempo de execução (Guloso Randomizado): 01:11:157
+Seed: 1754639278
+Conjunto Dominante a 2-distancia (Randomizado): q, M
+--------------------------------------------------
+
+--- Execucao 4 para o alpha 0.6 ---
+Seed: 1754639349
+Alpha: 0.6
+
+Tempo de execução (Guloso Randomizado): 01:13:042
+Seed: 1754639349
+Conjunto Dominante a 2-distancia (Randomizado): g, q
+--------------------------------------------------
+
+--- Execucao 5 para o alpha 0.6 ---
+Seed: 1754639422
+Alpha: 0.6
+
+Tempo de execução (Guloso Randomizado): 01:12:445
+Seed: 1754639422
+Conjunto Dominante a 2-distancia (Randomizado): g, q
+--------------------------------------------------
+
+--- Execucao 6 para o alpha 0.6 ---
+Seed: 1754639495
+Alpha: 0.6
+
+Tempo de execução (Guloso Randomizado): 01:11:735
+Seed: 1754639495
+Conjunto Dominante a 2-distancia (Randomizado): M, q
+--------------------------------------------------
+
+--- Execucao 7 para o alpha 0.6 ---
+Seed: 1754639567
+Alpha: 0.6
+
+Tempo de execução (Guloso Randomizado): 01:11:513
+Seed: 1754639567
+Conjunto Dominante a 2-distancia (Randomizado): r, J
+--------------------------------------------------
+
+--- Execucao 8 para o alpha 0.6 ---
+Seed: 1754639638
+Alpha: 0.6
+
+Tempo de execução (Guloso Randomizado): 01:11:394
+Seed: 1754639638
+Conjunto Dominante a 2-distancia (Randomizado): g, q
+--------------------------------------------------
+
+--- Execucao 9 para o alpha 0.6 ---
+Seed: 1754639709
+Alpha: 0.6
+
+Tempo de execução (Guloso Randomizado): 01:12:208
+Seed: 1754639709
+Conjunto Dominante a 2-distancia (Randomizado): n, q, j
+--------------------------------------------------
+
+--- Execucao 10 para o alpha 0.6 ---
+Seed: 1754639782
+Alpha: 0.6
+
+Tempo de execução (Guloso Randomizado): 01:11:125
+Seed: 1754639782
+Conjunto Dominante a 2-distancia (Randomizado): l, Y, r
+--------------------------------------------------
+
+--- Execucao 11 para o alpha 0.6 ---
+Seed: 1754639853
+Alpha: 0.6
+
+Tempo de execução (Guloso Randomizado): 01:11:115
+Seed: 1754639853
+Conjunto Dominante a 2-distancia (Randomizado): q, M
+--------------------------------------------------
+
+--- Execucao 12 para o alpha 0.6 ---
+Seed: 1754639924
+Alpha: 0.6
+
+Tempo de execução (Guloso Randomizado): 01:12:684
+Seed: 1754639924
+Conjunto Dominante a 2-distancia (Randomizado): x, g, l
+--------------------------------------------------
+
+--- Execucao 13 para o alpha 0.6 ---
+Seed: 1754639997
+Alpha: 0.6
+
+Tempo de execução (Guloso Randomizado): 01:12:645
+Seed: 1754639997
+Conjunto Dominante a 2-distancia (Randomizado): r, n, q
+--------------------------------------------------
+
+--- Execucao 14 para o alpha 0.6 ---
+Seed: 1754640069
+Alpha: 0.6
+
+Tempo de execução (Guloso Randomizado): 01:10:994
+Seed: 1754640069
+Conjunto Dominante a 2-distancia (Randomizado): g, q
+--------------------------------------------------
+
+--- Execucao 15 para o alpha 0.6 ---
+Seed: 1754640140
+Alpha: 0.6
+
+Tempo de execução (Guloso Randomizado): 01:11:232
+Seed: 1754640140
+Conjunto Dominante a 2-distancia (Randomizado): q, g
+--------------------------------------------------
+
+--- Execucao 16 para o alpha 0.6 ---
+Seed: 1754640211
+Alpha: 0.6
+
+Tempo de execução (Guloso Randomizado): 01:11:299
+Seed: 1754640211
+Conjunto Dominante a 2-distancia (Randomizado): 5, l, J
+--------------------------------------------------
+
+--- Execucao 17 para o alpha 0.6 ---
+Seed: 1754640283
+Alpha: 0.6
+
+Tempo de execução (Guloso Randomizado): 01:11:377
+Seed: 1754640283
+Conjunto Dominante a 2-distancia (Randomizado): r, J
+--------------------------------------------------
+
+--- Execucao 18 para o alpha 0.6 ---
+Seed: 1754640354
+Alpha: 0.6
+
+Tempo de execução (Guloso Randomizado): 01:11:113
+Seed: 1754640354
+Conjunto Dominante a 2-distancia (Randomizado): o, b, H
+--------------------------------------------------
+
+--- Execucao 19 para o alpha 0.6 ---
+Seed: 1754640425
+Alpha: 0.6
+
+Tempo de execução (Guloso Randomizado): 01:11:715
+Seed: 1754640425
+Conjunto Dominante a 2-distancia (Randomizado): 7, b, e
+--------------------------------------------------
+
+--- Execucao 20 para o alpha 0.6 ---
+Seed: 1754640497
+Alpha: 0.6
+
+Tempo de execução (Guloso Randomizado): 01:11:910
+Seed: 1754640497
+Conjunto Dominante a 2-distancia (Randomizado): o, d, b
+--------------------------------------------------
+
+--- Execucao 21 para o alpha 0.6 ---
+Seed: 1754640569
+Alpha: 0.6
+
+Tempo de execução (Guloso Randomizado): 01:12:064
+Seed: 1754640569
+Conjunto Dominante a 2-distancia (Randomizado): 7, M, S
+--------------------------------------------------
+
+--- Execucao 22 para o alpha 0.6 ---
+Seed: 1754640641
+Alpha: 0.6
+
+Tempo de execução (Guloso Randomizado): 01:10:805
+Seed: 1754640641
+Conjunto Dominante a 2-distancia (Randomizado): 5, q
+--------------------------------------------------
+
+--- Execucao 23 para o alpha 0.6 ---
+Seed: 1754640712
+Alpha: 0.6
+
+Tempo de execução (Guloso Randomizado): 01:12:419
+Seed: 1754640712
+Conjunto Dominante a 2-distancia (Randomizado): M, q
+--------------------------------------------------
+
+--- Execucao 24 para o alpha 0.6 ---
+Seed: 1754640784
+Alpha: 0.6
+
+Tempo de execução (Guloso Randomizado): 01:11:951
+Seed: 1754640784
+Conjunto Dominante a 2-distancia (Randomizado): J, r
+--------------------------------------------------
+
+--- Execucao 25 para o alpha 0.6 ---
+Seed: 1754640856
+Alpha: 0.6
+
+Tempo de execução (Guloso Randomizado): 01:11:410
+Seed: 1754640856
+Conjunto Dominante a 2-distancia (Randomizado): g, q
+--------------------------------------------------
+
+--- Execucao 26 para o alpha 0.6 ---
+Seed: 1754640928
+Alpha: 0.6
+
+Tempo de execução (Guloso Randomizado): 01:12:629
+Seed: 1754640928
+Conjunto Dominante a 2-distancia (Randomizado): q, g
+--------------------------------------------------
+
+--- Execucao 27 para o alpha 0.6 ---
+Seed: 1754641000
+Alpha: 0.6
+
+Tempo de execução (Guloso Randomizado): 01:11:746
+Seed: 1754641000
+Conjunto Dominante a 2-distancia (Randomizado): q, 5
+--------------------------------------------------
+
+--- Execucao 28 para o alpha 0.6 ---
+Seed: 1754641072
+Alpha: 0.6
+
+Tempo de execução (Guloso Randomizado): 01:11:804
+Seed: 1754641072
+Conjunto Dominante a 2-distancia (Randomizado): 0, b, g
+--------------------------------------------------
+
+--- Execucao 29 para o alpha 0.6 ---
+Seed: 1754641144
+Alpha: 0.6
+
+Tempo de execução (Guloso Randomizado): 01:12:384
+Seed: 1754641144
+Conjunto Dominante a 2-distancia (Randomizado): q, g
+--------------------------------------------------
+
+--- Execucao 30 para o alpha 0.6 ---
+Seed: 1754641216
+Alpha: 0.6
+
+Tempo de execução (Guloso Randomizado): 01:11:250
+Seed: 1754641216
+Conjunto Dominante a 2-distancia (Randomizado): r, J
+--------------------------------------------------
+
+--- Execucao 1 para o alpha 0.9 ---
+Seed: 1754641317
+Alpha: 0.9
+
+Tempo de execução (Guloso Randomizado): 01:19:286
+Seed: 1754641317
+Conjunto Dominante a 2-distancia (Randomizado): q, T, n
+--------------------------------------------------
+
+--- Execucao 2 para o alpha 0.9 ---
+Seed: 1754641397
+Alpha: 0.9
+
+Tempo de execução (Guloso Randomizado): 01:20:001
+Seed: 1754641397
+Conjunto Dominante a 2-distancia (Randomizado): 7, c, 2
+--------------------------------------------------
+
+--- Execucao 3 para o alpha 0.9 ---
+Seed: 1754641477
+Alpha: 0.9
+
+Tempo de execução (Guloso Randomizado): 01:19:208
+Seed: 1754641477
+Conjunto Dominante a 2-distancia (Randomizado): q, M
+--------------------------------------------------
+
+--- Execucao 4 para o alpha 0.9 ---
+Seed: 1754641556
+Alpha: 0.9
+
+Tempo de execução (Guloso Randomizado): 01:20:762
+Seed: 1754641556
+Conjunto Dominante a 2-distancia (Randomizado): q, M
+--------------------------------------------------
+
+--- Execucao 5 para o alpha 0.9 ---
+Seed: 1754641637
+Alpha: 0.9
+
+Tempo de execução (Guloso Randomizado): 01:20:170
+Seed: 1754641637
+Conjunto Dominante a 2-distancia (Randomizado): B, g, K
+--------------------------------------------------
+
+--- Execucao 6 para o alpha 0.9 ---
+Seed: 1754641717
+Alpha: 0.9
+
+Tempo de execução (Guloso Randomizado): 01:20:000
+Seed: 1754641717
+Conjunto Dominante a 2-distancia (Randomizado): J, r
+--------------------------------------------------
+
+--- Execucao 7 para o alpha 0.9 ---
+Seed: 1754641797
+Alpha: 0.9
+
+Tempo de execução (Guloso Randomizado): 01:21:891
+Seed: 1754641797
+Conjunto Dominante a 2-distancia (Randomizado): q, Y, g
+--------------------------------------------------
+
+--- Execucao 8 para o alpha 0.9 ---
+Seed: 1754641879
+Alpha: 0.9
+
+Tempo de execução (Guloso Randomizado): 01:20:397
+Seed: 1754641879
+Conjunto Dominante a 2-distancia (Randomizado): V, J, r
+--------------------------------------------------
+
+--- Execucao 9 para o alpha 0.9 ---
+Seed: 1754641959
+Alpha: 0.9
+
+Tempo de execução (Guloso Randomizado): 01:19:449
+Seed: 1754641959
+Conjunto Dominante a 2-distancia (Randomizado): 7, 0, R
+--------------------------------------------------
+
+--- Execucao 10 para o alpha 0.9 ---
+Seed: 1754642039
+Alpha: 0.9
+
+Tempo de execução (Guloso Randomizado): 01:21:543
+Seed: 1754642039
+Conjunto Dominante a 2-distancia (Randomizado): J, r
+--------------------------------------------------
+
+--- Execucao 11 para o alpha 0.9 ---
+Seed: 1754642120
+Alpha: 0.9
+
+Tempo de execução (Guloso Randomizado): 01:22:406
+Seed: 1754642120
+Conjunto Dominante a 2-distancia (Randomizado): 7, c, h
+--------------------------------------------------
+
+--- Execucao 12 para o alpha 0.9 ---
+Seed: 1754642202
+Alpha: 0.9
+
+Tempo de execução (Guloso Randomizado): 01:19:868
+Seed: 1754642202
+Conjunto Dominante a 2-distancia (Randomizado): M, q
+--------------------------------------------------
+
+--- Execucao 13 para o alpha 0.9 ---
+Seed: 1754642282
+Alpha: 0.9
+
+Tempo de execução (Guloso Randomizado): 01:18:983
+Seed: 1754642282
+Conjunto Dominante a 2-distancia (Randomizado): q, R, e
+--------------------------------------------------
+
+--- Execucao 14 para o alpha 0.9 ---
+Seed: 1754642361
+Alpha: 0.9
+
+Tempo de execução (Guloso Randomizado): 01:22:686
+Seed: 1754642361
+Conjunto Dominante a 2-distancia (Randomizado): q, n, F
+--------------------------------------------------
+
+--- Execucao 15 para o alpha 0.9 ---
+Seed: 1754642444
+Alpha: 0.9
+
+Tempo de execução (Guloso Randomizado): 01:21:136
+Seed: 1754642444
+Conjunto Dominante a 2-distancia (Randomizado): g, r, j
+--------------------------------------------------
+
+--- Execucao 16 para o alpha 0.9 ---
+Seed: 1754642525
+Alpha: 0.9
+
+Tempo de execução (Guloso Randomizado): 01:20:437
+Seed: 1754642525
+Conjunto Dominante a 2-distancia (Randomizado): U, 6, b
+--------------------------------------------------
+
+--- Execucao 17 para o alpha 0.9 ---
+Seed: 1754642606
+Alpha: 0.9
+
+Tempo de execução (Guloso Randomizado): 01:20:447
+Seed: 1754642606
+Conjunto Dominante a 2-distancia (Randomizado): q, g
+--------------------------------------------------
+
+--- Execucao 18 para o alpha 0.9 ---
+Seed: 1754642686
+Alpha: 0.9
+
+Tempo de execução (Guloso Randomizado): 01:20:589
+Seed: 1754642686
+Conjunto Dominante a 2-distancia (Randomizado): D, q, c
+--------------------------------------------------
+
+--- Execucao 19 para o alpha 0.9 ---
+Seed: 1754642767
+Alpha: 0.9
+
+Tempo de execução (Guloso Randomizado): 01:21:146
+Seed: 1754642767
+Conjunto Dominante a 2-distancia (Randomizado): z, l, n
+--------------------------------------------------
+
+--- Execucao 20 para o alpha 0.9 ---
+Seed: 1754642848
+Alpha: 0.9
+
+Tempo de execução (Guloso Randomizado): 01:21:778
+Seed: 1754642848
+Conjunto Dominante a 2-distancia (Randomizado): J, 7, q
+--------------------------------------------------
+
+--- Execucao 21 para o alpha 0.9 ---
+Seed: 1754642930
+Alpha: 0.9
+
+Tempo de execução (Guloso Randomizado): 01:21:197
+Seed: 1754642930
+Conjunto Dominante a 2-distancia (Randomizado): 2, n, u
+--------------------------------------------------
+
+--- Execucao 22 para o alpha 0.9 ---
+Seed: 1754643011
+Alpha: 0.9
+
+Tempo de execução (Guloso Randomizado): 01:19:870
+Seed: 1754643011
+Conjunto Dominante a 2-distancia (Randomizado): 7, N, 0
+--------------------------------------------------
+
+--- Execucao 23 para o alpha 0.9 ---
+Seed: 1754643091
+Alpha: 0.9
+
+Tempo de execução (Guloso Randomizado): 01:21:239
+Seed: 1754643091
+Conjunto Dominante a 2-distancia (Randomizado): x, 7, h
+--------------------------------------------------
+
+--- Execucao 24 para o alpha 0.9 ---
+Seed: 1754643172
+Alpha: 0.9
+
+Tempo de execução (Guloso Randomizado): 01:22:559
+Seed: 1754643172
+Conjunto Dominante a 2-distancia (Randomizado): q, g
+--------------------------------------------------
+
+--- Execucao 25 para o alpha 0.9 ---
+Seed: 1754643254
+Alpha: 0.9
+
+Tempo de execução (Guloso Randomizado): 01:21:775
+Seed: 1754643254
+Conjunto Dominante a 2-distancia (Randomizado): 0, n, l
+--------------------------------------------------
+
+--- Execucao 26 para o alpha 0.9 ---
+Seed: 1754643336
+Alpha: 0.9
+
+Tempo de execução (Guloso Randomizado): 01:21:611
+Seed: 1754643336
+Conjunto Dominante a 2-distancia (Randomizado): T, q, N
+--------------------------------------------------
+
+--- Execucao 27 para o alpha 0.9 ---
+Seed: 1754643418
+Alpha: 0.9
+
+Tempo de execução (Guloso Randomizado): 01:19:572
+Seed: 1754643418
+Conjunto Dominante a 2-distancia (Randomizado): a, f, q
+--------------------------------------------------
+
+--- Execucao 28 para o alpha 0.9 ---
+Seed: 1754643497
+Alpha: 0.9
+
+Tempo de execução (Guloso Randomizado): 01:22:283
+Seed: 1754643497
+Conjunto Dominante a 2-distancia (Randomizado): 2, J, D
+--------------------------------------------------
+
+--- Execucao 29 para o alpha 0.9 ---
+Seed: 1754643580
+Alpha: 0.9
+
+Tempo de execução (Guloso Randomizado): 01:21:055
+Seed: 1754643580
+Conjunto Dominante a 2-distancia (Randomizado): B, D, 7
+--------------------------------------------------
+
+--- Execucao 30 para o alpha 0.9 ---
+Seed: 1754643661
+Alpha: 0.9
+
+Tempo de execução (Guloso Randomizado): 01:21:165
+Seed: 1754643661
+Conjunto Dominante a 2-distancia (Randomizado): 7, M, R
+--------------------------------------------------
+

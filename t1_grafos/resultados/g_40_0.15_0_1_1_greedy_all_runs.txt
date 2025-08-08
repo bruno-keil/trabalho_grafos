@@ -1,0 +1,270 @@
+--- Execucao 1 ---
+Seed: 1754590406
+Nó adicionado ao conjunto dominante: G
+Nó adicionado ao conjunto dominante: k
+
+Tempo de execução (Guloso): 00:00:109
+Conjunto Dominante a 2-distancia (Guloso): G, k
+---------------------------
+
+--- Execucao 2 ---
+Seed: 1754590407
+Nó adicionado ao conjunto dominante: G
+Nó adicionado ao conjunto dominante: k
+
+Tempo de execução (Guloso): 00:00:109
+Conjunto Dominante a 2-distancia (Guloso): G, k
+---------------------------
+
+--- Execucao 3 ---
+Seed: 1754590408
+Nó adicionado ao conjunto dominante: G
+Nó adicionado ao conjunto dominante: k
+
+Tempo de execução (Guloso): 00:00:110
+Conjunto Dominante a 2-distancia (Guloso): G, k
+---------------------------
+
+--- Execucao 4 ---
+Seed: 1754590409
+Nó adicionado ao conjunto dominante: G
+Nó adicionado ao conjunto dominante: k
+
+Tempo de execução (Guloso): 00:00:108
+Conjunto Dominante a 2-distancia (Guloso): G, k
+---------------------------
+
+--- Execucao 5 ---
+Seed: 1754590410
+Nó adicionado ao conjunto dominante: G
+Nó adicionado ao conjunto dominante: k
+
+Tempo de execução (Guloso): 00:00:108
+Conjunto Dominante a 2-distancia (Guloso): G, k
+---------------------------
+
+--- Execucao 6 ---
+Seed: 1754590412
+Nó adicionado ao conjunto dominante: G
+Nó adicionado ao conjunto dominante: k
+
+Tempo de execução (Guloso): 00:00:108
+Conjunto Dominante a 2-distancia (Guloso): G, k
+---------------------------
+
+--- Execucao 7 ---
+Seed: 1754590413
+Nó adicionado ao conjunto dominante: G
+Nó adicionado ao conjunto dominante: k
+
+Tempo de execução (Guloso): 00:00:108
+Conjunto Dominante a 2-distancia (Guloso): G, k
+---------------------------
+
+--- Execucao 8 ---
+Seed: 1754590414
+Nó adicionado ao conjunto dominante: G
+Nó adicionado ao conjunto dominante: k
+
+Tempo de execução (Guloso): 00:00:108
+Conjunto Dominante a 2-distancia (Guloso): G, k
+---------------------------
+
+--- Execucao 9 ---
+Seed: 1754590415
+Nó adicionado ao conjunto dominante: G
+Nó adicionado ao conjunto dominante: k
+
+Tempo de execução (Guloso): 00:00:106
+Conjunto Dominante a 2-distancia (Guloso): G, k
+---------------------------
+
+--- Execucao 10 ---
+Seed: 1754590416
+Nó adicionado ao conjunto dominante: G
+Nó adicionado ao conjunto dominante: k
+
+Tempo de execução (Guloso): 00:00:108
+Conjunto Dominante a 2-distancia (Guloso): G, k
+---------------------------
+
+--- Execucao 11 ---
+Seed: 1754590417
+Nó adicionado ao conjunto dominante: G
+Nó adicionado ao conjunto dominante: k
+
+Tempo de execução (Guloso): 00:00:108
+Conjunto Dominante a 2-distancia (Guloso): G, k
+---------------------------
+
+--- Execucao 12 ---
+Seed: 1754590418
+Nó adicionado ao conjunto dominante: G
+Nó adicionado ao conjunto dominante: k
+
+Tempo de execução (Guloso): 00:00:107
+Conjunto Dominante a 2-distancia (Guloso): G, k
+---------------------------
+
+--- Execucao 13 ---
+Seed: 1754590419
+Nó adicionado ao conjunto dominante: G
+Nó adicionado ao conjunto dominante: k
+
+Tempo de execução (Guloso): 00:00:108
+Conjunto Dominante a 2-distancia (Guloso): G, k
+---------------------------
+
+--- Execucao 14 ---
+Seed: 1754590420
+Nó adicionado ao conjunto dominante: G
+Nó adicionado ao conjunto dominante: k
+
+Tempo de execução (Guloso): 00:00:108
+Conjunto Dominante a 2-distancia (Guloso): G, k
+---------------------------
+
+--- Execucao 15 ---
+Seed: 1754590422
+Nó adicionado ao conjunto dominante: G
+Nó adicionado ao conjunto dominante: k
+
+Tempo de execução (Guloso): 00:00:107
+Conjunto Dominante a 2-distancia (Guloso): G, k
+---------------------------
+
+--- Execucao 16 ---
+Seed: 1754590423
+Nó adicionado ao conjunto dominante: G
+Nó adicionado ao conjunto dominante: k
+
+Tempo de execução (Guloso): 00:00:108
+Conjunto Dominante a 2-distancia (Guloso): G, k
+---------------------------
+
+--- Execucao 17 ---
+Seed: 1754590424
+Nó adicionado ao conjunto dominante: G
+Nó adicionado ao conjunto dominante: k
+
+Tempo de execução (Guloso): 00:00:108
+Conjunto Dominante a 2-distancia (Guloso): G, k
+---------------------------
+
+--- Execucao 18 ---
+Seed: 1754590425
+Nó adicionado ao conjunto dominante: G
+Nó adicionado ao conjunto dominante: k
+
+Tempo de execução (Guloso): 00:00:108
+Conjunto Dominante a 2-distancia (Guloso): G, k
+---------------------------
+
+--- Execucao 19 ---
+Seed: 1754590426
+Nó adicionado ao conjunto dominante: G
+Nó adicionado ao conjunto dominante: k
+
+Tempo de execução (Guloso): 00:00:107
+Conjunto Dominante a 2-distancia (Guloso): G, k
+---------------------------
+
+--- Execucao 20 ---
+Seed: 1754590427
+Nó adicionado ao conjunto dominante: G
+Nó adicionado ao conjunto dominante: k
+
+Tempo de execução (Guloso): 00:00:107
+Conjunto Dominante a 2-distancia (Guloso): G, k
+---------------------------
+
+--- Execucao 21 ---
+Seed: 1754590428
+Nó adicionado ao conjunto dominante: G
+Nó adicionado ao conjunto dominante: k
+
+Tempo de execução (Guloso): 00:00:107
+Conjunto Dominante a 2-distancia (Guloso): G, k
+---------------------------
+
+--- Execucao 22 ---
+Seed: 1754590429
+Nó adicionado ao conjunto dominante: G
+Nó adicionado ao conjunto dominante: k
+
+Tempo de execução (Guloso): 00:00:107
+Conjunto Dominante a 2-distancia (Guloso): G, k
+---------------------------
+
+--- Execucao 23 ---
+Seed: 1754590430
+Nó adicionado ao conjunto dominante: G
+Nó adicionado ao conjunto dominante: k
+
+Tempo de execução (Guloso): 00:00:107
+Conjunto Dominante a 2-distancia (Guloso): G, k
+---------------------------
+
+--- Execucao 24 ---
+Seed: 1754590432
+Nó adicionado ao conjunto dominante: G
+Nó adicionado ao conjunto dominante: k
+
+Tempo de execução (Guloso): 00:00:107
+Conjunto Dominante a 2-distancia (Guloso): G, k
+---------------------------
+
+--- Execucao 25 ---
+Seed: 1754590433
+Nó adicionado ao conjunto dominante: G
+Nó adicionado ao conjunto dominante: k
+
+Tempo de execução (Guloso): 00:00:108
+Conjunto Dominante a 2-distancia (Guloso): G, k
+---------------------------
+
+--- Execucao 26 ---
+Seed: 1754590434
+Nó adicionado ao conjunto dominante: G
+Nó adicionado ao conjunto dominante: k
+
+Tempo de execução (Guloso): 00:00:107
+Conjunto Dominante a 2-distancia (Guloso): G, k
+---------------------------
+
+--- Execucao 27 ---
+Seed: 1754590435
+Nó adicionado ao conjunto dominante: G
+Nó adicionado ao conjunto dominante: k
+
+Tempo de execução (Guloso): 00:00:107
+Conjunto Dominante a 2-distancia (Guloso): G, k
+---------------------------
+
+--- Execucao 28 ---
+Seed: 1754590436
+Nó adicionado ao conjunto dominante: G
+Nó adicionado ao conjunto dominante: k
+
+Tempo de execução (Guloso): 00:00:107
+Conjunto Dominante a 2-distancia (Guloso): G, k
+---------------------------
+
+--- Execucao 29 ---
+Seed: 1754590437
+Nó adicionado ao conjunto dominante: G
+Nó adicionado ao conjunto dominante: k
+
+Tempo de execução (Guloso): 00:00:108
+Conjunto Dominante a 2-distancia (Guloso): G, k
+---------------------------
+
+--- Execucao 30 ---
+Seed: 1754590438
+Nó adicionado ao conjunto dominante: G
+Nó adicionado ao conjunto dominante: k
+
+Tempo de execução (Guloso): 00:00:107
+Conjunto Dominante a 2-distancia (Guloso): G, k
+---------------------------
+

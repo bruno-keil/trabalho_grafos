@@ -1576,7 +1576,8 @@ vector<char> Grafo::ds_2_randomized_greedy(int max_iter, float alpha)
     auto start_time = chrono::high_resolution_clock::now();
 
     vector<char> best_solution; // solBest
-    srand(time(0)); // Seed the random number generator
+    unsigned int seed = time(0) + 30 + (int)(alpha * 100);
+    srand(seed); // Seed the random number generator
 
     for (int i = 0; i < max_iter; ++i)
     {
@@ -1652,6 +1653,8 @@ vector<char> Grafo::ds_2_randomized_greedy(int max_iter, float alpha)
          << setfill('0') << setw(2) << seconds << ":"
          << setfill('0') << setw(3) << milliseconds << endl;
 
+    cout << "Seed: " << seed << endl;
+
     return best_solution;
 }
 
@@ -1670,7 +1673,8 @@ vector<char> Grafo::ds_2_reactive_randomized_greedy(vector<float> alfaVet, int n
     vector<float> M(m, 0.0);     // Average solution quality for each alpha
     vector<int> usos(m, 0);      // Usage count for each alpha
 
-    srand(time(NULL)); // Seed for random number generation
+    unsigned int seed = time(0) + 30 + 1000;
+    srand(seed); // Seed for random number generation
 
     // while (i < numIter)
     for (int iter = 1; iter <= numIter; iter++)
@@ -1789,6 +1793,7 @@ vector<char> Grafo::ds_2_reactive_randomized_greedy(vector<float> alfaVet, int n
          << setfill('0') << setw(3) << milliseconds << endl;
 
     cout << "Melhor alfa encontrado: " << best_alpha << endl;
+    cout << "Seed: " << seed << endl;
 
     return melhor_solucao;
 }

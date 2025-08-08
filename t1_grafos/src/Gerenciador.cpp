@@ -676,7 +676,7 @@ void Gerenciador::run_all_heuristics(Grafo *grafo, const string &instanceName)
             cout.rdbuf(randomized_outFile.rdbuf());
 
             randomized_outFile << "--- Execucao " << i + 1 << " para o alpha " << alpha << " ---" << endl;
-            unsigned int seed = time(0) + i + (int)(alpha * 100);
+            unsigned int seed = time(0) + 30 + (int)(alpha * 100);
             srand(seed);
             randomized_outFile << "Seed: " << seed << endl;
             randomized_outFile << "Alpha: " << alpha << endl;
@@ -705,7 +705,7 @@ void Gerenciador::run_all_heuristics(Grafo *grafo, const string &instanceName)
         cout.rdbuf(reactive_outFile.rdbuf());
 
         reactive_outFile << "--- Execucao " << i + 1 << " ---" << endl;
-        unsigned int seed = time(0) + i + 1000;
+        unsigned int seed = time(0) + 30 + 1000;
         srand(seed);
         reactive_outFile << "Seed: " << seed << endl;
         vector<float> reactive_alphas = {0.3, 0.6, 0.9};

@@ -1,0 +1,300 @@
+--- Execucao 1 ---
+Seed: 1754582492
+Nó adicionado ao conjunto dominante: r
+Nó adicionado ao conjunto dominante: a
+Nó adicionado ao conjunto dominante: h
+
+Tempo de execução (Guloso): 00:00:113
+Conjunto Dominante a 2-distancia (Guloso): r, a, h
+---------------------------
+
+--- Execucao 2 ---
+Seed: 1754582493
+Nó adicionado ao conjunto dominante: r
+Nó adicionado ao conjunto dominante: a
+Nó adicionado ao conjunto dominante: h
+
+Tempo de execução (Guloso): 00:00:112
+Conjunto Dominante a 2-distancia (Guloso): r, a, h
+---------------------------
+
+--- Execucao 3 ---
+Seed: 1754582494
+Nó adicionado ao conjunto dominante: r
+Nó adicionado ao conjunto dominante: a
+Nó adicionado ao conjunto dominante: h
+
+Tempo de execução (Guloso): 00:00:114
+Conjunto Dominante a 2-distancia (Guloso): r, a, h
+---------------------------
+
+--- Execucao 4 ---
+Seed: 1754582495
+Nó adicionado ao conjunto dominante: r
+Nó adicionado ao conjunto dominante: a
+Nó adicionado ao conjunto dominante: h
+
+Tempo de execução (Guloso): 00:00:111
+Conjunto Dominante a 2-distancia (Guloso): r, a, h
+---------------------------
+
+--- Execucao 5 ---
+Seed: 1754582497
+Nó adicionado ao conjunto dominante: r
+Nó adicionado ao conjunto dominante: a
+Nó adicionado ao conjunto dominante: h
+
+Tempo de execução (Guloso): 00:00:112
+Conjunto Dominante a 2-distancia (Guloso): r, a, h
+---------------------------
+
+--- Execucao 6 ---
+Seed: 1754582498
+Nó adicionado ao conjunto dominante: r
+Nó adicionado ao conjunto dominante: a
+Nó adicionado ao conjunto dominante: h
+
+Tempo de execução (Guloso): 00:00:113
+Conjunto Dominante a 2-distancia (Guloso): r, a, h
+---------------------------
+
+--- Execucao 7 ---
+Seed: 1754582499
+Nó adicionado ao conjunto dominante: r
+Nó adicionado ao conjunto dominante: a
+Nó adicionado ao conjunto dominante: h
+
+Tempo de execução (Guloso): 00:00:113
+Conjunto Dominante a 2-distancia (Guloso): r, a, h
+---------------------------
+
+--- Execucao 8 ---
+Seed: 1754582500
+Nó adicionado ao conjunto dominante: r
+Nó adicionado ao conjunto dominante: a
+Nó adicionado ao conjunto dominante: h
+
+Tempo de execução (Guloso): 00:00:111
+Conjunto Dominante a 2-distancia (Guloso): r, a, h
+---------------------------
+
+--- Execucao 9 ---
+Seed: 1754582501
+Nó adicionado ao conjunto dominante: r
+Nó adicionado ao conjunto dominante: a
+Nó adicionado ao conjunto dominante: h
+
+Tempo de execução (Guloso): 00:00:112
+Conjunto Dominante a 2-distancia (Guloso): r, a, h
+---------------------------
+
+--- Execucao 10 ---
+Seed: 1754582502
+Nó adicionado ao conjunto dominante: r
+Nó adicionado ao conjunto dominante: a
+Nó adicionado ao conjunto dominante: h
+
+Tempo de execução (Guloso): 00:00:112
+Conjunto Dominante a 2-distancia (Guloso): r, a, h
+---------------------------
+
+--- Execucao 11 ---
+Seed: 1754582503
+Nó adicionado ao conjunto dominante: r
+Nó adicionado ao conjunto dominante: a
+Nó adicionado ao conjunto dominante: h
+
+Tempo de execução (Guloso): 00:00:116
+Conjunto Dominante a 2-distancia (Guloso): r, a, h
+---------------------------
+
+--- Execucao 12 ---
+Seed: 1754582504
+Nó adicionado ao conjunto dominante: r
+Nó adicionado ao conjunto dominante: a
+Nó adicionado ao conjunto dominante: h
+
+Tempo de execução (Guloso): 00:00:112
+Conjunto Dominante a 2-distancia (Guloso): r, a, h
+---------------------------
+
+--- Execucao 13 ---
+Seed: 1754582505
+Nó adicionado ao conjunto dominante: r
+Nó adicionado ao conjunto dominante: a
+Nó adicionado ao conjunto dominante: h
+
+Tempo de execução (Guloso): 00:00:112
+Conjunto Dominante a 2-distancia (Guloso): r, a, h
+---------------------------
+
+--- Execucao 14 ---
+Seed: 1754582507
+Nó adicionado ao conjunto dominante: r
+Nó adicionado ao conjunto dominante: a
+Nó adicionado ao conjunto dominante: h
+
+Tempo de execução (Guloso): 00:00:111
+Conjunto Dominante a 2-distancia (Guloso): r, a, h
+---------------------------
+
+--- Execucao 15 ---
+Seed: 1754582508
+Nó adicionado ao conjunto dominante: r
+Nó adicionado ao conjunto dominante: a
+Nó adicionado ao conjunto dominante: h
+
+Tempo de execução (Guloso): 00:00:111
+Conjunto Dominante a 2-distancia (Guloso): r, a, h
+---------------------------
+
+--- Execucao 16 ---
+Seed: 1754582509
+Nó adicionado ao conjunto dominante: r
+Nó adicionado ao conjunto dominante: a
+Nó adicionado ao conjunto dominante: h
+
+Tempo de execução (Guloso): 00:00:111
+Conjunto Dominante a 2-distancia (Guloso): r, a, h
+---------------------------
+
+--- Execucao 17 ---
+Seed: 1754582510
+Nó adicionado ao conjunto dominante: r
+Nó adicionado ao conjunto dominante: a
+Nó adicionado ao conjunto dominante: h
+
+Tempo de execução (Guloso): 00:00:111
+Conjunto Dominante a 2-distancia (Guloso): r, a, h
+---------------------------
+
+--- Execucao 18 ---
+Seed: 1754582511
+Nó adicionado ao conjunto dominante: r
+Nó adicionado ao conjunto dominante: a
+Nó adicionado ao conjunto dominante: h
+
+Tempo de execução (Guloso): 00:00:111
+Conjunto Dominante a 2-distancia (Guloso): r, a, h
+---------------------------
+
+--- Execucao 19 ---
+Seed: 1754582512
+Nó adicionado ao conjunto dominante: r
+Nó adicionado ao conjunto dominante: a
+Nó adicionado ao conjunto dominante: h
+
+Tempo de execução (Guloso): 00:00:111
+Conjunto Dominante a 2-distancia (Guloso): r, a, h
+---------------------------
+
+--- Execucao 20 ---
+Seed: 1754582513
+Nó adicionado ao conjunto dominante: r
+Nó adicionado ao conjunto dominante: a
+Nó adicionado ao conjunto dominante: h
+
+Tempo de execução (Guloso): 00:00:111
+Conjunto Dominante a 2-distancia (Guloso): r, a, h
+---------------------------
+
+--- Execucao 21 ---
+Seed: 1754582514
+Nó adicionado ao conjunto dominante: r
+Nó adicionado ao conjunto dominante: a
+Nó adicionado ao conjunto dominante: h
+
+Tempo de execução (Guloso): 00:00:111
+Conjunto Dominante a 2-distancia (Guloso): r, a, h
+---------------------------
+
+--- Execucao 22 ---
+Seed: 1754582515
+Nó adicionado ao conjunto dominante: r
+Nó adicionado ao conjunto dominante: a
+Nó adicionado ao conjunto dominante: h
+
+Tempo de execução (Guloso): 00:00:111
+Conjunto Dominante a 2-distancia (Guloso): r, a, h
+---------------------------
+
+--- Execucao 23 ---
+Seed: 1754582517
+Nó adicionado ao conjunto dominante: r
+Nó adicionado ao conjunto dominante: a
+Nó adicionado ao conjunto dominante: h
+
+Tempo de execução (Guloso): 00:00:111
+Conjunto Dominante a 2-distancia (Guloso): r, a, h
+---------------------------
+
+--- Execucao 24 ---
+Seed: 1754582518
+Nó adicionado ao conjunto dominante: r
+Nó adicionado ao conjunto dominante: a
+Nó adicionado ao conjunto dominante: h
+
+Tempo de execução (Guloso): 00:00:111
+Conjunto Dominante a 2-distancia (Guloso): r, a, h
+---------------------------
+
+--- Execucao 25 ---
+Seed: 1754582519
+Nó adicionado ao conjunto dominante: r
+Nó adicionado ao conjunto dominante: a
+Nó adicionado ao conjunto dominante: h
+
+Tempo de execução (Guloso): 00:00:111
+Conjunto Dominante a 2-distancia (Guloso): r, a, h
+---------------------------
+
+--- Execucao 26 ---
+Seed: 1754582520
+Nó adicionado ao conjunto dominante: r
+Nó adicionado ao conjunto dominante: a
+Nó adicionado ao conjunto dominante: h
+
+Tempo de execução (Guloso): 00:00:111
+Conjunto Dominante a 2-distancia (Guloso): r, a, h
+---------------------------
+
+--- Execucao 27 ---
+Seed: 1754582521
+Nó adicionado ao conjunto dominante: r
+Nó adicionado ao conjunto dominante: a
+Nó adicionado ao conjunto dominante: h
+
+Tempo de execução (Guloso): 00:00:111
+Conjunto Dominante a 2-distancia (Guloso): r, a, h
+---------------------------
+
+--- Execucao 28 ---
+Seed: 1754582522
+Nó adicionado ao conjunto dominante: r
+Nó adicionado ao conjunto dominante: a
+Nó adicionado ao conjunto dominante: h
+
+Tempo de execução (Guloso): 00:00:111
+Conjunto Dominante a 2-distancia (Guloso): r, a, h
+---------------------------
+
+--- Execucao 29 ---
+Seed: 1754582523
+Nó adicionado ao conjunto dominante: r
+Nó adicionado ao conjunto dominante: a
+Nó adicionado ao conjunto dominante: h
+
+Tempo de execução (Guloso): 00:00:111
+Conjunto Dominante a 2-distancia (Guloso): r, a, h
+---------------------------
+
+--- Execucao 30 ---
+Seed: 1754582524
+Nó adicionado ao conjunto dominante: r
+Nó adicionado ao conjunto dominante: a
+Nó adicionado ao conjunto dominante: h
+
+Tempo de execução (Guloso): 00:00:111
+Conjunto Dominante a 2-distancia (Guloso): r, a, h
+---------------------------
+

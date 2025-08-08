@@ -1,0 +1,240 @@
+--- Execucao 1 ---
+Seed: 1754582566
+
+Tempo de execução (Reactive Randomized Greedy): 00:03:450
+Melhor alfa encontrado: 0.3
+Conjunto Dominante a 2-distancia (Reativo): q, m
+---------------------------
+
+--- Execucao 2 ---
+Seed: 1754582570
+
+Tempo de execução (Reactive Randomized Greedy): 00:03:404
+Melhor alfa encontrado: 0.3
+Conjunto Dominante a 2-distancia (Reativo): q, k
+---------------------------
+
+--- Execucao 3 ---
+Seed: 1754582575
+
+Tempo de execução (Reactive Randomized Greedy): 00:03:385
+Melhor alfa encontrado: 0.3
+Conjunto Dominante a 2-distancia (Reativo): x, y
+---------------------------
+
+--- Execucao 4 ---
+Seed: 1754582579
+
+Tempo de execução (Reactive Randomized Greedy): 00:03:425
+Melhor alfa encontrado: 0.3
+Conjunto Dominante a 2-distancia (Reativo): x, y
+---------------------------
+
+--- Execucao 5 ---
+Seed: 1754582584
+
+Tempo de execução (Reactive Randomized Greedy): 00:03:354
+Melhor alfa encontrado: 0.3
+Conjunto Dominante a 2-distancia (Reativo): m, r
+---------------------------
+
+--- Execucao 6 ---
+Seed: 1754582588
+
+Tempo de execução (Reactive Randomized Greedy): 00:03:384
+Melhor alfa encontrado: 0.3
+Conjunto Dominante a 2-distancia (Reativo): m, l
+---------------------------
+
+--- Execucao 7 ---
+Seed: 1754582592
+
+Tempo de execução (Reactive Randomized Greedy): 00:03:378
+Melhor alfa encontrado: 0.3
+Conjunto Dominante a 2-distancia (Reativo): m, f
+---------------------------
+
+--- Execucao 8 ---
+Seed: 1754582597
+
+Tempo de execução (Reactive Randomized Greedy): 00:03:323
+Melhor alfa encontrado: 0.3
+Conjunto Dominante a 2-distancia (Reativo): j, k
+---------------------------
+
+--- Execucao 9 ---
+Seed: 1754582601
+
+Tempo de execução (Reactive Randomized Greedy): 00:03:353
+Melhor alfa encontrado: 0.3
+Conjunto Dominante a 2-distancia (Reativo): j, u
+---------------------------
+
+--- Execucao 10 ---
+Seed: 1754582605
+
+Tempo de execução (Reactive Randomized Greedy): 00:03:434
+Melhor alfa encontrado: 0.3
+Conjunto Dominante a 2-distancia (Reativo): v, y
+---------------------------
+
+--- Execucao 11 ---
+Seed: 1754582610
+
+Tempo de execução (Reactive Randomized Greedy): 00:03:372
+Melhor alfa encontrado: 0.3
+Conjunto Dominante a 2-distancia (Reativo): v, m
+---------------------------
+
+--- Execucao 12 ---
+Seed: 1754582614
+
+Tempo de execução (Reactive Randomized Greedy): 00:03:390
+Melhor alfa encontrado: 0.3
+Conjunto Dominante a 2-distancia (Reativo): k, b
+---------------------------
+
+--- Execucao 13 ---
+Seed: 1754582619
+
+Tempo de execução (Reactive Randomized Greedy): 00:03:375
+Melhor alfa encontrado: 0.3
+Conjunto Dominante a 2-distancia (Reativo): k, f
+---------------------------
+
+--- Execucao 14 ---
+Seed: 1754582623
+
+Tempo de execução (Reactive Randomized Greedy): 00:03:403
+Melhor alfa encontrado: 0.3
+Conjunto Dominante a 2-distancia (Reativo): u, f
+---------------------------
+
+--- Execucao 15 ---
+Seed: 1754582627
+
+Tempo de execução (Reactive Randomized Greedy): 00:03:361
+Melhor alfa encontrado: 0.3
+Conjunto Dominante a 2-distancia (Reativo): u, f
+---------------------------
+
+--- Execucao 16 ---
+Seed: 1754582632
+
+Tempo de execução (Reactive Randomized Greedy): 00:03:398
+Melhor alfa encontrado: 0.3
+Conjunto Dominante a 2-distancia (Reativo): q, m
+---------------------------
+
+--- Execucao 17 ---
+Seed: 1754582636
+
+Tempo de execução (Reactive Randomized Greedy): 00:03:385
+Melhor alfa encontrado: 0.3
+Conjunto Dominante a 2-distancia (Reativo): q, k
+---------------------------
+
+--- Execucao 18 ---
+Seed: 1754582641
+
+Tempo de execução (Reactive Randomized Greedy): 00:03:396
+Melhor alfa encontrado: 0.3
+Conjunto Dominante a 2-distancia (Reativo): q, m
+---------------------------
+
+--- Execucao 19 ---
+Seed: 1754582645
+
+Tempo de execução (Reactive Randomized Greedy): 00:03:369
+Melhor alfa encontrado: 0.3
+Conjunto Dominante a 2-distancia (Reativo): x, k
+---------------------------
+
+--- Execucao 20 ---
+Seed: 1754582649
+
+Tempo de execução (Reactive Randomized Greedy): 00:03:361
+Melhor alfa encontrado: 0.3
+Conjunto Dominante a 2-distancia (Reativo): x, u
+---------------------------
+
+--- Execucao 21 ---
+Seed: 1754582654
+
+Tempo de execução (Reactive Randomized Greedy): 00:03:346
+Melhor alfa encontrado: 0.3
+Conjunto Dominante a 2-distancia (Reativo): m, f
+---------------------------
+
+--- Execucao 22 ---
+Seed: 1754582658
+
+Tempo de execução (Reactive Randomized Greedy): 00:03:350
+Melhor alfa encontrado: 0.3
+Conjunto Dominante a 2-distancia (Reativo): m, f
+---------------------------
+
+--- Execucao 23 ---
+Seed: 1754582662
+
+Tempo de execução (Reactive Randomized Greedy): 00:03:368
+Melhor alfa encontrado: 0.3
+Conjunto Dominante a 2-distancia (Reativo): j, e
+---------------------------
+
+--- Execucao 24 ---
+Seed: 1754582667
+
+Tempo de execução (Reactive Randomized Greedy): 00:03:390
+Melhor alfa encontrado: 0.3
+Conjunto Dominante a 2-distancia (Reativo): j, u
+---------------------------
+
+--- Execucao 25 ---
+Seed: 1754582671
+
+Tempo de execução (Reactive Randomized Greedy): 00:03:412
+Melhor alfa encontrado: 0.3
+Conjunto Dominante a 2-distancia (Reativo): j, e
+---------------------------
+
+--- Execucao 26 ---
+Seed: 1754582676
+
+Tempo de execução (Reactive Randomized Greedy): 00:03:378
+Melhor alfa encontrado: 0.3
+Conjunto Dominante a 2-distancia (Reativo): v, y
+---------------------------
+
+--- Execucao 27 ---
+Seed: 1754582680
+
+Tempo de execução (Reactive Randomized Greedy): 00:03:415
+Melhor alfa encontrado: 0.3
+Conjunto Dominante a 2-distancia (Reativo): v, i
+---------------------------
+
+--- Execucao 28 ---
+Seed: 1754582684
+
+Tempo de execução (Reactive Randomized Greedy): 00:03:402
+Melhor alfa encontrado: 0.3
+Conjunto Dominante a 2-distancia (Reativo): k, p
+---------------------------
+
+--- Execucao 29 ---
+Seed: 1754582689
+
+Tempo de execução (Reactive Randomized Greedy): 00:03:405
+Melhor alfa encontrado: 0.3
+Conjunto Dominante a 2-distancia (Reativo): k, b
+---------------------------
+
+--- Execucao 30 ---
+Seed: 1754582693
+
+Tempo de execução (Reactive Randomized Greedy): 00:03:369
+Melhor alfa encontrado: 0.3
+Conjunto Dominante a 2-distancia (Reativo): u, b
+---------------------------
+
