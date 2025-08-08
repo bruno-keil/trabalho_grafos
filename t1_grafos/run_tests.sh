@@ -16,6 +16,6 @@ for file in "$INSTANCE_DIR"/*.txt; do
   # 4 -> Run all heuristics
   # 0 -> Go back to Main Menu
   # 0 -> Exit
-  printf "3\n4\n0\n0\n" | ./execGrupo7 "$file"
+  printf "3\n4\n0\n0\n" | ./execGrupo14 "$file"
   echo "---------------------------------"
 done
