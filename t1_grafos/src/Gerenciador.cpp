@@ -504,6 +504,35 @@ void Gerenciador::menu_algoritmos(Grafo *grafo)
                 }
                 cout << endl
                      << endl;
+
+                if (pergunta_imprimir_arquivo("propriedades_grafo.txt"))
+                {
+                    ofstream outFile("propriedades_grafo.txt");
+                    if (outFile.is_open())
+                    {
+                        outFile << "--- Propriedades do Grafo ---" << endl;
+                        outFile << "Raio: " << r << endl;
+                        outFile << "Diametro: " << d << endl;
+                        outFile << "Centro: ";
+                        for (size_t i = 0; i < c.size(); ++i)
+                        {
+                            outFile << c[i] << (i == c.size() - 1 ? "" : ", ");
+                        }
+                        outFile << endl;
+                        outFile << "Periferia: ";
+                        for (size_t i = 0; i < p.size(); ++i)
+                        {
+                            outFile << p[i] << (i == p.size() - 1 ? "" : ", ");
+                        }
+                        outFile << endl;
+                        outFile.close();
+                        cout << "Propriedades do grafo salvas em propriedades_grafo.txt" << endl;
+                    }
+                    else
+                    {
+                        cout << "Erro ao abrir o arquivo para escrita." << endl;
+                    }
+                }
             }
             break;
         }
@@ -525,6 +554,33 @@ void Gerenciador::menu_algoritmos(Grafo *grafo)
             }
             cout << endl
                  << endl;
+
+            if (pergunta_imprimir_arquivo("vertices_articulacao.txt"))
+            {
+                ofstream outFile("vertices_articulacao.txt");
+                if (outFile.is_open())
+                {
+                    outFile << "--- Vertices de Articulacao ---" << endl;
+                    if (articulacao.empty())
+                    {
+                        outFile << "O grafo nao possui vertices de articulacao." << endl;
+                    }
+                    else
+                    {
+                        for (size_t i = 0; i < articulacao.size(); ++i)
+                        {
+                            outFile << articulacao[i] << (i == articulacao.size() - 1 ? "" : ", ");
+                        }
+                    }
+                    outFile << endl;
+                    outFile.close();
+                    cout << "Vertices de articulacao salvos em vertices_articulacao.txt" << endl;
+                }
+                else
+                {
+                    cout << "Erro ao abrir o arquivo para escrita." << endl;
+                }
+            }
             break;
         }
         case '0':
@@ -556,74 +612,133 @@ void Gerenciador::menu_heuristics(Grafo *grafo, const string &instanceName)
 
         switch (resp)
         {
-        case '1':
-        {
-            vector<char> resultado = grafo->ds_2_greedy();
-            cout << "Conjunto Dominante a 2-distancia (Guloso): ";
-            for (size_t i = 0; i < resultado.size(); ++i)
+            case '1':
             {
-                cout << resultado[i] << (i == resultado.size() - 1 ? "" : ", ");
+                vector<char> resultado = grafo->ds_2_greedy();
+                cout << "Conjunto Dominante a 2-distancia (Guloso): ";
+                for (size_t i = 0; i < resultado.size(); ++i)
+                {
+                    cout << resultado[i] << (i == resultado.size() - 1 ? "" : ", ");
+                }
+                cout << endl
+                     << endl;
+    
+                if (pergunta_imprimir_arquivo("ds_2_greedy.txt"))
+                {
+                    ofstream outFile("ds_2_greedy.txt");
+                    if (outFile.is_open())
+                    {
+                        outFile << "Conjunto Dominante a 2-distancia (Guloso): ";
+                        for (size_t i = 0; i < resultado.size(); ++i)
+                        {
+                            outFile << resultado[i] << (i == resultado.size() - 1 ? "" : ", ");
+                        }
+                        outFile << endl;
+                        outFile.close();
+                        cout << "Resultado salvo em ds_2_greedy.txt" << endl;
+                    }
+                    else
+                    {
+                        cout << "Erro ao abrir o arquivo para escrita." << endl;
+                    }
+                }
+                break;
             }
-            cout << endl
-                 << endl;
-            break;
-        }
-        case '2':
-        {
-            int max_iter;
-            float alpha;
-            unsigned int seed;
-
-            cout << "Digite o numero maximo de iteracoes: ";
-            cin >> max_iter;
-            cout << "Digite o valor de alfa (entre 0 e 1): ";
-            cin >> alpha;
-            cout << "Digite a seed (0 se quiser seed aleatoria): ";
-            cin >> seed;
-
-            vector<char> resultado = grafo->ds_2_randomized_greedy(max_iter, alpha, seed);
-            cout << "Conjunto Dominante a 2-distancia (Randomizado): ";
-            for (size_t i = 0; i < resultado.size(); ++i)
+            case '2':
             {
-                cout << resultado[i] << (i == resultado.size() - 1 ? "" : ", ");
+                int max_iter;
+                float alpha;
+                unsigned int seed;
+    
+                cout << "Digite o numero maximo de iteracoes: ";
+                cin >> max_iter;
+                cout << "Digite o valor de alfa (entre 0 e 1): ";
+                cin >> alpha;
+                cout << "Digite a seed (0 se quiser seed aleatoria): ";
+                cin >> seed;
+    
+                vector<char> resultado = grafo->ds_2_randomized_greedy(max_iter, alpha, seed);
+                cout << "Conjunto Dominante a 2-distancia (Randomizado): ";
+                for (size_t i = 0; i < resultado.size(); ++i)
+                {
+                    cout << resultado[i] << (i == resultado.size() - 1 ? "" : ", ");
+                }
+                cout << endl
+                     << endl;
+    
+                if (pergunta_imprimir_arquivo("ds_2_randomized_greedy.txt"))
+                {
+                    ofstream outFile("ds_2_randomized_greedy.txt");
+                    if (outFile.is_open())
+                    {
+                        outFile << "Conjunto Dominante a 2-distancia (Randomizado): ";
+                        for (size_t i = 0; i < resultado.size(); ++i)
+                        {
+                            outFile << resultado[i] << (i == resultado.size() - 1 ? "" : ", ");
+                        }
+                        outFile << endl;
+                        outFile.close();
+                        cout << "Resultado salvo em ds_2_randomized_greedy.txt" << endl;
+                    }
+                    else
+                    {
+                        cout << "Erro ao abrir o arquivo para escrita." << endl;
+                    }
+                }
+                break;
             }
-            cout << endl
-                 << endl;
-            break;
-        }
-        case '3':
-        {
-            int numIter;
-            int bloco;
-            int numAlfas;
-            unsigned int seed;
-
-            cout << "Digite o numero maximo de iteracoes: ";
-            cin >> numIter;
-            cout << "Digite o tamanho do bloco: ";
-            cin >> bloco;
-            cout << "Digite a seed (0 se quiser seed aleatoria): ";
-            cin >> seed;
-            cout << "Digite o numero de alfas a serem testados: ";
-            cin >> numAlfas;
-
-            vector<float> alfaVet(numAlfas);
-            cout << "Digite os " << numAlfas << " valores de alfa (entre 0 e 1):" << endl;
-            for (int i = 0; i < numAlfas; ++i) {
-                cout << "Alfa " << i + 1 << ": ";
-                cin >> alfaVet[i];
-            }
-
-            vector<char> resultado = grafo->ds_2_reactive_randomized_greedy(alfaVet, numIter, bloco, seed);
-            cout << "Conjunto Dominante a 2-distancia (Reativo): ";
-            for (size_t i = 0; i < resultado.size(); ++i)
+            case '3':
             {
-                cout << resultado[i] << (i == resultado.size() - 1 ? "" : ", ");
+                int numIter;
+                int bloco;
+                int numAlfas;
+                unsigned int seed;
+    
+                cout << "Digite o numero maximo de iteracoes: ";
+                cin >> numIter;
+                cout << "Digite o tamanho do bloco: ";
+                cin >> bloco;
+                cout << "Digite a seed (0 se quiser seed aleatoria): ";
+                cin >> seed;
+                cout << "Digite o numero de alfas a serem testados: ";
+                cin >> numAlfas;
+    
+                vector<float> alfaVet(numAlfas);
+                cout << "Digite os " << numAlfas << " valores de alfa (entre 0 e 1):" << endl;
+                for (int i = 0; i < numAlfas; ++i) {
+                    cout << "Alfa " << i + 1 << ": ";
+                    cin >> alfaVet[i];
+                }
+    
+                vector<char> resultado = grafo->ds_2_reactive_randomized_greedy(alfaVet, numIter, bloco, seed);
+                cout << "Conjunto Dominante a 2-distancia (Reativo): ";
+                for (size_t i = 0; i < resultado.size(); ++i)
+                {
+                    cout << resultado[i] << (i == resultado.size() - 1 ? "" : ", ");
+                }
+                cout << endl
+                     << endl;
+                if (pergunta_imprimir_arquivo("ds_2_reactive_randomized_greedy.txt"))
+                {
+                    ofstream outFile("ds_2_reactive_randomized_greedy.txt");
+                    if (outFile.is_open())
+                    {
+                        outFile << "Conjunto Dominante a 2-distancia (Reativo): ";
+                        for (size_t i = 0; i < resultado.size(); ++i)
+                        {
+                            outFile << resultado[i] << (i == resultado.size() - 1 ? "" : ", ");
+                        }
+                        outFile << endl;
+                        outFile.close();
+                        cout << "Resultado salvo em ds_2_reactive_randomized_greedy.txt" << endl;
+                    }
+                    else
+                    {
+                        cout << "Erro ao abrir o arquivo para escrita." << endl;
+                    }
+                }
+                break;
             }
-            cout << endl
-                 << endl;
-            break;
-        }
         case '4':
         {
             run_all_heuristics(grafo, instanceName);
